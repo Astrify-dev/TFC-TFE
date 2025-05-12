@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe6a1e167f876f4fa5d51d5deb76b71, type: 3}
   m_Name: ST_Commandes
   m_EditorClassIdentifier: 
-  moveForward: w
-  moveBackward: s
-  jump: space
+  moveForward: 275
+  moveBackward: 276
+  jump: 32
+  dash: 304
