@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
-public class ST_Commandes : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "InputSettings", menuName = "Custom/Input Settings")]
+public class S_Commandes : ScriptableObject{
+    [Header("Commandes de déplacement")]
+    public KeyCode moveForward = KeyCode.W;
+    public KeyCode moveBackward = KeyCode.S;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Commandes de saut")]
+    public KeyCode jump = KeyCode.Space;
+
+    [Header("Commandes spéciales")]
+    public KeyCode dash = KeyCode.LeftShift;
 }
