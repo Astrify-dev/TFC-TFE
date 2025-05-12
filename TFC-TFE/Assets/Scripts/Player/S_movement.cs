@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using NaughtyAttributes;
+using System;
 
 public class S_movement : MonoBehaviour{
     [Header("Paramètres de déplacement")]
@@ -14,9 +16,6 @@ public class S_movement : MonoBehaviour{
     [Header("Paramètres physiques")]
     [SerializeField] private Rigidbody _rb;
 
-    [Header("Paramètres des commandes")]
-    [SerializeField] private S_Commandes _inputSettings;
-
     [Header("Paramètres de rotation")]
     [SerializeField] private GameObject _objectToFlip;
 
@@ -27,12 +26,15 @@ public class S_movement : MonoBehaviour{
     private bool _isGrounded = true;
     private bool _isDashing = false;
     private bool _facingRight = true;
-    private bool _isSlowMotionActive = false;
-    private bool _isAirDashReady = false;
+
+    private Vector2 _moveInput;
+
+    private bool _jumpInput;
+    private bool _dashInput;
 
     private Inputs _inputs;
 
-    private void Start(){
+    private void Awake(){
         _inputs = new Inputs();
 
         if (_rb is null){
@@ -45,89 +47,59 @@ public class S_movement : MonoBehaviour{
 
     private void OnEnable(){
         _inputs.Player.Enable();
-        //_inputs.Player.Direction.performed += ;
+        _inputs.Player.Direction.performed += OnMove;
+        _inputs.Player.Direction.canceled += OnMove;
+        _inputs.Player.Jump.performed += OnJump;
+        _inputs.Player.Dash.performed += OnDash;
     }
 
-    private void Update(){
+    private void OnDisable(){
+        _inputs.Player.Disable();
+        _inputs.Player.Direction.performed -= OnMove ;
+        _inputs.Player.Direction.canceled -= OnMove;
+        _inputs.Player.Jump.performed -= OnJump;
+        _inputs.Player.Dash.performed -= OnDash;
+    }
+
+    private void OnMove(InputAction.CallbackContext context){
+        _moveInput = Vector2.MoveTowards(_moveInput, context.ReadValue<Vector2>(), Time.deltaTime * (_moveSpeed*100));
+    }
+
+    private void OnJump(InputAction.CallbackContext context){
+        if (_isGrounded && _canJump){
+            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            _isGrounded = false;
+        }
+    }
+
+    private void OnDash(InputAction.CallbackContext context){
+        if (!_isDashing){
+            StartCoroutine(Dash());
+        }
+    }
+
+    private void FixedUpdate(){
         if (_isDashing) return;
 
-        float moveInput = 0f;
-        if (Input.GetKey(_inputSettings.moveForward)){
-            moveInput = 1f;
-        }else if (Input.GetKey(_inputSettings.moveBackward)){
-            moveInput = -1f;
-        }
-
+        float moveInput = _moveInput.x;
         Vector3 move = new Vector3(0, 0, moveInput * _moveSpeed);
         _rb.velocity = new Vector3(0, _rb.velocity.y, move.z);
 
         if (moveInput > 0 && !_facingRight){
-            Flip();
+            Flip(0);
         }else if (moveInput < 0 && _facingRight){
-            Flip();
-        }
-
-        if (_canJump && _isGrounded && Input.GetKeyDown(_inputSettings.jump)){
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            _isGrounded = false;
-        }
-
-        if (!_isGrounded){
-            HandleAirDash(moveInput);
-        }else if (Input.GetKeyDown(_inputSettings.dash))
-        {
-            Dash(moveInput);
-        }
-    }
-    private void HandleAirDash(float direction){
-        if (Input.GetKey(_inputSettings.dash)){
-            if (!_isSlowMotionActive){
-                StartSlowMotion(0.2f);
-            }
-            _isSlowMotionActive = true;
-            _isAirDashReady = true;
-        }
-
-        if (Input.GetKeyUp(_inputSettings.dash) && _isAirDashReady)
-        {
-            StopSlowMotion();
-            Dash(direction);
-            _isAirDashReady = false;
+            Flip(180);
         }
     }
 
-    private void StartSlowMotion(float intensite){
-        Time.timeScale = intensite;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
-    }
-
-    private void StopSlowMotion(){
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f;
-    }
-
-    private void Dash(float direction){
+    private IEnumerator Dash(){
         _isDashing = true;
 
-        Vector3 dashDirection;
-        if (direction != 0){
-            dashDirection = new Vector3(0, 0, direction).normalized;
-        }else{
-            if (_facingRight){
-                dashDirection = Vector3.forward;
-            }else{
-                dashDirection = -Vector3.forward;
-            }
-
-        }
-
+        Vector3 dashDirection = _facingRight ? Vector3.forward : -Vector3.forward;
         _rb.AddForce(dashDirection * _dashForce, ForceMode.Impulse);
 
-        StartCoroutine(EndDash());
-    }
-
-    private IEnumerator EndDash(){
         yield return new WaitForSeconds(_dashDuration);
+
         _isDashing = false;
     }
 
@@ -136,26 +108,12 @@ public class S_movement : MonoBehaviour{
             _isGrounded = true;
         }
     }
-    private void Flip(){
+
+    private void Flip(Int16 value){
         _facingRight = !_facingRight;
 
         Vector3 rotation = _objectToFlip.transform.eulerAngles;
-        rotation.y += 180f;
+        rotation.y = value;
         _objectToFlip.transform.eulerAngles = rotation;
     }
-
-    public void SlowMotion(float intensite, float duree){
-        StartCoroutine(SlowMotionCoroutine(intensite, duree));
-    }
-
-    private IEnumerator SlowMotionCoroutine(float intensite, float duree){
-        Time.timeScale = intensite;
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
-
-        yield return new WaitForSecondsRealtime(duree);
-
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.02f;
-    }
-
 }

@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 547836182}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.276, z: 0}
+  m_LocalPosition: {x: 0, y: 1.276, z: -17.237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -220,13 +220,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024faaeceaa608244a2366c2071d5517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 10
   _jumpForce: 5
-  _dashForce: 10
+  _dashForce: 50
   _dashDuration: 0.2
   _canJump: 1
   _rb: {fileID: 547836187}
-  _inputSettings: {fileID: 11400000, guid: dec2b10f795c3dd4ca7f478154437a03, type: 2}
   _objectToFlip: {fileID: 1802578205}
   _intensiteSlow: 0.5
   _timerSlow: 5
@@ -372,7 +371,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
