@@ -220,14 +220,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024faaeceaa608244a2366c2071d5517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 5
-  dashForce: 50
-  dashDuration: 0.5
-  canJump: 1
-  rb: {fileID: 547836187}
-  inputSettings: {fileID: 11400000, guid: dec2b10f795c3dd4ca7f478154437a03, type: 2}
-  objectToFlip: {fileID: 1802578205}
+  _moveSpeed: 5
+  _jumpForce: 5
+  _dashForce: 10
+  _dashDuration: 0.2
+  _canJump: 1
+  _rb: {fileID: 547836187}
+  _inputSettings: {fileID: 11400000, guid: dec2b10f795c3dd4ca7f478154437a03, type: 2}
+  _objectToFlip: {fileID: 1802578205}
+  _intensiteSlow: 0.5
+  _timerSlow: 5
 --- !u!1 &736179903
 GameObject:
   m_ObjectHideFlags: 0

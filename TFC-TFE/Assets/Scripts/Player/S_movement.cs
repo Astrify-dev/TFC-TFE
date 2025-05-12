@@ -30,13 +30,22 @@ public class S_movement : MonoBehaviour{
     private bool _isSlowMotionActive = false;
     private bool _isAirDashReady = false;
 
+    private Inputs _inputs;
+
     private void Start(){
+        _inputs = new Inputs();
+
         if (_rb is null){
             _rb = GetComponent<Rigidbody>();
         }
         if (_objectToFlip is null){
             _objectToFlip = gameObject;
         }
+    }
+
+    private void OnEnable(){
+        _inputs.Player.Enable();
+        //_inputs.Player.Direction.performed += ;
     }
 
     private void Update(){
