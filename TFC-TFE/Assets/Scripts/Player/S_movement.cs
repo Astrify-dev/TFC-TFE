@@ -25,6 +25,12 @@ public class S_movement : MonoBehaviour{
     private float _rebounceBoostMultiplier = 1.1f;
     private float _reboundTimer = 1f;
     private float _reboundInputWindow = 0.5f;
+    private float _minMoveSpeed;
+    private float _maxMoveSpeed;
+    private float _accelerationRate;
+    private float _currentMoveSpeed;
+    private float _minJumpForce;
+    private float _maxJumpForce;
 
     [Header("Paramètres Raycast")]
     [SerializeField] private float _groundCheckDistance = 0.5f;
@@ -56,6 +62,7 @@ public class S_movement : MonoBehaviour{
     private bool _groundDashOnCooldown = false;
     private bool _waitingForReboundInput = false;
     private bool _isAirReboundDash = false;
+    private bool _isWallSliding = false;
 
     private Rigidbody _rb;
     
@@ -99,8 +106,13 @@ public class S_movement : MonoBehaviour{
         if (_canWallJump && !_isGrounded && ((moveInput > 0 && _facingRight) || (moveInput < 0 && !_facingRight))){
             moveInput = 0;
         }
-        Vector3 move = new Vector3(0, 0, moveInput * _moveSpeed*2);
-        _rb.AddForce(move);
+
+        float targetSpeed = moveInput * _maxMoveSpeed;
+        _currentMoveSpeed = Mathf.MoveTowards(_currentMoveSpeed, targetSpeed, _accelerationRate * Time.fixedDeltaTime);
+
+        Vector3 velocity = _rb.velocity;
+        velocity.z = _currentMoveSpeed;
+        _rb.velocity = velocity;
 
         if (moveInput > 0 && !_facingRight){
             Flip(0);
@@ -108,8 +120,16 @@ public class S_movement : MonoBehaviour{
             Flip(180);
         }
 
-        if (_canWallJump && !_isGrounded && _rb.velocity.y > -_wallSlideSpeed){
-            _rb.velocity = new Vector3(_rb.velocity.x, -_wallSlideSpeed, _rb.velocity.z);
+        if (_canWallJump && !_isGrounded){
+            StartWallSlide();
+        }else{
+            StopWallSlide();
+        }
+
+        if (_isWallSliding){
+            Vector3 velocityUpdate = _rb.velocity;
+            velocityUpdate.y = -_wallSlideSpeed;
+            _rb.velocity = velocityUpdate;
         }
 
         PerformDive();
@@ -134,6 +154,11 @@ public class S_movement : MonoBehaviour{
         _rebounceBoostMultiplier = _movementSettings.rebounceBoostMultiplier;
         _reboundTimer = _movementSettings.reboundTimer;
         _reboundInputWindow = _movementSettings.reboundInputWindow;
+        _minMoveSpeed = _movementSettings.minMoveSpeed;
+        _maxMoveSpeed = _movementSettings.maxMoveSpeed;
+        _accelerationRate = _movementSettings.accelerationRate;
+        _minJumpForce = _movementSettings.minJumpForce;
+        _maxJumpForce = _movementSettings.maxJumpForce;
     }
 
     #region RAYCAST
@@ -186,10 +211,30 @@ public class S_movement : MonoBehaviour{
 
     #endregion
 
+    #region SLIDE
+    private void StartWallSlide(){
+        if (_isWallSliding) return;
+
+        _isWallSliding = true;
+        _rb.useGravity = false;
+    }
+
+    private void StopWallSlide()
+    {
+        if (!_isWallSliding) return;
+
+        _isWallSliding = false;
+        _rb.useGravity = true; // réactive la gravité
+    }
+    #endregion
+
     #region JUMP
     private void HandleJump(){
         if (_isGrounded && _canJump){
-            _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            float speedRatio = Mathf.InverseLerp(_minMoveSpeed, _maxMoveSpeed, Mathf.Abs(_currentMoveSpeed));
+            float dynamicJumpForce = Mathf.Lerp(_minJumpForce, _maxJumpForce, speedRatio);
+
+            _rb.AddForce(Vector3.up * dynamicJumpForce, ForceMode.Impulse);
             _isGrounded = false;
             _canJump = false;
 
@@ -201,7 +246,6 @@ public class S_movement : MonoBehaviour{
             _wallJumpTimer = 0;
         }
     }
-
 
     #endregion
 

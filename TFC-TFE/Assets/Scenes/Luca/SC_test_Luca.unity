@@ -1139,6 +1139,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
         type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: 2dbe5a8af3d376244b03ce25c5936171,
+        type: 2}
+    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
+        type: 3}
       propertyPath: _airDashForce
       value: 30
       objectReference: {fileID: 0}
@@ -1203,6 +1209,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
+    - {fileID: 0}
     - {fileID: 6319699513798318747, guid: 82d04fe0c6c526648a8f8be93d785d01, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

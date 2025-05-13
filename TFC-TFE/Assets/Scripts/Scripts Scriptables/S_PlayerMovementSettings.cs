@@ -27,8 +27,25 @@ public class PlayerMovementSettings : ScriptableObject{
     [SerializeField, Tooltip("La force de plonger du joueur.")]
     public float dive = 5f;
 
+    [BoxGroup("Movement Settings"), SerializeField, Tooltip("Vitesse minimale du joueur (vitesse de départ).")]
+    public float minMoveSpeed = 5f;
+
+    [BoxGroup("Movement Settings"), SerializeField, Tooltip("Vitesse maximale du joueur.")]
+    public float maxMoveSpeed = 10f;
+
+    [BoxGroup("Movement Settings"), SerializeField, Tooltip("Vitesse à laquelle on atteint la vitesse max.")]
+    public float accelerationRate = 20f;
+
     [BoxGroup("Jump Settings"), SerializeField, Tooltip("La force de saut appliquée au joueur.")]
     public float jumpForce = 5f;
+
+    [BoxGroup("Jump Settings")]
+    [SerializeField, Tooltip("Force minimale de saut.")]
+    public float minJumpForce = 4f;
+
+    [BoxGroup("Jump Settings")]
+    [SerializeField, Tooltip("Force maximale de saut.")]
+    public float maxJumpForce = 9f;
 
     [BoxGroup("Slide Settings"), SerializeField, Tooltip("La vitesse de quand on reste sur un mur et qu'on glisse.")]
     public float wallSlideSpeed = 2f;
