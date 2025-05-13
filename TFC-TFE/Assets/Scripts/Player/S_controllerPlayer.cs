@@ -8,6 +8,7 @@ public class S_controllerPlayer : MonoBehaviour{
     [Header("Références des scripts liés au joueur")]
     public S_inputPlayer inputPlayer;
     public S_SlowMotion slowMotionHandler;
+    public S_Bounce bouncePlayer;
 
     private void Awake(){
         if (inputPlayer is null){
@@ -27,6 +28,9 @@ public class S_controllerPlayer : MonoBehaviour{
         }
         if (slowMotionHandler is null){
             slowMotionHandler = GetComponent<S_SlowMotion>();
+        }
+        if (bouncePlayer is null){
+            bouncePlayer = GetComponent<S_Bounce>();
         }
     }
 
