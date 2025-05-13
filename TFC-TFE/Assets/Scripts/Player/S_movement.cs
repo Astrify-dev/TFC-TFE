@@ -1,12 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using NaughtyAttributes;
 using System;
+using System.Runtime.InteropServices;
 
 public class S_movement : MonoBehaviour{
-    [Header("Param�tres de d�placement")]
+    [Header("Paramètres de déplacement")]
     [SerializeField] private PlayerMovementSettings _movementSettings;
     [SerializeField] private GameObject _objectToFlip;
 
@@ -21,16 +22,24 @@ public class S_movement : MonoBehaviour{
     private float _groundDashCooldownTime = 1f;
     private float _intensiteSlow = 0.5f;
     private float _timerSlow = 10f;
+    private float _rebounceBoostMultiplier = 1.1f;
+    private float _reboundTimer = 1f;
+    private float _reboundInputWindow = 0.5f;
 
-    [Header("Param�tres Raycast")]
+    [Header("Paramètres Raycast")]
     [SerializeField] private float _groundCheckDistance = 0.5f;
     [SerializeField] private float _wallCheckDistance = 0.5f;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _wallLayer;
+    [SerializeField] private LayerMask _bounceLayer;
+
 
     [Header("Couleurs des Raycasts")]
     [SerializeField] private Color _groundRayColor = Color.green;
     [SerializeField] private Color _wallRayColor = Color.red;
+    [SerializeField] private Color _ceilingRayColor = Color.blue;
+    [SerializeField] private Color _bounceRayColor = Color.yellow;
+    [SerializeField] private Color _velocityRayColor = Color.yellow;
 
     [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private bool _isGrounded = true;
     [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private bool _isDashing = false;
@@ -41,8 +50,12 @@ public class S_movement : MonoBehaviour{
     [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private bool _airDashCooldown = false;
     [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private bool _canWallJump = false;
     [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private float _wallJumpTimer = 0f;
+    [SerializeField, BoxGroup("ReadOnly"), ReadOnly] private bool _hasAirDashed = false;
 
     private bool _facingRight = true;
+    private bool _groundDashOnCooldown = false;
+    private bool _waitingForReboundInput = false;
+    private bool _isAirReboundDash = false;
 
     private Rigidbody _rb;
     
@@ -50,14 +63,12 @@ public class S_movement : MonoBehaviour{
 
     private Coroutine _slowMotionCoroutine;
 
-    private void Awake(){
-
-    }
-
     private void Start(){
         S_controllerPlayer.Instance.inputPlayer.OnMoveEvent += HandleMove;
         S_controllerPlayer.Instance.inputPlayer.OnJumpEvent += HandleJump;
         S_controllerPlayer.Instance.inputPlayer.OnDashEvent += HandleDash;
+        S_controllerPlayer.Instance.inputPlayer.OnDashReleased += OnDashRelease;
+
         if (_rb is null){
             _rb = GetComponent<Rigidbody>();
         }
@@ -73,6 +84,8 @@ public class S_movement : MonoBehaviour{
         S_controllerPlayer.Instance.inputPlayer.OnMoveEvent -= HandleMove;
         S_controllerPlayer.Instance.inputPlayer.OnJumpEvent -= HandleJump;
         S_controllerPlayer.Instance.inputPlayer.OnDashEvent -= HandleDash;
+        S_controllerPlayer.Instance.inputPlayer.OnDashReleased -= OnDashRelease;
+
     }
 
     private void FixedUpdate(){
@@ -86,8 +99,8 @@ public class S_movement : MonoBehaviour{
         if (_canWallJump && !_isGrounded && ((moveInput > 0 && _facingRight) || (moveInput < 0 && !_facingRight))){
             moveInput = 0;
         }
-        Vector3 move = new Vector3(0, 0, moveInput * _moveSpeed);
-        _rb.velocity = new Vector3(0, _rb.velocity.y, move.z);
+        Vector3 move = new Vector3(0, 0, moveInput * _moveSpeed*2);
+        _rb.AddForce(move);
 
         if (moveInput > 0 && !_facingRight){
             Flip(0);
@@ -118,28 +131,28 @@ public class S_movement : MonoBehaviour{
         _wallSlideSpeed = _movementSettings.wallSlideSpeed;
         _groundDashCooldown = _movementSettings.groundDashCooldown;
         _movementSettings.ApplySettingsToRigidbody(_rb);
+        _rebounceBoostMultiplier = _movementSettings.rebounceBoostMultiplier;
+        _reboundTimer = _movementSettings.reboundTimer;
+        _reboundInputWindow = _movementSettings.reboundInputWindow;
     }
 
     #region RAYCAST
     private void CheckGrounded(){
-        RaycastHit hit;
-        _isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, _groundCheckDistance, _groundLayer);
+        _isGrounded = Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, _groundLayer);
         if (_isGrounded){
             _canJump = true;
             _canDash = true;
             _canAirDash = true;
             _wallJumpTimer = 0;
             _canWallJump = false;
-        }
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, _groundCheckDistance, _movementSettings.dashResetLayers)){
-            _canAirDash = true;
+            _hasAirDashed = false;
         }
     }
 
+
     private void CheckWallCollision(){
         Vector3 direction = _facingRight ? Vector3.forward : Vector3.back;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, _wallCheckDistance, _wallLayer)){
+        if (Physics.Raycast(transform.position, direction, out _, _wallCheckDistance, _wallLayer)){
             _canWallJump = true;
             _wallJumpTimer = _wallJumpCoyoteTime;
         }else if (_wallJumpTimer > 0){
@@ -147,10 +160,6 @@ public class S_movement : MonoBehaviour{
         }else{
             _canWallJump = false;
             _wallJumpTimer = 0;
-
-        }
-        if (Physics.Raycast(transform.position, direction, out hit, _wallCheckDistance, _movementSettings.dashResetLayers)){
-            _canAirDash = true;
         }
     }
     #endregion
@@ -198,47 +207,131 @@ public class S_movement : MonoBehaviour{
 
     #region DASH
     private void HandleDash(){
-        if (!_canDash || _isDashing) return;
+        if (!_canDash || _isDashing || (_groundDashCooldown && _groundDashOnCooldown)) return;
 
         if (_isGrounded){
-            PerformDash();
-        }else if (_canAirDash){ 
+            PerformGroundDash();
+        }else if (_canAirDash){
             StartSlowMotionDash();
-            _canAirDash = false;
         }
     }
 
-    private void PerformDash(){
+    private void PerformGroundDash(){
         _isDashing = true;
         _canDash = false;
 
-        float dashForce = _isGrounded ? _groundDashForce : _airDashForce;
-        Vector3 dashDirection;
-        if (_moveInput == Vector2.zero){
-            dashDirection = _facingRight ? transform.forward : -transform.forward;
-        }else{
-            dashDirection = new Vector3(0, _moveInput.y, _moveInput.x).normalized;
-        }
+        _isAirReboundDash = false;
 
-        _rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
-
+        Vector3 dashDirection = _facingRight ? transform.forward : -transform.forward;
+        _rb.AddForce(dashDirection * _groundDashForce, ForceMode.Impulse);
         Invoke(nameof(ResetDash), 0.1f);
 
-        if (_isGrounded && _groundDashCooldown){
+        if (_groundDashCooldown){
+            _groundDashOnCooldown = true;
             StartCoroutine(DashCooldown(_groundDashCooldownTime));
-        }else{
-            _canDash = true;
         }
     }
 
-    private void StartSlowMotionDash(){
-        S_controllerPlayer.Instance.slowMotionHandler.StartSlowMotion(
-            _intensiteSlow,
-            _timerSlow,
-            OnSlowMotionEnd
-        );
-        StartCoroutine(WaitForDashRelease());
+
+
+    private void PerformAirDash(){
+        _isDashing = true;
+        _canAirDash = false;
+        _hasAirDashed = true;
+        _isAirReboundDash = true;
+
+        Vector3 dashDirection = new Vector3(0, _moveInput.y, _moveInput.x).normalized;
+        if (dashDirection == Vector3.zero){
+            dashDirection = _facingRight ? Vector3.forward : Vector3.back;
+        }
+
+        StartCoroutine(HandleAirDashWithRebound(dashDirection, _airDashForce));
     }
+
+    private IEnumerator HandleAirDashWithRebound(Vector3 direction, float dashForce){
+        float rayLength = 1.2f;
+        float reboundTimeout = 0f;
+        bool waitingForReboundInput = false;
+
+        _rb.useGravity = false;
+        _isDashing = true;
+        _rb.velocity = direction * dashForce;
+
+        void ReboundInputHandler(){
+            if (waitingForReboundInput){
+                waitingForReboundInput = false;
+            }
+        }
+
+        S_controllerPlayer.Instance.inputPlayer.OnDashEvent += ReboundInputHandler;
+
+        while (true){
+            Vector3 rayOrigin = transform.position + direction.normalized * 0.25f;
+
+            if (_isAirReboundDash && Physics.Raycast(rayOrigin, direction, out RaycastHit hit, rayLength, _bounceLayer)){
+                _rb.velocity = Vector3.zero;
+                waitingForReboundInput = true;
+
+                float inputWindow = _reboundInputWindow;
+                float timer = 0f;
+
+                while (_isAirReboundDash && waitingForReboundInput && timer < inputWindow){
+                    timer += Time.deltaTime;
+                    yield return null;
+                }
+
+                if (waitingForReboundInput){
+                    break;
+                }
+
+                Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
+
+                if (Vector3.Angle(reflected, Vector3.down) < 20f)
+                    reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
+
+                direction = reflected;
+                transform.position = hit.point + hit.normal * 0.05f;
+
+                _rb.velocity = direction * dashForce * _rebounceBoostMultiplier;
+                reboundTimeout = 0f;
+
+                Debug.DrawRay(transform.position, direction * 2f, Color.magenta, 0.2f);
+            }else{
+                _rb.velocity = direction * dashForce;
+            }
+
+            if (direction.z > 0 && !_facingRight) Flip(0);
+            else if (direction.z < 0 && _facingRight) Flip(180);
+
+            reboundTimeout += Time.fixedDeltaTime;
+            if (reboundTimeout >= _reboundTimer)
+                break;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        S_controllerPlayer.Instance.inputPlayer.OnDashEvent -= ReboundInputHandler;
+
+        _rb.useGravity = true;
+        _isDashing = false;
+        _hasAirDashed = false;
+        _isAirReboundDash = false;
+    }
+
+
+    private void OnDashRelease(){
+        if (_canAirDash){
+            S_controllerPlayer.Instance.slowMotionHandler.StopSlowMotion();
+            if(!_groundDashOnCooldown)
+                PerformAirDash();
+        }
+    }
+
+
+    private void StartSlowMotionDash(){
+        S_controllerPlayer.Instance.slowMotionHandler.StartSlowMotion(_intensiteSlow, _timerSlow, OnSlowMotionEnd);
+    }
+
 
     private IEnumerator WaitForDashRelease(){
         while (S_controllerPlayer.Instance.inputPlayer._inputs.Player.Dash.IsPressed()){
@@ -246,20 +339,22 @@ public class S_movement : MonoBehaviour{
         }
 
         S_controllerPlayer.Instance.slowMotionHandler.StopSlowMotion();
-        PerformDash();
+        PerformAirDash();
     }
 
     private void OnSlowMotionEnd(){
-        if (!S_controllerPlayer.Instance.inputPlayer._inputs.Player.Dash.IsPressed()){
+        if (!S_controllerPlayer.Instance.inputPlayer._inputs.Player.Dash.IsPressed())
             return;
-        }
 
-        PerformDash();
+        PerformAirDash();
     }
+
     private IEnumerator DashCooldown(float cooldownTime){
         yield return new WaitForSeconds(cooldownTime);
+        _groundDashOnCooldown = false;
         _canDash = true;
     }
+
 
 
     private void ResetDash(){
@@ -269,13 +364,38 @@ public class S_movement : MonoBehaviour{
 
     #region GIZMOS
     private void OnDrawGizmos(){
+        if (_rb == null) return;
+
+        // Raycast pour vérifier le sol
         Gizmos.color = _groundRayColor;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _groundCheckDistance);
 
+        // Raycast pour vérifier les murs
         Gizmos.color = _wallRayColor;
-        Vector3 direction = _facingRight ? Vector3.forward : Vector3.back;
-        Gizmos.DrawLine(transform.position, transform.position + direction * _wallCheckDistance);
+        Vector3 wallDirection = _facingRight ? Vector3.forward : Vector3.back;
+        Gizmos.DrawLine(transform.position, transform.position + wallDirection * _wallCheckDistance);
 
+        // Raycast pour vérifier le plafond
+        Gizmos.color = _ceilingRayColor;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * _groundCheckDistance);
+
+        // Gizmo pour la direction du Dash (basé sur l'entrée du joystick)
+        Gizmos.color = _bounceRayColor;
+        Vector3 dashDirection = new Vector3(0, _moveInput.y, _moveInput.x).normalized; // Haut/Bas = Y, Gauche/Droite = Z
+        Gizmos.DrawLine(transform.position, transform.position + dashDirection * 5); // Longueur arbitraire de 5 unités
+
+        // Gizmo pour la direction de la vélocité actuelle
+        Gizmos.color = _velocityRayColor;
+        Vector3 velocityDirection = _rb.velocity.normalized; // Direction de la vélocité
+        Gizmos.DrawLine(transform.position, transform.position + velocityDirection * 5); // Longueur arbitraire de 5 unités
+
+        // GIZMO : Raycast de détection de rebond
+        if (_isDashing){
+            Gizmos.color = Color.magenta;
+            Vector3 raycastDir = _rb.velocity.normalized;
+            Vector3 rayOrigin = transform.position + raycastDir * 0.25f;
+            Gizmos.DrawLine(rayOrigin, rayOrigin + raycastDir * 1.5f);
+        }
     }
     #endregion
 }

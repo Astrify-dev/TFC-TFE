@@ -8,6 +8,8 @@ public class S_inputPlayer : MonoBehaviour{
     public event Action<Vector2> OnMoveEvent;
     public event Action OnJumpEvent;
     public event Action OnDashEvent;
+    public event Action OnDashReleased;
+
 
     private bool _moveEnabled = true;
     private bool _jumpEnabled = true;
@@ -23,6 +25,8 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Direction.canceled += OnMove;
         _inputs.Player.Jump.performed += OnJump;
         _inputs.Player.Dash.performed += OnDash;
+        _inputs.Player.Dash.canceled += OnDashRelease;
+
     }
 
     private void OnDisable(){
@@ -31,6 +35,8 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Direction.canceled -= OnMove;
         _inputs.Player.Jump.performed -= OnJump;
         _inputs.Player.Dash.performed -= OnDash;
+        _inputs.Player.Dash.canceled -= OnDashRelease;
+
     }
 
     private void OnMove(InputAction.CallbackContext context){
@@ -51,6 +57,13 @@ public class S_inputPlayer : MonoBehaviour{
             OnDashEvent?.Invoke();
         }
     }
+
+    private void OnDashRelease(InputAction.CallbackContext context){
+        if (_dashEnabled){
+            OnDashReleased?.Invoke();
+        }
+    }
+
 
     public void EnableMove(bool enable) => _moveEnabled = enable;
     public void EnableJump(bool enable) => _jumpEnabled = enable;

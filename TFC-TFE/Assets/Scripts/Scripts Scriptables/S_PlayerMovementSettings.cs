@@ -51,6 +51,15 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Dash air Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash en l'air.")]
     public float airDashForce = 10f;
 
+    [BoxGroup("Dash air Settings"), SerializeField, Tooltip("Un petit multiplicateur qui donne un boost a chaque rebond contre qqch.")]
+    public float rebounceBoostMultiplier = 1.1f;
+
+    [BoxGroup("Dash air Settings"), SerializeField, Tooltip("Le temps avant que le 'rebond' se fini et on rechute'")]
+    public float reboundTimer = 1f;
+
+    [BoxGroup("Dash air Settings"), SerializeField, Tooltip("Le temps qu'on peux appuier pour rebondir contre un mur etc")]
+    public float reboundInputWindow = 1f;
+
     [BoxGroup("Slow Motion Settings")]
     [SerializeField, Tooltip("L'intensité du slow motion.")]
     public float slowMotionIntensity = 0.5f;

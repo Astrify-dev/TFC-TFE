@@ -26,7 +26,8 @@ MonoBehaviour:
   groundDashForce: 25
   groundDashCooldown: 1
   groundDashCooldownTime: 5
-  airDashForce: 17
+  airDashForce: 30
+  rebounceBoostMultiplier: 1.25
   slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:
