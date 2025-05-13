@@ -342,18 +342,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1270741599579080848, guid: 6ed783589e0973a4bb326343ea9dd78d,
         type: 3}
-      propertyPath: _speed
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1270741599579080848, guid: 6ed783589e0973a4bb326343ea9dd78d,
-        type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1675024284}
     - target: {fileID: 1386174902686566451, guid: 6ed783589e0973a4bb326343ea9dd78d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1386174902686566451, guid: 6ed783589e0973a4bb326343ea9dd78d,
         type: 3}
@@ -724,43 +719,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
         type: 3}
-      propertyPath: _groundRayColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _groundRayColor.g
-      value: 0.21478581
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _groundRayColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _wallLayer.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _wallCheckDistance
-      value: 0.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _groundLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
       propertyPath: _wallJumpCoyoteTime
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
-        type: 3}
-      propertyPath: _groundCheckDistance
-      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3176686871565909795, guid: 82d04fe0c6c526648a8f8be93d785d01,
         type: 3}
