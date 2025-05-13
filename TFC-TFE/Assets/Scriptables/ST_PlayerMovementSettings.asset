@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445f4119e5c82e408faaa4b548ae25e, type: 3}
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
-  rigidbodyMass: 1
-  rigidbodyDrag: 0
+  rigidbodyMass: 1.2
+  rigidbodyDrag: 1
   rigidbodyAngularDrag: 0.05
   useGravity: 1
   globalGravity: {x: 0, y: -9.81, z: 0}
-  moveSpeed: 10
-  dive: 20
-  jumpForce: 10
-  wallSlideSpeed: 2
-  wallJumpCoyoteTime: 0.5
-  wallJumpForce: 15
-  groundDashForce: 10
+  moveSpeed: 13
+  dive: 50
+  jumpForce: 8
+  wallSlideSpeed: -1
+  wallJumpCoyoteTime: 0.15
+  wallJumpForce: 12
+  groundDashForce: 25
   groundDashCooldown: 1
-  groundDashCooldownTime: 3
-  airDashForce: 10
-  slowMotionIntensity: 0.2
+  groundDashCooldownTime: 5
+  airDashForce: 17
+  slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:
     serializedVersion: 2
