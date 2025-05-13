@@ -20,12 +20,12 @@ MonoBehaviour:
   moveSpeed: 13
   dive: 50
   minMoveSpeed: 10
-  maxMoveSpeed: 20
+  maxMoveSpeed: 15
   accelerationRate: 30
-  jumpForce: 14
-  minJumpForce: 10
-  maxJumpForce: 20
-  wallSlideSpeed: 6
+  jumpForce: 10
+  minJumpForce: 8
+  maxJumpForce: 15
+  wallSlideSpeed: 0.5
   wallJumpCoyoteTime: 0.15
   wallJumpForce: 12
   groundDashForce: 25
