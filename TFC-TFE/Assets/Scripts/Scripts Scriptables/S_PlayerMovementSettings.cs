@@ -30,14 +30,26 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Jump Settings"), SerializeField, Tooltip("La force de saut appliquée au joueur.")]
     public float jumpForce = 5f;
 
-    [BoxGroup("Dash Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash.")]
-    public float dashForce = 10f;
+    [BoxGroup("Slide Settings"), SerializeField, Tooltip("La vitesse de quand on reste sur un mur et qu'on glisse.")]
+    public float wallSlideSpeed = 2f;
 
-    [BoxGroup("Dash Settings"), SerializeField, Tooltip("cooldown entre 2 dash ?")]
-    public bool dashCooldown = false ;    
+    [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("Le delay pour que le joueur puisse a nouveau sauter.")]
+    public float wallJumpCoyoteTime = 0.2f;
+
+    [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("La force du wallJump")]
+    public float wallJumpForce = 1.2f;
+
+    [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash au sol.")]
+    public float groundDashForce = 10f;
+
+    [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("cooldown entre 2 dash au sol ?")]
+    public bool groundDashCooldown = false ;    
     
-    [BoxGroup("Dash Settings"), SerializeField, Tooltip("Le cooldown entre 2 dash.")]
-    public float dashCooldownTime = 0.2f;
+    [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("Le cooldown entre 2 dash au sol.")]
+    public float groundDashCooldownTime = 0.2f;
+
+    [BoxGroup("Dash air Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash en l'air.")]
+    public float airDashForce = 10f;
 
     [BoxGroup("Slow Motion Settings")]
     [SerializeField, Tooltip("L'intensité du slow motion.")]

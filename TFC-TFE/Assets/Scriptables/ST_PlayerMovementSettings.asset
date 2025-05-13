@@ -18,11 +18,15 @@ MonoBehaviour:
   useGravity: 1
   globalGravity: {x: 0, y: -9.81, z: 0}
   moveSpeed: 10
-  dive: 5
+  dive: 20
   jumpForce: 10
-  dashForce: 50
-  dashCooldown: 1
-  dashCooldownTime: 1
+  wallSlideSpeed: 2
+  wallJumpCoyoteTime: 0.5
+  wallJumpForce: 15
+  groundDashForce: 10
+  groundDashCooldown: 1
+  groundDashCooldownTime: 3
+  airDashForce: 10
   slowMotionIntensity: 0.2
   slowMotionTimer: 10
   jumpResetLayers:
