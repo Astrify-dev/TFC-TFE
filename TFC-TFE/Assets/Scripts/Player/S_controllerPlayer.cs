@@ -10,6 +10,10 @@ public class S_controllerPlayer : MonoBehaviour{
     public S_SlowMotion slowMotionHandler;
 
     private void Awake(){
+        if (inputPlayer is null){
+            inputPlayer = GetComponent<S_inputPlayer>();
+        }
+
         if (Instance is not null && Instance != this){
             Destroy(gameObject);
             return;

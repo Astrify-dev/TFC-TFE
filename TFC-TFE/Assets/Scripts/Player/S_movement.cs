@@ -33,19 +33,22 @@ public class S_movement : MonoBehaviour{
     private Coroutine _slowMotionCoroutine;
 
     private void Awake(){
-        if (_rb is null){
-            _rb = GetComponent<Rigidbody>();
-        }
-        if (_objectToFlip is null){
-            _objectToFlip = gameObject;
-        }
-        ApplyMovementSettings();
+
     }
 
-    private void OnEnable(){
+    private void Start(){
         S_controllerPlayer.Instance.inputPlayer.OnMoveEvent += HandleMove;
         S_controllerPlayer.Instance.inputPlayer.OnJumpEvent += HandleJump;
         S_controllerPlayer.Instance.inputPlayer.OnDashEvent += HandleDash;
+        if (_rb is null){
+            _rb = GetComponent<Rigidbody>();
+        }
+
+        if (_objectToFlip is null){
+            _objectToFlip = gameObject;
+        }
+
+        ApplyMovementSettings();
     }
 
     private void OnDisable(){
