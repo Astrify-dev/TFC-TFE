@@ -69,7 +69,7 @@ public class S_movement : MonoBehaviour{
     private Vector2 _moveInput;
 
     private Coroutine _slowMotionCoroutine;
-
+    private Vector3 _vector3AxeProject = new Vector3(0, 1, 1);
     private void Start(){
         S_controllerPlayer.Instance.inputPlayer.OnMoveEvent += HandleMove;
         S_controllerPlayer.Instance.inputPlayer.OnJumpEvent += HandleJump;
@@ -240,7 +240,7 @@ public class S_movement : MonoBehaviour{
 
         }else if (_canWallJump || _wallJumpTimer > 0){
             _rb.velocity = Vector3.zero;
-            _rb.AddForce(Vector3.up * _wallJumpForce, ForceMode.Impulse);
+            _rb.AddForce(_vector3AxeProject * _wallJumpForce, ForceMode.Impulse);
 
             _canWallJump = false;
             _wallJumpTimer = 0;
