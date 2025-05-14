@@ -53,6 +53,9 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("La force du wallJump")]
     public float wallJumpForce = 1.2f;
 
+    [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("La force du wallJump")]
+    public Vector2 directionImpulsion;
+
     [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash au sol.")]
     public float groundDashForce = 10f;
 
