@@ -29,6 +29,7 @@ public class S_cameraShake : MonoBehaviour
         while (1 > timer)
         {
             timer += Speed * Time.deltaTime;
+
             CamPosition = Random.insideUnitSphere * Strength * _shakeCurve.Evaluate(timer);
             gameObject.transform.localPosition = CamPosition;
             yield return null;
