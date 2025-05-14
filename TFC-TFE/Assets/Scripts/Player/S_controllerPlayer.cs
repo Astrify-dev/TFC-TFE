@@ -28,6 +28,7 @@ public class S_controllerPlayer : MonoBehaviour{
         if (slowMotionHandler is null){
             slowMotionHandler = GetComponent<S_SlowMotion>();
         }
+
     }
 
 }

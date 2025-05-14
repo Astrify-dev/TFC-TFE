@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8099734614925078272}
   - component: {fileID: 3176686871565909795}
   - component: {fileID: 5674734472377475416}
+  - component: {fileID: 6319699513798318747}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -114,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPlayer: {fileID: 2597219210766312242}
   slowMotionHandler: {fileID: 5674734472377475416}
+  bouncePlayer: {fileID: 6319699513798318747}
 --- !u!114 &3176686871565909795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,11 +130,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSettings: {fileID: 11400000, guid: 2dbe5a8af3d376244b03ce25c5936171, type: 2}
   _objectToFlip: {fileID: 3520637777564457845}
+  _groundCheckDistance: 1.25
+  _wallCheckDistance: 0.51
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundRayColor: {r: 0, g: 0.21478581, b: 1, a: 1}
+  _wallRayColor: {r: 1, g: 0, b: 0, a: 1}
   _isGrounded: 1
   _isDashing: 0
   _canJump: 1
   _canDash: 1
-  _dashCooldown: 0
+  _canAirDash: 1
+  _groundDashCooldown: 0
+  _airDashCooldown: 0
+  _canWallJump: 0
+  _wallJumpTimer: 0
 --- !u!114 &5674734472377475416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +161,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7b4c70973214a48bd0f935fcfacbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6319699513798318747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529776725966297697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7b9883300d1cf4ba4084145272b877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceLayer:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &3520637777564457845
 GameObject:
   m_ObjectHideFlags: 0
