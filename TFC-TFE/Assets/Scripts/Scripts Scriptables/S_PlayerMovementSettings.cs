@@ -16,9 +16,6 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Rigidbody Settings"), SerializeField, Tooltip("Activer ou désactiver la gravité pour le Rigidbody.")]
     public bool useGravity = true;
 
-    [BoxGroup("Rigidbody Settings"), SerializeField, Tooltip("Valeur de la gravité globale (affecte tous les objets dans la scène).")]
-    public Vector3 globalGravity = new Vector3(0, -9.81f, 0);
-
     [BoxGroup("Movement Settings")]
     [SerializeField, Tooltip("La vitesse de déplacement du joueur.")]
     public float moveSpeed = 5f;
@@ -97,7 +94,5 @@ public class PlayerMovementSettings : ScriptableObject{
         rb.drag = rigidbodyDrag;
         rb.angularDrag = rigidbodyAngularDrag;
         rb.useGravity = useGravity;
-
-        Physics.gravity = globalGravity;
     }
 }
