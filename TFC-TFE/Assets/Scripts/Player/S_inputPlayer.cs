@@ -52,11 +52,15 @@ public class S_inputPlayer : MonoBehaviour{
         }
     }
 
-    private void OnDash(InputAction.CallbackContext context){
-        if (_dashEnabled){
+    private void OnDash(InputAction.CallbackContext context)
+    {
+        if (_dashEnabled)
+        {
+            Debug.Log("<color=blue>[INPUT]</color> Dash pressed");
             OnDashEvent?.Invoke();
         }
     }
+
 
     private void OnDashRelease(InputAction.CallbackContext context){
         if (_dashEnabled){

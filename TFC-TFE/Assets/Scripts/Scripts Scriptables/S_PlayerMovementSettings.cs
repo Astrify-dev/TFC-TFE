@@ -90,6 +90,10 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches permettant de restaurer le dash.")]
     public LayerMask dashResetLayers;
 
+    [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches qui permettent le rebond pendant un dash aérien.")]
+    public LayerMask bounceLayers;
+
+
     public void ApplySettingsToRigidbody(Rigidbody rb){
         if (rb is null) return;
 
