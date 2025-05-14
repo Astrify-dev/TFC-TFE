@@ -25,9 +25,9 @@ MonoBehaviour:
   minJumpForce: 8
   maxJumpForce: 15
   wallSlideSpeed: 0.5
-  wallJumpCoyoteTime: 0.15
+  wallJumpCoyoteTime: 0.2
   wallJumpForce: 12
-  directionImpulsion: {x: 1, y: 1}
+  directionImpulsion: {x: 1.5, y: 2}
   groundDashForce: 25
   groundDashCooldown: 1
   groundDashCooldownTime: 5
@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Bits: 64
   bounceLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
   wallJumpLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
