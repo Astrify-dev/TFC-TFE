@@ -192,6 +192,7 @@ public class S_movement : MonoBehaviour{
     #region MOVE
     private void HandleMove(Vector2 moveInput){
         _moveInput = Vector2.MoveTowards(_moveInput, moveInput, Time.deltaTime * (_moveSpeed * 100));
+        
     }
 
     private void Flip(int value){
