@@ -93,6 +93,8 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches qui permettent le rebond pendant un dash aérien.")]
     public LayerMask bounceLayers;
 
+    [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches autorisant wall slide et wall jump.")]
+    public LayerMask wallJumpLayers;
 
     public void ApplySettingsToRigidbody(Rigidbody rb){
         if (rb is null) return;

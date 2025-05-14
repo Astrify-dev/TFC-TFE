@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class S_JumpPlayerState : S_basePlayerStates
 {
@@ -6,11 +6,9 @@ public class S_JumpPlayerState : S_basePlayerStates
     {
         if (Player.IsGrounded && Player.CanJump)
         {
-            // Calcule une force de saut dynamique selon la vitesse actuelle
             float speedRatio = Mathf.InverseLerp(Player.Settings.minMoveSpeed, Player.Settings.maxMoveSpeed, Mathf.Abs(Player.Rigidbody.velocity.z));
             float jumpForce = Mathf.Lerp(Player.Settings.minJumpForce, Player.Settings.maxJumpForce, speedRatio);
 
-            // Applique une impulsion vers le haut
             Player.Rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
             Player.IsGrounded = false;
@@ -20,13 +18,16 @@ public class S_JumpPlayerState : S_basePlayerStates
         }
         else if (Player.CanWallJump || Player.WallJumpTimer > 0)
         {
-            // Reset vitesse avant de sauter
             Player.Rigidbody.velocity = Vector3.zero;
 
-            Vector2 dir = Player.Settings.directionImpulsion;
+            //Utilise directionImpulsion mais appliquée sur Y (vertical) et Z (horizontal)
+            int direction = Player.FacingRight ? -1 : 1;
+            Vector2 impulse = new Vector2(direction * Player.Settings.directionImpulsion.x, Player.Settings.directionImpulsion.y);
 
-            // Applique une impulsion dans une direction personnalis�e (souvent diagonale)
-            Player.Rigidbody.AddForce(new Vector3(dir.x, dir.y, 0).normalized * Player.Settings.wallJumpForce, ForceMode.Impulse);
+            Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Player.Settings.wallJumpForce;
+            Player.Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
+
+            Player.HandleFlip(direction);
 
             Player.CanWallJump = false;
             Player.WallJumpTimer = 0f;
@@ -36,6 +37,8 @@ public class S_JumpPlayerState : S_basePlayerStates
     }
 
     public override void OnEnable(S_playerStates Player) { }
+
     public override void OnDisable(S_playerStates Player) { }
+
     public override void UpdateState(S_playerStates Player) { }
 }

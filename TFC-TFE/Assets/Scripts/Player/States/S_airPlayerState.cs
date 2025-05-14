@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class S_airPlayerState : S_basePlayerStates
 {
@@ -20,24 +20,23 @@ public class S_airPlayerState : S_basePlayerStates
             return;
         }
 
-        if (Player.CheckWall() && Player.MoveInput.x != 0)
+        // ❗ SUPPRIME la condition "MoveInput.x != 0" pour détecter le mur même sans input
+        if (Player.CheckWall())
         {
             Player.SwitchState(Player.SlideWallState);
             return;
         }
 
-        // Mouvement horizontal en l'air (contr�le du joueur)
+        // Contrôle horizontal en l'air
         float targetSpeed = Player.MoveInput.x * Player.Settings.maxMoveSpeed;
         Vector3 velocity = Player.Rigidbody.velocity;
-
-        // Adoucit la transition de vitesse pour plus de fluidit�
         velocity.z = Mathf.MoveTowards(velocity.z, targetSpeed, Player.Settings.accelerationRate * Time.deltaTime);
         Player.Rigidbody.velocity = velocity;
 
         Player.HandleFlip(Player.MoveInput.x);
 
-        // Si on pousse vers le bas, applique une force pour plonger plus vite
-        if (Player.MoveInput.y < 0)
+        // ❗ Blocage du dive quand collé au mur
+        if (Player.MoveInput.y < 0 && !Player.IsWallSliding)
         {
             Vector3 diveForce = new Vector3(0, Player.MoveInput.y, 0) * Player.Settings.dive;
             Player.Rigidbody.AddForce(diveForce, ForceMode.Acceleration);

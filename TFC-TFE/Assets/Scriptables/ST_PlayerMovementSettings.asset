@@ -16,7 +16,6 @@ MonoBehaviour:
   rigidbodyDrag: 1
   rigidbodyAngularDrag: 0.05
   useGravity: 1
-  globalGravity: {x: 0, y: -9.81, z: 0}
   moveSpeed: 13
   dive: 50
   minMoveSpeed: 10
@@ -28,18 +27,25 @@ MonoBehaviour:
   wallSlideSpeed: 0.5
   wallJumpCoyoteTime: 0.15
   wallJumpForce: 12
+  directionImpulsion: {x: 1, y: 1}
   groundDashForce: 25
   groundDashCooldown: 1
   groundDashCooldownTime: 5
   airDashForce: 30
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
-  reboundInputWindow: 0.1
+  reboundInputWindow: 0.25
   slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
   dashResetLayers:
     serializedVersion: 2
     m_Bits: 64
+  bounceLayers:
+    serializedVersion: 2
+    m_Bits: 192
+  wallJumpLayers:
+    serializedVersion: 2
+    m_Bits: 0

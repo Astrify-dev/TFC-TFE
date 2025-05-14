@@ -142,9 +142,21 @@ public class S_playerStates : MonoBehaviour
 
     public bool CheckWall()
     {
-        // Raycast dans la direction actuelle du joueur pour détecter un mur rebondissable ou glissable
         Vector3 dir = FacingRight ? Vector3.forward : Vector3.back;
-        return Physics.Raycast(transform.position, dir, _wallCheckDistance, Settings.dashResetLayers);
+        Ray ray = new Ray(transform.position, dir);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _wallCheckDistance, Settings.wallJumpLayers))
+        {
+            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.green);
+            Debug.Log($"<color=green>[WALL CHECK]</color> Hit {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)} ✅");
+            return true;
+        }
+        else
+        {
+            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.red);
+            Debug.Log($"<color=red>[WALL CHECK]</color> Nothing hit ❌");
+            return false;
+        }
     }
 
     public void StartSlowMotionDash() =>
@@ -166,14 +178,10 @@ public class S_playerStates : MonoBehaviour
         float rayLength = 1.2f;
         float reboundTimeout = 0f;
 
-        // Désactive la gravité pour que le dash soit fluide
         Rigidbody.useGravity = false;
-
         IsDashing = true;
 
-        // Applique la vélocité de départ pour le dash
         Rigidbody.velocity = direction * dashForce;
-
         awaitingReboundInput = false;
 
         void ReboundInputHandler()
@@ -190,7 +198,6 @@ public class S_playerStates : MonoBehaviour
 
             if (IsAirReboundDash && Physics.Raycast(rayOrigin, direction, out RaycastHit hit, rayLength, Settings.bounceLayers))
             {
-                // On arrête le mouvement pour préparer le rebond
                 Rigidbody.velocity = Vector3.zero;
                 awaitingReboundInput = true;
 
@@ -204,26 +211,22 @@ public class S_playerStates : MonoBehaviour
                 if (awaitingReboundInput)
                     break;
 
-                // Calcule la nouvelle direction après le rebond
                 Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
 
-                // Si trop vertical, on adoucit le rebond vers le bas
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
                     reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
 
                 direction = reflected;
-
-                // Repositionne légèrement pour éviter de rester collé au mur
                 transform.position = hit.point + hit.normal * 0.05f;
 
-                // Applique la nouvelle vélocité pour le rebond
                 Rigidbody.velocity = direction * dashForce * Settings.rebounceBoostMultiplier;
+
+                HandleFlip(direction.x);
 
                 reboundTimeout = 0f;
             }
             else
             {
-                // Continue le dash si pas de rebond
                 Rigidbody.velocity = direction * dashForce;
             }
 
@@ -236,7 +239,6 @@ public class S_playerStates : MonoBehaviour
 
         S_controllerPlayer.Instance.inputPlayer.OnDashEvent -= ReboundInputHandler;
 
-        // Réactive la gravité et reset les flags de dash
         Rigidbody.useGravity = true;
         IsDashing = false;
         HasAirDashed = false;
@@ -244,6 +246,8 @@ public class S_playerStates : MonoBehaviour
 
         SwitchState(AirState);
     }
+
+
 
     private void OnDrawGizmos()
     {
