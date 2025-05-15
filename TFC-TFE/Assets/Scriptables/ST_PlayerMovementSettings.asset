@@ -19,14 +19,22 @@ MonoBehaviour:
   globalGravity: {x: 0, y: -9.81, z: 0}
   moveSpeed: 13
   dive: 50
-  jumpForce: 8
-  wallSlideSpeed: -1
+  minMoveSpeed: 10
+  maxMoveSpeed: 15
+  accelerationRate: 30
+  jumpForce: 10
+  minJumpForce: 8
+  maxJumpForce: 15
+  wallSlideSpeed: 0.5
   wallJumpCoyoteTime: 0.15
   wallJumpForce: 12
   groundDashForce: 25
   groundDashCooldown: 1
   groundDashCooldownTime: 5
-  airDashForce: 17
+  airDashForce: 30
+  rebounceBoostMultiplier: 2
+  reboundTimer: 0.5
+  reboundInputWindow: 0.1
   slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:
