@@ -221,7 +221,9 @@ public class S_playerStates : MonoBehaviour
 
                 Rigidbody.velocity = direction * dashForce * Settings.rebounceBoostMultiplier;
 
-                HandleFlip(direction.x);
+                int directionVisuel = FacingRight ? -1 : 1;
+
+                HandleFlip(directionVisuel);
 
                 reboundTimeout = 0f;
             }
