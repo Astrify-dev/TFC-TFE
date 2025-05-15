@@ -216,12 +216,11 @@ public class S_playerStates : MonoBehaviour
         int direction = FacingRight ? 1 : -1;
 
         Vector2 impulse2D = new Vector2(
-            direction * Settings.directionImpulsion.x,
-            Settings.directionImpulsion.y
+            direction * Settings.dashJumpDirection.x,
+            Settings.dashJumpDirection.y
         );
 
-        // Appliquer la force en diagonale (Y et Z, car tu bouges sur Z)
-        Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.wallJumpForce;
+        Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.dashJumpForce;
 
         Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
         MovementLockTimer = 0.1f; // blocage temporaire pour empêcher l'air control
