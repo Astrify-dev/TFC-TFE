@@ -12,25 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445f4119e5c82e408faaa4b548ae25e, type: 3}
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
-  rigidbodyMass: 1.2
-  rigidbodyDrag: 1
+  rigidbodyMass: 1
+  rigidbodyDrag: 0
   rigidbodyAngularDrag: 0.05
   useGravity: 1
-  moveSpeed: 13
+  moveSpeed: 5
   dive: 50
-  minMoveSpeed: 10
+  minMoveSpeed: 5
   maxMoveSpeed: 15
   accelerationRate: 30
-  jumpForce: 10
+  jumpForce: 5
   minJumpForce: 8
-  maxJumpForce: 15
+  maxJumpForce: 9
   wallSlideSpeed: 0.5
-  wallJumpCoyoteTime: 0.2
-  wallJumpForce: 12
-  directionImpulsion: {x: 1.5, y: 2}
+  wallJumpCoyoteTime: 1
+  wallJumpForce: 8
+  directionImpulsion: {x: 2, y: 0.6}
   groundDashForce: 25
-  groundDashCooldown: 1
-  groundDashCooldownTime: 5
+  groundDashCooldown: 0
+  groundDashCooldownTime: 0.2
   airDashForce: 30
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
