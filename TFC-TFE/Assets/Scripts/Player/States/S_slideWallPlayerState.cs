@@ -4,7 +4,6 @@ public class S_slideWallPlayerState : S_basePlayerStates
 {
     public override void EnterState(S_playerStates Player)
     {
-        Debug.Log("<color=cyan>[WALL]</color> Entered SlideWallState");
 
         // Active le mode wall slide (gravité désactivée, glisse lente)
         Player.Rigidbody.useGravity = false;
@@ -12,9 +11,7 @@ public class S_slideWallPlayerState : S_basePlayerStates
 
         // Autorise le wall jump
         Player.CanWallJump = true;
-        Player.WallJumpTimer = Player.Settings.wallJumpCoyoteTime;
 
-        Debug.Log("<color=yellow>[WALL]</color> Wall jump ready!");
     }
 
     public override void OnEnable(S_playerStates Player) { }

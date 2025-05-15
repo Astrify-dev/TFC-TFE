@@ -140,8 +140,6 @@ public class S_movement : MonoBehaviour{
         
         _moveSpeed = _movementSettings.moveSpeed;
         _dive = _movementSettings.dive;
-        _jumpForce = _movementSettings.jumpForce;
-        _wallJumpCoyoteTime = _movementSettings.wallJumpCoyoteTime;
         _wallJumpForce = _movementSettings.wallJumpForce;
         _groundDashForce = _movementSettings.groundDashForce;
         _groundDashCooldownTime = _movementSettings.groundDashCooldownTime;

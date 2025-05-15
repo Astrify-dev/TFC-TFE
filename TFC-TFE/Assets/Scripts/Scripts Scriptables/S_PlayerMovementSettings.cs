@@ -33,8 +33,17 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Movement Settings"), SerializeField, Tooltip("Vitesse à laquelle on atteint la vitesse max.")]
     public float accelerationRate = 20f;
 
-    [BoxGroup("Jump Settings"), SerializeField, Tooltip("La force de saut appliquée au joueur.")]
-    public float jumpForce = 5f;
+    [BoxGroup("Air Movement Settings")]
+    [SerializeField, Tooltip("Vitesse max dans les airs.")]
+    public float airMaxMoveSpeed = 6f;
+
+    [BoxGroup("Air Movement Settings")]
+    [SerializeField, Tooltip("Taux d'accélération dans les airs.")]
+
+    public float airAccelerationRate = 10f;
+    [BoxGroup("Air Movement Settings")]
+    [SerializeField, Tooltip("Vitesse de chute normale quand on ne plonge pas.")]
+    public float fallSpeed = 3f;
 
     [BoxGroup("Jump Settings")]
     [SerializeField, Tooltip("Force minimale de saut.")]
@@ -44,11 +53,12 @@ public class PlayerMovementSettings : ScriptableObject{
     [SerializeField, Tooltip("Force maximale de saut.")]
     public float maxJumpForce = 9f;
 
+    [BoxGroup("Jump Settings")]
+    [SerializeField, Tooltip("Temps max de charge du saut.")]
+    public float jumpChargeTime = 0.25f;
+
     [BoxGroup("Slide Settings"), SerializeField, Tooltip("La vitesse de quand on reste sur un mur et qu'on glisse.")]
     public float wallSlideSpeed = 2f;
-
-    [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("Le delay pour que le joueur puisse a nouveau sauter.")]
-    public float wallJumpCoyoteTime = 0.2f;
 
     [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("La force du wallJump")]
     public float wallJumpForce = 1.2f;

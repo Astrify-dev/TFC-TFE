@@ -7,6 +7,7 @@ public class S_inputPlayer : MonoBehaviour{
 
     public event Action<Vector2> OnMoveEvent;
     public event Action OnJumpEvent;
+    public event Action OnJumpReleased;
     public event Action OnDashEvent;
     public event Action OnDashReleased;
 
@@ -14,7 +15,8 @@ public class S_inputPlayer : MonoBehaviour{
     private bool _moveEnabled = true;
     private bool _jumpEnabled = true;
     private bool _dashEnabled = true;
-    
+    public bool IsJumpHeld => _inputs.Player.Jump.IsPressed();
+
     private void Awake(){
         _inputs = new Inputs();
     }
@@ -24,6 +26,7 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Direction.performed += OnMove;
         _inputs.Player.Direction.canceled += OnMove;
         _inputs.Player.Jump.performed += OnJump;
+        _inputs.Player.Jump.canceled += OnJumpRelease;
         _inputs.Player.Dash.performed += OnDash;
         _inputs.Player.Dash.canceled += OnDashRelease;
 
@@ -34,6 +37,7 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Direction.performed -= OnMove;
         _inputs.Player.Direction.canceled -= OnMove;
         _inputs.Player.Jump.performed -= OnJump;
+        _inputs.Player.Jump.canceled -= OnJumpRelease;
         _inputs.Player.Dash.performed -= OnDash;
         _inputs.Player.Dash.canceled -= OnDashRelease;
 
@@ -50,6 +54,12 @@ public class S_inputPlayer : MonoBehaviour{
         if (_jumpEnabled){
             OnJumpEvent?.Invoke();
         }
+    }
+
+    private void OnJumpRelease(InputAction.CallbackContext context)
+    {
+        if (_jumpEnabled)
+            OnJumpReleased?.Invoke();
     }
 
     private void OnDash(InputAction.CallbackContext context)

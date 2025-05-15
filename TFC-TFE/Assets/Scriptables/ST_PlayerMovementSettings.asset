@@ -17,17 +17,19 @@ MonoBehaviour:
   rigidbodyAngularDrag: 0.05
   useGravity: 1
   moveSpeed: 5
-  dive: 50
+  dive: 2
   minMoveSpeed: 5
   maxMoveSpeed: 15
   accelerationRate: 30
-  jumpForce: 5
+  airMaxMoveSpeed: 6
+  airAccelerationRate: 10
+  fallSpeed: 3
   minJumpForce: 8
-  maxJumpForce: 9
+  maxJumpForce: 15
+  jumpChargeTime: 0.3
   wallSlideSpeed: 0.5
-  wallJumpCoyoteTime: 1
-  wallJumpForce: 8
-  directionImpulsion: {x: 2.2, y: 0.7}
+  wallJumpForce: 10
+  directionImpulsion: {x: 0.6, y: 0.7}
   groundDashForce: 25
   groundDashCooldown: 0
   groundDashCooldownTime: 0.2
@@ -42,7 +44,7 @@ MonoBehaviour:
     m_Bits: 64
   dashResetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   bounceLayers:
     serializedVersion: 2
     m_Bits: 448

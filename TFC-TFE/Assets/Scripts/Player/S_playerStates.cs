@@ -37,6 +37,8 @@ public class S_playerStates : MonoBehaviour
     public bool IsAirReboundDash { get; set; }
 
     private bool awaitingReboundInput = false;
+    private float _chargedJumpForce = 0f;
+    private Coroutine _jumpChargeCoroutine;
 
     public PlayerMovementSettings Settings => _movementSettings;
     public S_SlowMotion SlowMotion { get; private set; }
@@ -70,8 +72,29 @@ public class S_playerStates : MonoBehaviour
         input.OnJumpEvent += () =>
         {
             if (_currentState == GroundState || _currentState == SlideWallState)
-                SwitchState(JumpState);
+            {
+                if (_jumpChargeCoroutine != null)
+                    StopCoroutine(_jumpChargeCoroutine);
+
+                _jumpChargeCoroutine = StartCoroutine(ChargeJump());
+            }
         };
+
+        input.OnJumpReleased += () =>
+        {
+            if (_currentState == GroundState)
+            {
+                PerformChargedJump(); // saut sol
+            }
+            else if (_currentState == SlideWallState && CanWallJump)
+            {
+                // Ne passe plus par JumpState
+                PerformWallJump();
+            }
+        };
+
+
+
 
         input.OnDashEvent += () =>
         {
@@ -93,17 +116,22 @@ public class S_playerStates : MonoBehaviour
         SwitchState(_initialyzePlayerState);
     }
 
+    public float AirControlLockTimer { get; set; } = 0f;
+
     private void Update()
     {
         _currentState?.UpdateState(this);
 
-        // Limite la vitesse de chute à une valeur max pour éviter un freefall incontrôlé
+        if (AirControlLockTimer > 0f)
+            AirControlLockTimer -= Time.deltaTime;
+
+        // chute max
         Vector3 vel = Rigidbody.velocity;
         if (vel.y < -_maxFallSpeed)
             vel.y = -_maxFallSpeed;
-
         Rigidbody.velocity = vel;
     }
+
 
     private void OnEnable() => _currentState?.OnEnable(this);
     private void OnDisable() => _currentState?.OnDisable(this);
@@ -148,13 +176,11 @@ public class S_playerStates : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, _wallCheckDistance, Settings.wallJumpLayers))
         {
             Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.green);
-            Debug.Log($"<color=green>[WALL CHECK]</color> Hit {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)} ✅");
             return true;
         }
         else
         {
             Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.red);
-            Debug.Log($"<color=red>[WALL CHECK]</color> Nothing hit ❌");
             return false;
         }
     }
@@ -249,7 +275,69 @@ public class S_playerStates : MonoBehaviour
         SwitchState(AirState);
     }
 
+    public void StartVariableJump(){
+        StartCoroutine(ChargeJump());
+    }
 
+    private IEnumerator ChargeJump()
+    {
+        float timer = 0f;
+        float maxHoldTime = Settings.jumpChargeTime;
+        _chargedJumpForce = Settings.minJumpForce;
+
+        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+
+        while (timer < maxHoldTime)
+        {
+            if (!S_controllerPlayer.Instance.inputPlayer.IsJumpHeld)
+                break;
+
+            timer += Time.deltaTime;
+            float ratio = Mathf.Clamp01(timer / maxHoldTime);
+            _chargedJumpForce = Mathf.Lerp(Settings.minJumpForce, Settings.maxJumpForce, ratio);
+
+            yield return null;
+        }
+    }
+
+    private void PerformChargedJump()
+    {
+        if (_chargedJumpForce > 0f)
+        {
+            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
+
+            IsGrounded = false;
+            CanJump = false;
+
+            _chargedJumpForce = 0f;
+
+            SwitchState(AirState);
+        }
+    }
+
+    public void PerformWallJump()
+    {
+        Rigidbody.velocity = Vector3.zero;
+
+        int direction = FacingRight ? -1 : 1;
+        Vector2 impulse = new Vector2(
+            direction * Settings.directionImpulsion.x,
+            Settings.directionImpulsion.y
+        );
+
+        Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
+
+        Debug.Log($"<color=orange>[WALL JUMP]</color> Force appliquée: {wallJumpForce}");
+
+        Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
+        HandleFlip(direction);
+
+        CanWallJump = false;
+        WallJumpTimer = 0f;
+        AirControlLockTimer = 0.15f;
+
+        SwitchState(AirState);
+    }
 
     private void OnDrawGizmos()
     {
