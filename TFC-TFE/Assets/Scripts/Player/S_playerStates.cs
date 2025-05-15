@@ -29,7 +29,6 @@ public class S_playerStates : MonoBehaviour
     public Vector2 MoveInput { get; set; }
     public bool FacingRight { get; private set; } = true;
 
-    // État internes du joueur
     public bool IsGrounded { get; set; }
     public bool CanJump { get; set; }
     public bool CanDash { get; set; }
@@ -40,6 +39,8 @@ public class S_playerStates : MonoBehaviour
     public bool HasAirDashed { get; set; }
     public bool IsWallSliding { get; set; }
     public bool IsAirReboundDash { get; set; }
+
+    public bool WasReboundInterrupted { get; private set; } = false; // ✅ Nouveau flag
 
     private bool awaitingReboundInput = false;
     private float _chargedJumpForce = 0f;
@@ -53,6 +54,7 @@ public class S_playerStates : MonoBehaviour
     public S_SlowMotion SlowMotion { get; private set; }
 
     #endregion
+
 
     #region === États de la State Machine ===
 
@@ -108,7 +110,7 @@ public class S_playerStates : MonoBehaviour
             }
             else if (IsDashing)
             {
-                BreakDashWithJump(); // ✅ On interrompt le dash avec un saut
+                BreakDashWithJump(); // ✅ Interruption dash
             }
         };
 
@@ -116,10 +118,22 @@ public class S_playerStates : MonoBehaviour
         {
             if (awaitingReboundInput) return;
 
-            if (_currentState == GroundState && CanDash)
-                SwitchState(DashGroundState);
-            else if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
+            // ✅ Logique de blocage du dash si le saut ne vient pas d’un rebond
+            if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
+            {
+                if (!WasReboundInterrupted)
+                {
+                    Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut non-rebond");
+                    return;
+                }
+
+                Debug.Log("<color=green>[DASH]</color> Autorisé : dash après rebond");
                 StartSlowMotionDash();
+            }
+            else if (_currentState == GroundState && CanDash)
+            {
+                SwitchState(DashGroundState);
+            }
         };
 
         input.OnDashReleased += () =>
@@ -143,6 +157,7 @@ public class S_playerStates : MonoBehaviour
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
 
+        // ✅ Ajustement visuel si on dash contre un mur
         if (IsDashing && CheckWall())
         {
             Vector3 correctionDir = FacingRight ? Vector3.forward : Vector3.back;
@@ -152,7 +167,7 @@ public class S_playerStates : MonoBehaviour
             {
                 Debug.DrawLine(transform.position, hit.point, Color.magenta);
 
-                Vector3 targetPos = hit.point - correctionDir * 0.5f; 
+                Vector3 targetPos = hit.point - correctionDir * 0.5f;
                 transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
             }
         }
@@ -169,12 +184,12 @@ public class S_playerStates : MonoBehaviour
     {
         _currentState?.OnDisable(this);
         _currentState = newState;
-        Debug.Log($"<color=orange>[STATE]</color> Switched to: {newState.GetType().Name}");
         newState?.OnEnable(this);
         newState?.EnterState(this);
     }
 
     #endregion
+
 
     #region === Mouvement, Dash & Jump ===
 
@@ -219,14 +234,11 @@ public class S_playerStates : MonoBehaviour
     {
         if (!IsDashing) return;
 
-        Debug.Log("<color=cyan>[DASH INTERRUPT]</color> Dash interrompu par saut");
-
-        // On stoppe net la vélocité actuelle (du dash)
+        // Stop net le dash
         Vector3 currentVelocity = Rigidbody.velocity;
-        Vector3 blendedVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 5f); // ou 0.5 pour plus d'inertie
+        Vector3 blendedVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 5f);
         Rigidbody.velocity = blendedVelocity;
 
-        // Déterminer la direction du wall jump (basé sur FacingRight)
         int direction = FacingRight ? 1 : -1;
 
         Vector2 impulse2D = new Vector2(
@@ -235,22 +247,14 @@ public class S_playerStates : MonoBehaviour
         );
 
         Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.dashJumpForce;
-
         Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
-        MovementLockTimer = 0.1f; // blocage temporaire pour empêcher l'air control
+
+        MovementLockTimer = 0.1f;
+        AirControlLockTimer = 0.3f;
 
         HandleFlip(direction);
 
-        // Reset états
-        CanWallJump = false;
-        WallJumpTimer = 0f;
-        AirControlLockTimer = 0.3f;
-
-        if (IsAirReboundDash)
-        {
-            CanAirDash = true;
-        }
-
+        // Arrêt dash + coroutine
         if (_airDashCoroutine != null)
         {
             StopCoroutine(_airDashCoroutine);
@@ -259,12 +263,12 @@ public class S_playerStates : MonoBehaviour
 
         IsDashing = false;
         IsAirReboundDash = false;
-
         MoveInput = Vector2.zero;
 
+        CanAirDash = WasReboundInterrupted; 
+        IsAirReboundDash = false;
         SwitchState(AirState);
     }
-
 
     public void PerformChargedJump()
     {
@@ -309,6 +313,7 @@ public class S_playerStates : MonoBehaviour
 
     #endregion
 
+
     #region === Rebond Dash ===
 
     public void StartAirDashCoroutine(Vector3 direction)
@@ -323,6 +328,11 @@ public class S_playerStates : MonoBehaviour
 
         Rigidbody.useGravity = false;
         IsDashing = true;
+        WasReboundInterrupted = false;
+        if (IsAirReboundDash){
+            WasReboundInterrupted = true;
+        }
+
         Rigidbody.velocity = direction * dashForce;
         awaitingReboundInput = false;
 
@@ -382,7 +392,6 @@ public class S_playerStates : MonoBehaviour
         Rigidbody.useGravity = true;
         IsDashing = false;
         HasAirDashed = false;
-        IsAirReboundDash = false;
 
         SwitchState(AirState);
     }
@@ -464,3 +473,4 @@ public class S_playerStates : MonoBehaviour
 
     #endregion
 }
+

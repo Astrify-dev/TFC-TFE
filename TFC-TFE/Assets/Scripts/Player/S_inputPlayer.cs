@@ -66,7 +66,6 @@ public class S_inputPlayer : MonoBehaviour{
     {
         if (_dashEnabled)
         {
-            Debug.Log("<color=blue>[INPUT]</color> Dash pressed");
             OnDashEvent?.Invoke();
         }
     }

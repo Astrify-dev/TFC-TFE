@@ -10,6 +10,7 @@ public class S_groundPlayerState : S_basePlayerStates
         Player.CanAirDash = true;
         Player.HasAirDashed = false;
         Player.IsWallSliding = false;
+
     }
 
     public override void OnEnable(S_playerStates Player) { }
