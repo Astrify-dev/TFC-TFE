@@ -2328,14 +2328,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff210a857cb7d84a98496574728a330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target1: {fileID: 2091780982}
-  _target2: {fileID: 11314514}
+  _target1: {fileID: 11314514}
+  _target2: {fileID: 2091780982}
   _target3: {fileID: 419345636}
-  _speed1: 0.1
+  _speed1: 0.5
   _speed2: 0.2
   _speed3: 0.3
-  _strengthRandom: 10
-  _maxVelocity: 0.05
+  _strengthRandom: 2
+  _maxDistanceRandom: 0.2
+  _maxVelocity: 5
+  _velocityLose: 1.05
+  _drawGizmos: 0
 --- !u!114 &1788869197
 MonoBehaviour:
   m_ObjectHideFlags: 2
