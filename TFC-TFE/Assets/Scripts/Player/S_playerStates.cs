@@ -142,6 +142,20 @@ public class S_playerStates : MonoBehaviour
         if (vel.y < -_maxFallSpeed)
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
+
+        if (IsDashing && CheckWall())
+        {
+            Vector3 correctionDir = FacingRight ? Vector3.forward : Vector3.back;
+            Ray wallRay = new Ray(transform.position, correctionDir);
+
+            if (Physics.Raycast(wallRay, out RaycastHit hit, _wallCheckDistance + 0.15f, Settings.wallJumpLayers))
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.magenta);
+
+                Vector3 targetPos = hit.point - correctionDir * 0.5f; 
+                transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
+            }
+        }
     }
 
     private void OnEnable() => _currentState?.OnEnable(this);
@@ -401,17 +415,18 @@ public class S_playerStates : MonoBehaviour
 
     public bool CheckWall()
     {
+        float distance = IsDashing ? _wallCheckDistance + 0.3f : _wallCheckDistance;
         Vector3 dir = FacingRight ? Vector3.forward : Vector3.back;
         Ray ray = new Ray(transform.position, dir);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, _wallCheckDistance, Settings.wallJumpLayers))
+        if (Physics.Raycast(ray, out RaycastHit hit, distance, Settings.wallJumpLayers))
         {
-            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.green);
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.green);
             return true;
         }
         else
         {
-            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.red);
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
             return false;
         }
     }

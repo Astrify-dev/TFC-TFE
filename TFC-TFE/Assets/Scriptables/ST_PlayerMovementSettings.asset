@@ -37,6 +37,8 @@ MonoBehaviour:
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
   reboundInputWindow: 0.25
+  dashJumpDirection: {x: 0.6, y: 1}
+  dashJumpForce: 10
   slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:
