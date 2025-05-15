@@ -17,6 +17,16 @@ public class S_airPlayerState : S_basePlayerStates
 
     public override void UpdateState(S_playerStates Player)
     {
+        if (Player.MovementLockTimer > 0f)
+        {
+            Player.MovementLockTimer -= Time.deltaTime;
+            return; // Ne rien faire tant que le saut est verrouillé
+        }
+
+        if (Player.IsDashing){
+            return;
+        }
+
         if (_justEntered)
         {
             _justEntered = false;

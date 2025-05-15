@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class S_playerStates : MonoBehaviour
 {
+    #region === Références & Données ===
+
     private S_basePlayerStates _currentState;
 
     [Header("Références")]
@@ -14,17 +16,20 @@ public class S_playerStates : MonoBehaviour
     [SerializeField] private float _groundCheckDistance = 0.5f;
     [SerializeField] private float _wallCheckDistance = 0.5f;
 
-    [Header("Couleurs des Raycasts")]
+    [Header("Debug Raycast Couleurs")]
     [SerializeField] private Color _groundRayColor = Color.green;
     [SerializeField] private Color _wallRayColor = Color.red;
     [SerializeField] private Color _ceilingRayColor = Color.blue;
     [SerializeField] private Color _bounceRayColor = Color.yellow;
     [SerializeField] private Color _velocityRayColor = Color.yellow;
+
     [SerializeField] private float _maxFallSpeed = 25f;
 
     public Rigidbody Rigidbody => _rigidbody;
     public Vector2 MoveInput { get; set; }
     public bool FacingRight { get; private set; } = true;
+
+    // État internes du joueur
     public bool IsGrounded { get; set; }
     public bool CanJump { get; set; }
     public bool CanDash { get; set; }
@@ -39,11 +44,18 @@ public class S_playerStates : MonoBehaviour
     private bool awaitingReboundInput = false;
     private float _chargedJumpForce = 0f;
     private Coroutine _jumpChargeCoroutine;
+    private Coroutine _airDashCoroutine;
+
+    public float AirControlLockTimer { get; set; } = 0f;
+    public float MovementLockTimer { get; set; } = 0f;
 
     public PlayerMovementSettings Settings => _movementSettings;
     public S_SlowMotion SlowMotion { get; private set; }
 
-    // États
+    #endregion
+
+    #region === États de la State Machine ===
+
     public S_initialyzePlayerState _initialyzePlayerState { get; private set; } = new S_initialyzePlayerState();
     public S_groundPlayerState GroundState { get; private set; } = new S_groundPlayerState();
     public S_airPlayerState AirState { get; private set; } = new S_airPlayerState();
@@ -54,7 +66,9 @@ public class S_playerStates : MonoBehaviour
     public S_wallDashReboundPlayerState WallReboundState { get; private set; } = new S_wallDashReboundPlayerState();
     public S_deadPlayerState DeadState { get; private set; } = new S_deadPlayerState();
 
-    public float AirControlLockTimer { get; set; } = 0f;
+    #endregion
+
+    #region === Unity Lifecycle ===
 
     private void Awake()
     {
@@ -92,12 +106,15 @@ public class S_playerStates : MonoBehaviour
             {
                 PerformWallJump();
             }
+            else if (IsDashing)
+            {
+                BreakDashWithJump(); // ✅ On interrompt le dash avec un saut
+            }
         };
 
         input.OnDashEvent += () =>
         {
-            if (awaitingReboundInput)
-                return;
+            if (awaitingReboundInput) return;
 
             if (_currentState == GroundState && CanDash)
                 SwitchState(DashGroundState);
@@ -130,6 +147,10 @@ public class S_playerStates : MonoBehaviour
     private void OnEnable() => _currentState?.OnEnable(this);
     private void OnDisable() => _currentState?.OnDisable(this);
 
+    #endregion
+
+    #region === Transitions d'État ===
+
     public void SwitchState(S_basePlayerStates newState)
     {
         _currentState?.OnDisable(this);
@@ -138,6 +159,224 @@ public class S_playerStates : MonoBehaviour
         newState?.OnEnable(this);
         newState?.EnterState(this);
     }
+
+    #endregion
+
+    #region === Mouvement, Dash & Jump ===
+
+    public void StartSlowMotionDash() =>
+        SlowMotion?.StartSlowMotion(Settings.slowMotionIntensity, Settings.slowMotionTimer);
+
+    public void StopSlowMotionDashAndPerformAirDash()
+    {
+        SlowMotion?.StopSlowMotion();
+        SwitchState(AirDashState);
+    }
+
+    public void PerformWallJump()
+    {
+        Rigidbody.velocity = Vector3.zero;
+
+        int direction = FacingRight ? -1 : 1;
+        Vector2 impulse = new Vector2(
+            direction * Settings.directionImpulsion.x,
+            Settings.directionImpulsion.y
+        );
+
+        Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
+
+        Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
+        HandleFlip(direction);
+
+        CanWallJump = false;
+        WallJumpTimer = 0f;
+        AirControlLockTimer = 0.3f;
+        CanAirDash = true;
+
+        MoveInput = Vector2.zero;
+
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(false);
+        StartCoroutine(ReactivateInputAfterDelay(0.25f));
+
+        SwitchState(AirState);
+    }
+
+    public void BreakDashWithJump()
+    {
+        if (!IsDashing) return;
+
+        Debug.Log("<color=cyan>[DASH INTERRUPT]</color> Dash interrompu par saut");
+
+        // On stoppe net la vélocité actuelle (du dash)
+        Vector3 currentVelocity = Rigidbody.velocity;
+        Vector3 blendedVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 5f); // ou 0.5 pour plus d'inertie
+        Rigidbody.velocity = blendedVelocity;
+
+        // Déterminer la direction du wall jump (basé sur FacingRight)
+        int direction = FacingRight ? 1 : -1;
+
+        Vector2 impulse2D = new Vector2(
+            direction * Settings.directionImpulsion.x,
+            Settings.directionImpulsion.y
+        );
+
+        // Appliquer la force en diagonale (Y et Z, car tu bouges sur Z)
+        Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.wallJumpForce;
+
+        Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+        MovementLockTimer = 0.1f; // blocage temporaire pour empêcher l'air control
+
+        HandleFlip(direction);
+
+        // Reset états
+        CanWallJump = false;
+        WallJumpTimer = 0f;
+        AirControlLockTimer = 0.3f;
+
+        if (IsAirReboundDash)
+        {
+            CanAirDash = true;
+        }
+
+        if (_airDashCoroutine != null)
+        {
+            StopCoroutine(_airDashCoroutine);
+            _airDashCoroutine = null;
+        }
+
+        IsDashing = false;
+        IsAirReboundDash = false;
+
+        MoveInput = Vector2.zero;
+
+        SwitchState(AirState);
+    }
+
+
+    public void PerformChargedJump()
+    {
+        if (_chargedJumpForce > 0f)
+        {
+            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
+            IsGrounded = false;
+            CanJump = false;
+            _chargedJumpForce = 0f;
+            SwitchState(AirState);
+        }
+    }
+
+    public void StartVariableJump() => StartCoroutine(ChargeJump());
+
+    private IEnumerator ChargeJump()
+    {
+        float timer = 0f;
+        float maxHoldTime = Settings.jumpChargeTime;
+        _chargedJumpForce = Settings.minJumpForce;
+
+        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+
+        while (timer < maxHoldTime)
+        {
+            if (!S_controllerPlayer.Instance.inputPlayer.IsJumpHeld)
+                break;
+
+            timer += Time.deltaTime;
+            float ratio = Mathf.Clamp01(timer / maxHoldTime);
+            _chargedJumpForce = Mathf.Lerp(Settings.minJumpForce, Settings.maxJumpForce, ratio);
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator ReactivateInputAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(true);
+    }
+
+    #endregion
+
+    #region === Rebond Dash ===
+
+    public void StartAirDashCoroutine(Vector3 direction)
+    {
+        _airDashCoroutine = StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
+    }
+
+    private IEnumerator HandleAirDashWithRebound(Vector3 direction, float dashForce)
+    {
+        float rayLength = 1.2f;
+        float reboundTimeout = 0f;
+
+        Rigidbody.useGravity = false;
+        IsDashing = true;
+        Rigidbody.velocity = direction * dashForce;
+        awaitingReboundInput = false;
+
+        void ReboundInputHandler()
+        {
+            if (awaitingReboundInput)
+                awaitingReboundInput = false;
+        }
+
+        S_controllerPlayer.Instance.inputPlayer.OnDashEvent += ReboundInputHandler;
+
+        while (true)
+        {
+            Vector3 rayOrigin = transform.position + direction.normalized * 0.25f;
+
+            if (IsAirReboundDash && Physics.Raycast(rayOrigin, direction, out RaycastHit hit, rayLength, Settings.bounceLayers))
+            {
+                Rigidbody.velocity = Vector3.zero;
+                awaitingReboundInput = true;
+
+                float timer = 0f;
+                while (awaitingReboundInput && timer < Settings.reboundInputWindow)
+                {
+                    timer += Time.deltaTime;
+                    yield return null;
+                }
+
+                if (awaitingReboundInput) break;
+
+                Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
+                if (Vector3.Angle(reflected, Vector3.down) < 20f)
+                    reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
+
+                direction = reflected;
+                transform.position = hit.point + hit.normal * 0.05f;
+                Rigidbody.velocity = direction * dashForce * Settings.rebounceBoostMultiplier;
+
+                int directionVisuel = FacingRight ? -1 : 1;
+                HandleFlip(directionVisuel);
+
+                reboundTimeout = 0f;
+            }
+            else
+            {
+                Rigidbody.velocity = direction * dashForce;
+            }
+
+            reboundTimeout += Time.fixedDeltaTime;
+            if (reboundTimeout >= Settings.reboundTimer)
+                break;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        S_controllerPlayer.Instance.inputPlayer.OnDashEvent -= ReboundInputHandler;
+
+        Rigidbody.useGravity = true;
+        IsDashing = false;
+        HasAirDashed = false;
+        IsAirReboundDash = false;
+
+        SwitchState(AirState);
+    }
+
+    #endregion
+
+    #region === Utilitaires ===
 
     public void HandleFlip(float moveInput)
     {
@@ -178,163 +417,6 @@ public class S_playerStates : MonoBehaviour
         }
     }
 
-    public void StartSlowMotionDash() =>
-        SlowMotion?.StartSlowMotion(Settings.slowMotionIntensity, Settings.slowMotionTimer);
-
-    public void StopSlowMotionDashAndPerformAirDash()
-    {
-        SlowMotion?.StopSlowMotion();
-        SwitchState(AirDashState);
-    }
-
-    public void StartAirDashCoroutine(Vector3 direction)
-    {
-        StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
-    }
-
-    private IEnumerator HandleAirDashWithRebound(Vector3 direction, float dashForce)
-    {
-        float rayLength = 1.2f;
-        float reboundTimeout = 0f;
-
-        Rigidbody.useGravity = false;
-        IsDashing = true;
-        Rigidbody.velocity = direction * dashForce;
-        awaitingReboundInput = false;
-
-        void ReboundInputHandler()
-        {
-            if (awaitingReboundInput)
-                awaitingReboundInput = false;
-        }
-
-        S_controllerPlayer.Instance.inputPlayer.OnDashEvent += ReboundInputHandler;
-
-        while (true)
-        {
-            Vector3 rayOrigin = transform.position + direction.normalized * 0.25f;
-
-            if (IsAirReboundDash && Physics.Raycast(rayOrigin, direction, out RaycastHit hit, rayLength, Settings.bounceLayers))
-            {
-                Rigidbody.velocity = Vector3.zero;
-                awaitingReboundInput = true;
-
-                float timer = 0f;
-                while (awaitingReboundInput && timer < Settings.reboundInputWindow)
-                {
-                    timer += Time.deltaTime;
-                    yield return null;
-                }
-
-                if (awaitingReboundInput)
-                    break;
-
-                Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
-                if (Vector3.Angle(reflected, Vector3.down) < 20f)
-                    reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
-
-                direction = reflected;
-                transform.position = hit.point + hit.normal * 0.05f;
-                Rigidbody.velocity = direction * dashForce * Settings.rebounceBoostMultiplier;
-
-                int directionVisuel = FacingRight ? -1 : 1;
-                HandleFlip(directionVisuel);
-
-                reboundTimeout = 0f;
-            }
-            else
-            {
-                Rigidbody.velocity = direction * dashForce;
-            }
-
-            reboundTimeout += Time.fixedDeltaTime;
-            if (reboundTimeout >= Settings.reboundTimer)
-                break;
-
-            yield return new WaitForFixedUpdate();
-        }
-
-        S_controllerPlayer.Instance.inputPlayer.OnDashEvent -= ReboundInputHandler;
-
-        Rigidbody.useGravity = true;
-        IsDashing = false;
-        HasAirDashed = false;
-        IsAirReboundDash = false;
-
-        SwitchState(AirState);
-    }
-
-    public void StartVariableJump() => StartCoroutine(ChargeJump());
-
-    private IEnumerator ChargeJump()
-    {
-        float timer = 0f;
-        float maxHoldTime = Settings.jumpChargeTime;
-        _chargedJumpForce = Settings.minJumpForce;
-
-        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
-
-        while (timer < maxHoldTime)
-        {
-            if (!S_controllerPlayer.Instance.inputPlayer.IsJumpHeld)
-                break;
-
-            timer += Time.deltaTime;
-            float ratio = Mathf.Clamp01(timer / maxHoldTime);
-            _chargedJumpForce = Mathf.Lerp(Settings.minJumpForce, Settings.maxJumpForce, ratio);
-
-            yield return null;
-        }
-    }
-
-    private void PerformChargedJump()
-    {
-        if (_chargedJumpForce > 0f)
-        {
-            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
-            IsGrounded = false;
-            CanJump = false;
-            _chargedJumpForce = 0f;
-            SwitchState(AirState);
-        }
-    }
-
-    public void PerformWallJump()
-    {
-        Rigidbody.velocity = Vector3.zero;
-
-        int direction = FacingRight ? -1 : 1;
-        Vector2 impulse = new Vector2(
-            direction * Settings.directionImpulsion.x,
-            Settings.directionImpulsion.y
-        );
-
-        Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
-
-        Debug.Log($"<color=orange>[WALL JUMP]</color> Force appliquée: {wallJumpForce}");
-
-        Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
-        HandleFlip(direction);
-
-        CanWallJump = false;
-        WallJumpTimer = 0f;
-        AirControlLockTimer = 0.15f;
-        CanAirDash = true;
-
-        MoveInput = Vector2.zero;
-
-        S_controllerPlayer.Instance.inputPlayer.EnableMove(false);
-        StartCoroutine(ReactivateInputAfterDelay(0.15f));
-
-        SwitchState(AirState);
-    }
-
-    private IEnumerator ReactivateInputAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        S_controllerPlayer.Instance.inputPlayer.EnableMove(true);
-    }
-
     private void OnDrawGizmos()
     {
         if (_rigidbody == null) return;
@@ -365,4 +447,6 @@ public class S_playerStates : MonoBehaviour
             Gizmos.DrawLine(rayOrigin, rayOrigin + raycastDir * 1.5f);
         }
     }
+
+    #endregion
 }
