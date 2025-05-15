@@ -40,7 +40,8 @@ public class S_playerStates : MonoBehaviour
     public bool IsWallSliding { get; set; }
     public bool IsAirReboundDash { get; set; }
 
-    public bool WasReboundInterrupted { get; private set; } = false; // ✅ Nouveau flag
+    public bool WasReboundDash { get; private set; } = false; // ✅ Flag : true si dash était un rebond
+    public bool HasActuallyRebounded { get; private set; } = false;
 
     private bool awaitingReboundInput = false;
     private float _chargedJumpForce = 0f;
@@ -121,13 +122,6 @@ public class S_playerStates : MonoBehaviour
             // ✅ Logique de blocage du dash si le saut ne vient pas d’un rebond
             if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
             {
-                if (!WasReboundInterrupted)
-                {
-                    Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut non-rebond");
-                    return;
-                }
-
-                Debug.Log("<color=green>[DASH]</color> Autorisé : dash après rebond");
                 StartSlowMotionDash();
             }
             else if (_currentState == GroundState && CanDash)
@@ -254,7 +248,7 @@ public class S_playerStates : MonoBehaviour
 
         HandleFlip(direction);
 
-        // Arrêt dash + coroutine
+        // Arrêt dash + arrêt coroutine
         if (_airDashCoroutine != null)
         {
             StopCoroutine(_airDashCoroutine);
@@ -265,10 +259,17 @@ public class S_playerStates : MonoBehaviour
         IsAirReboundDash = false;
         MoveInput = Vector2.zero;
 
-        CanAirDash = WasReboundInterrupted; 
-        IsAirReboundDash = false;
+        CanAirDash = HasActuallyRebounded;
+
+        if (CanAirDash)
+            Debug.Log("<color=green>[DASH]</color> Autorisé : dash après rebond réel");
+        else
+            Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut sans rebond");
+
+
         SwitchState(AirState);
     }
+
 
     public void PerformChargedJump()
     {
@@ -318,6 +319,8 @@ public class S_playerStates : MonoBehaviour
 
     public void StartAirDashCoroutine(Vector3 direction)
     {
+        WasReboundDash = false;
+        HasActuallyRebounded = false;
         _airDashCoroutine = StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
     }
 
@@ -328,10 +331,8 @@ public class S_playerStates : MonoBehaviour
 
         Rigidbody.useGravity = false;
         IsDashing = true;
-        WasReboundInterrupted = false;
-        if (IsAirReboundDash){
-            WasReboundInterrupted = true;
-        }
+        WasReboundDash = IsAirReboundDash;
+
 
         Rigidbody.velocity = direction * dashForce;
         awaitingReboundInput = false;
@@ -361,6 +362,8 @@ public class S_playerStates : MonoBehaviour
                 }
 
                 if (awaitingReboundInput) break;
+
+                HasActuallyRebounded = true;
 
                 Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
