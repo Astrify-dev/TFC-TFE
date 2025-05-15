@@ -54,6 +54,8 @@ public class S_playerStates : MonoBehaviour
     public S_wallDashReboundPlayerState WallReboundState { get; private set; } = new S_wallDashReboundPlayerState();
     public S_deadPlayerState DeadState { get; private set; } = new S_deadPlayerState();
 
+    public float AirControlLockTimer { get; set; } = 0f;
+
     private void Awake()
     {
         if (_rigidbody == null) _rigidbody = GetComponent<Rigidbody>();
@@ -84,17 +86,13 @@ public class S_playerStates : MonoBehaviour
         {
             if (_currentState == GroundState)
             {
-                PerformChargedJump(); // saut sol
+                PerformChargedJump();
             }
             else if (_currentState == SlideWallState && CanWallJump)
             {
-                // Ne passe plus par JumpState
                 PerformWallJump();
             }
         };
-
-
-
 
         input.OnDashEvent += () =>
         {
@@ -116,8 +114,6 @@ public class S_playerStates : MonoBehaviour
         SwitchState(_initialyzePlayerState);
     }
 
-    public float AirControlLockTimer { get; set; } = 0f;
-
     private void Update()
     {
         _currentState?.UpdateState(this);
@@ -125,13 +121,11 @@ public class S_playerStates : MonoBehaviour
         if (AirControlLockTimer > 0f)
             AirControlLockTimer -= Time.deltaTime;
 
-        // chute max
         Vector3 vel = Rigidbody.velocity;
         if (vel.y < -_maxFallSpeed)
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
     }
-
 
     private void OnEnable() => _currentState?.OnEnable(this);
     private void OnDisable() => _currentState?.OnDisable(this);
@@ -161,7 +155,6 @@ public class S_playerStates : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        // Raycast ou SphereCast pour détecter le sol (jump reset possible)
         if (Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, Settings.jumpResetLayers))
             return true;
 
@@ -206,7 +199,6 @@ public class S_playerStates : MonoBehaviour
 
         Rigidbody.useGravity = false;
         IsDashing = true;
-
         Rigidbody.velocity = direction * dashForce;
         awaitingReboundInput = false;
 
@@ -238,17 +230,14 @@ public class S_playerStates : MonoBehaviour
                     break;
 
                 Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
-
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
                     reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
 
                 direction = reflected;
                 transform.position = hit.point + hit.normal * 0.05f;
-
                 Rigidbody.velocity = direction * dashForce * Settings.rebounceBoostMultiplier;
 
                 int directionVisuel = FacingRight ? -1 : 1;
-
                 HandleFlip(directionVisuel);
 
                 reboundTimeout = 0f;
@@ -275,9 +264,7 @@ public class S_playerStates : MonoBehaviour
         SwitchState(AirState);
     }
 
-    public void StartVariableJump(){
-        StartCoroutine(ChargeJump());
-    }
+    public void StartVariableJump() => StartCoroutine(ChargeJump());
 
     private IEnumerator ChargeJump()
     {
@@ -305,12 +292,9 @@ public class S_playerStates : MonoBehaviour
         if (_chargedJumpForce > 0f)
         {
             Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
-
             IsGrounded = false;
             CanJump = false;
-
             _chargedJumpForce = 0f;
-
             SwitchState(AirState);
         }
     }
@@ -335,8 +319,20 @@ public class S_playerStates : MonoBehaviour
         CanWallJump = false;
         WallJumpTimer = 0f;
         AirControlLockTimer = 0.15f;
+        CanAirDash = true;
+
+        MoveInput = Vector2.zero;
+
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(false);
+        StartCoroutine(ReactivateInputAfterDelay(0.15f));
 
         SwitchState(AirState);
+    }
+
+    private IEnumerator ReactivateInputAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(true);
     }
 
     private void OnDrawGizmos()
