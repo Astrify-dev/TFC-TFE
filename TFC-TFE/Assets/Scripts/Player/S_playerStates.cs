@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class S_playerStates : MonoBehaviour
 {
+    #region === Références & Données ===
+
     private S_basePlayerStates _currentState;
 
     [Header("Références")]
@@ -14,17 +16,19 @@ public class S_playerStates : MonoBehaviour
     [SerializeField] private float _groundCheckDistance = 0.5f;
     [SerializeField] private float _wallCheckDistance = 0.5f;
 
-    [Header("Couleurs des Raycasts")]
+    [Header("Debug Raycast Couleurs")]
     [SerializeField] private Color _groundRayColor = Color.green;
     [SerializeField] private Color _wallRayColor = Color.red;
     [SerializeField] private Color _ceilingRayColor = Color.blue;
     [SerializeField] private Color _bounceRayColor = Color.yellow;
     [SerializeField] private Color _velocityRayColor = Color.yellow;
+
     [SerializeField] private float _maxFallSpeed = 25f;
 
     public Rigidbody Rigidbody => _rigidbody;
     public Vector2 MoveInput { get; set; }
     public bool FacingRight { get; private set; } = true;
+
     public bool IsGrounded { get; set; }
     public bool CanJump { get; set; }
     public bool CanDash { get; set; }
@@ -36,14 +40,24 @@ public class S_playerStates : MonoBehaviour
     public bool IsWallSliding { get; set; }
     public bool IsAirReboundDash { get; set; }
 
+    public bool WasReboundInterrupted { get; private set; } = false; // ✅ Nouveau flag
+
     private bool awaitingReboundInput = false;
     private float _chargedJumpForce = 0f;
     private Coroutine _jumpChargeCoroutine;
+    private Coroutine _airDashCoroutine;
+
+    public float AirControlLockTimer { get; set; } = 0f;
+    public float MovementLockTimer { get; set; } = 0f;
 
     public PlayerMovementSettings Settings => _movementSettings;
     public S_SlowMotion SlowMotion { get; private set; }
 
-    // États
+    #endregion
+
+
+    #region === États de la State Machine ===
+
     public S_initialyzePlayerState _initialyzePlayerState { get; private set; } = new S_initialyzePlayerState();
     public S_groundPlayerState GroundState { get; private set; } = new S_groundPlayerState();
     public S_airPlayerState AirState { get; private set; } = new S_airPlayerState();
@@ -54,7 +68,9 @@ public class S_playerStates : MonoBehaviour
     public S_wallDashReboundPlayerState WallReboundState { get; private set; } = new S_wallDashReboundPlayerState();
     public S_deadPlayerState DeadState { get; private set; } = new S_deadPlayerState();
 
-    public float AirControlLockTimer { get; set; } = 0f;
+    #endregion
+
+    #region === Unity Lifecycle ===
 
     private void Awake()
     {
@@ -92,17 +108,32 @@ public class S_playerStates : MonoBehaviour
             {
                 PerformWallJump();
             }
+            else if (IsDashing)
+            {
+                BreakDashWithJump(); // ✅ Interruption dash
+            }
         };
 
         input.OnDashEvent += () =>
         {
-            if (awaitingReboundInput)
-                return;
+            if (awaitingReboundInput) return;
 
-            if (_currentState == GroundState && CanDash)
-                SwitchState(DashGroundState);
-            else if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
+            // ✅ Logique de blocage du dash si le saut ne vient pas d’un rebond
+            if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
+            {
+                if (!WasReboundInterrupted)
+                {
+                    Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut non-rebond");
+                    return;
+                }
+
+                Debug.Log("<color=green>[DASH]</color> Autorisé : dash après rebond");
                 StartSlowMotionDash();
+            }
+            else if (_currentState == GroundState && CanDash)
+            {
+                SwitchState(DashGroundState);
+            }
         };
 
         input.OnDashReleased += () =>
@@ -125,58 +156,42 @@ public class S_playerStates : MonoBehaviour
         if (vel.y < -_maxFallSpeed)
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
+
+        // ✅ Ajustement visuel si on dash contre un mur
+        if (IsDashing && CheckWall())
+        {
+            Vector3 correctionDir = FacingRight ? Vector3.forward : Vector3.back;
+            Ray wallRay = new Ray(transform.position, correctionDir);
+
+            if (Physics.Raycast(wallRay, out RaycastHit hit, _wallCheckDistance + 0.15f, Settings.wallJumpLayers))
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.magenta);
+
+                Vector3 targetPos = hit.point - correctionDir * 0.5f;
+                transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
+            }
+        }
     }
 
     private void OnEnable() => _currentState?.OnEnable(this);
     private void OnDisable() => _currentState?.OnDisable(this);
 
+    #endregion
+
+    #region === Transitions d'État ===
+
     public void SwitchState(S_basePlayerStates newState)
     {
         _currentState?.OnDisable(this);
         _currentState = newState;
-        Debug.Log($"<color=orange>[STATE]</color> Switched to: {newState.GetType().Name}");
         newState?.OnEnable(this);
         newState?.EnterState(this);
     }
 
-    public void HandleFlip(float moveInput)
-    {
-        if (moveInput > 0 && !FacingRight) SetFlip(0);
-        else if (moveInput < 0 && FacingRight) SetFlip(180);
-    }
+    #endregion
 
-    public void SetFlip(int value)
-    {
-        FacingRight = !FacingRight;
-        Vector3 rot = _objectToFlip.transform.eulerAngles;
-        rot.y = value;
-        _objectToFlip.transform.eulerAngles = rot;
-    }
 
-    public bool CheckGrounded()
-    {
-        if (Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, Settings.jumpResetLayers))
-            return true;
-
-        return Physics.SphereCast(transform.position, 0.25f, Vector3.down, out _, _groundCheckDistance + 0.2f, Settings.jumpResetLayers);
-    }
-
-    public bool CheckWall()
-    {
-        Vector3 dir = FacingRight ? Vector3.forward : Vector3.back;
-        Ray ray = new Ray(transform.position, dir);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, _wallCheckDistance, Settings.wallJumpLayers))
-        {
-            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.green);
-            return true;
-        }
-        else
-        {
-            Debug.DrawRay(ray.origin, ray.direction * _wallCheckDistance, Color.red);
-            return false;
-        }
-    }
+    #region === Mouvement, Dash & Jump ===
 
     public void StartSlowMotionDash() =>
         SlowMotion?.StartSlowMotion(Settings.slowMotionIntensity, Settings.slowMotionTimer);
@@ -187,9 +202,123 @@ public class S_playerStates : MonoBehaviour
         SwitchState(AirDashState);
     }
 
+    public void PerformWallJump()
+    {
+        Rigidbody.velocity = Vector3.zero;
+
+        int direction = FacingRight ? -1 : 1;
+        Vector2 impulse = new Vector2(
+            direction * Settings.directionImpulsion.x,
+            Settings.directionImpulsion.y
+        );
+
+        Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
+
+        Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
+        HandleFlip(direction);
+
+        CanWallJump = false;
+        WallJumpTimer = 0f;
+        AirControlLockTimer = 0.3f;
+        CanAirDash = true;
+
+        MoveInput = Vector2.zero;
+
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(false);
+        StartCoroutine(ReactivateInputAfterDelay(0.25f));
+
+        SwitchState(AirState);
+    }
+
+    public void BreakDashWithJump()
+    {
+        if (!IsDashing) return;
+
+        // Stop net le dash
+        Vector3 currentVelocity = Rigidbody.velocity;
+        Vector3 blendedVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 5f);
+        Rigidbody.velocity = blendedVelocity;
+
+        int direction = FacingRight ? 1 : -1;
+
+        Vector2 impulse2D = new Vector2(
+            direction * Settings.dashJumpDirection.x,
+            Settings.dashJumpDirection.y
+        );
+
+        Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.dashJumpForce;
+        Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+
+        MovementLockTimer = 0.1f;
+        AirControlLockTimer = 0.3f;
+
+        HandleFlip(direction);
+
+        // Arrêt dash + coroutine
+        if (_airDashCoroutine != null)
+        {
+            StopCoroutine(_airDashCoroutine);
+            _airDashCoroutine = null;
+        }
+
+        IsDashing = false;
+        IsAirReboundDash = false;
+        MoveInput = Vector2.zero;
+
+        CanAirDash = WasReboundInterrupted; 
+        IsAirReboundDash = false;
+        SwitchState(AirState);
+    }
+
+    public void PerformChargedJump()
+    {
+        if (_chargedJumpForce > 0f)
+        {
+            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
+            IsGrounded = false;
+            CanJump = false;
+            _chargedJumpForce = 0f;
+            SwitchState(AirState);
+        }
+    }
+
+    public void StartVariableJump() => StartCoroutine(ChargeJump());
+
+    private IEnumerator ChargeJump()
+    {
+        float timer = 0f;
+        float maxHoldTime = Settings.jumpChargeTime;
+        _chargedJumpForce = Settings.minJumpForce;
+
+        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+
+        while (timer < maxHoldTime)
+        {
+            if (!S_controllerPlayer.Instance.inputPlayer.IsJumpHeld)
+                break;
+
+            timer += Time.deltaTime;
+            float ratio = Mathf.Clamp01(timer / maxHoldTime);
+            _chargedJumpForce = Mathf.Lerp(Settings.minJumpForce, Settings.maxJumpForce, ratio);
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator ReactivateInputAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        S_controllerPlayer.Instance.inputPlayer.EnableMove(true);
+    }
+
+    #endregion
+
+
+    #region === Rebond Dash ===
+
     public void StartAirDashCoroutine(Vector3 direction)
     {
-        StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
+        _airDashCoroutine = StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
     }
 
     private IEnumerator HandleAirDashWithRebound(Vector3 direction, float dashForce)
@@ -199,6 +328,11 @@ public class S_playerStates : MonoBehaviour
 
         Rigidbody.useGravity = false;
         IsDashing = true;
+        WasReboundInterrupted = false;
+        if (IsAirReboundDash){
+            WasReboundInterrupted = true;
+        }
+
         Rigidbody.velocity = direction * dashForce;
         awaitingReboundInput = false;
 
@@ -226,8 +360,7 @@ public class S_playerStates : MonoBehaviour
                     yield return null;
                 }
 
-                if (awaitingReboundInput)
-                    break;
+                if (awaitingReboundInput) break;
 
                 Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
@@ -259,80 +392,52 @@ public class S_playerStates : MonoBehaviour
         Rigidbody.useGravity = true;
         IsDashing = false;
         HasAirDashed = false;
-        IsAirReboundDash = false;
 
         SwitchState(AirState);
     }
 
-    public void StartVariableJump() => StartCoroutine(ChargeJump());
+    #endregion
 
-    private IEnumerator ChargeJump()
+    #region === Utilitaires ===
+
+    public void HandleFlip(float moveInput)
     {
-        float timer = 0f;
-        float maxHoldTime = Settings.jumpChargeTime;
-        _chargedJumpForce = Settings.minJumpForce;
+        if (moveInput > 0 && !FacingRight) SetFlip(0);
+        else if (moveInput < 0 && FacingRight) SetFlip(180);
+    }
 
-        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+    public void SetFlip(int value)
+    {
+        FacingRight = !FacingRight;
+        Vector3 rot = _objectToFlip.transform.eulerAngles;
+        rot.y = value;
+        _objectToFlip.transform.eulerAngles = rot;
+    }
 
-        while (timer < maxHoldTime)
+    public bool CheckGrounded()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, Settings.jumpResetLayers))
+            return true;
+
+        return Physics.SphereCast(transform.position, 0.25f, Vector3.down, out _, _groundCheckDistance + 0.2f, Settings.jumpResetLayers);
+    }
+
+    public bool CheckWall()
+    {
+        float distance = IsDashing ? _wallCheckDistance + 0.3f : _wallCheckDistance;
+        Vector3 dir = FacingRight ? Vector3.forward : Vector3.back;
+        Ray ray = new Ray(transform.position, dir);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, distance, Settings.wallJumpLayers))
         {
-            if (!S_controllerPlayer.Instance.inputPlayer.IsJumpHeld)
-                break;
-
-            timer += Time.deltaTime;
-            float ratio = Mathf.Clamp01(timer / maxHoldTime);
-            _chargedJumpForce = Mathf.Lerp(Settings.minJumpForce, Settings.maxJumpForce, ratio);
-
-            yield return null;
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.green);
+            return true;
         }
-    }
-
-    private void PerformChargedJump()
-    {
-        if (_chargedJumpForce > 0f)
+        else
         {
-            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
-            IsGrounded = false;
-            CanJump = false;
-            _chargedJumpForce = 0f;
-            SwitchState(AirState);
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red);
+            return false;
         }
-    }
-
-    public void PerformWallJump()
-    {
-        Rigidbody.velocity = Vector3.zero;
-
-        int direction = FacingRight ? -1 : 1;
-        Vector2 impulse = new Vector2(
-            direction * Settings.directionImpulsion.x,
-            Settings.directionImpulsion.y
-        );
-
-        Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
-
-        Debug.Log($"<color=orange>[WALL JUMP]</color> Force appliquée: {wallJumpForce}");
-
-        Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
-        HandleFlip(direction);
-
-        CanWallJump = false;
-        WallJumpTimer = 0f;
-        AirControlLockTimer = 0.15f;
-        CanAirDash = true;
-
-        MoveInput = Vector2.zero;
-
-        S_controllerPlayer.Instance.inputPlayer.EnableMove(false);
-        StartCoroutine(ReactivateInputAfterDelay(0.15f));
-
-        SwitchState(AirState);
-    }
-
-    private IEnumerator ReactivateInputAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        S_controllerPlayer.Instance.inputPlayer.EnableMove(true);
     }
 
     private void OnDrawGizmos()
@@ -365,4 +470,7 @@ public class S_playerStates : MonoBehaviour
             Gizmos.DrawLine(rayOrigin, rayOrigin + raycastDir * 1.5f);
         }
     }
+
+    #endregion
 }
+
