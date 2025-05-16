@@ -58,15 +58,16 @@ public class S_airPlayerState : S_basePlayerStates
         Player.HandleFlip(Player.MoveInput.x);
 
         // Dive ou chute
-        if (Player.MoveInput.y < 0 && !Player.IsWallSliding)
-        {
+        if (Player.MoveInput.y < 0 && !Player.IsWallSliding){
             Vector3 diveForce = new Vector3(0, Player.MoveInput.y, 0) * Player.Settings.dive;
             Player.Rigidbody.AddForce(diveForce, ForceMode.Acceleration);
-        }
-        else
-        {
+        }else{
             Vector3 vel = Player.Rigidbody.velocity;
-            vel.y = Mathf.Max(vel.y, -Player.Settings.fallSpeed); // limite chute naturelle
+
+            vel.y -= Player.Settings.fallSpeed * Time.deltaTime;
+
+            vel.y = Mathf.Max(vel.y, -Player.Settings.fallSpeed);
+
             Player.Rigidbody.velocity = vel;
         }
     }
