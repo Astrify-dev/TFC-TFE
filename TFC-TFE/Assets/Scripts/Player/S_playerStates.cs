@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+
 public class S_playerStates : MonoBehaviour
 {
     #region === Références & Données ===
@@ -40,7 +41,8 @@ public class S_playerStates : MonoBehaviour
     public bool IsWallSliding { get; set; }
     public bool IsAirReboundDash { get; set; }
 
-    public bool WasReboundInterrupted { get; private set; } = false; // ✅ Nouveau flag
+    public bool WasReboundDash { get; private set; } = false;
+    public bool HasActuallyRebounded { get; private set; } = false;
 
     private bool awaitingReboundInput = false;
     private float _chargedJumpForce = 0f;
@@ -53,8 +55,10 @@ public class S_playerStates : MonoBehaviour
     public PlayerMovementSettings Settings => _movementSettings;
     public S_SlowMotion SlowMotion { get; private set; }
 
-    #endregion
+    private Vector3 externalPlatformVelocity = Vector3.zero;
+    private bool isOnMovingPlatform = false;
 
+    #endregion
 
     #region === États de la State Machine ===
 
@@ -110,7 +114,7 @@ public class S_playerStates : MonoBehaviour
             }
             else if (IsDashing)
             {
-                BreakDashWithJump(); // ✅ Interruption dash
+                BreakDashWithJump();
             }
         };
 
@@ -118,10 +122,9 @@ public class S_playerStates : MonoBehaviour
         {
             if (awaitingReboundInput) return;
 
-            // ✅ Logique de blocage du dash si le saut ne vient pas d’un rebond
             if ((_currentState == AirState || _currentState == SlideWallState) && CanAirDash)
             {
-                if (!WasReboundInterrupted)
+                if (!WasReboundDash)
                 {
                     Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut non-rebond");
                     return;
@@ -157,7 +160,13 @@ public class S_playerStates : MonoBehaviour
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
 
-        // ✅ Ajustement visuel si on dash contre un mur
+        if (isOnMovingPlatform)
+        {
+            // Applique l’effet de glissement de la plateforme (ex: tu restes dessus même si elle bouge)
+            Vector3 velocityAdjustment = new Vector3(0f, 0f, externalPlatformVelocity.z);
+            Rigidbody.velocity += velocityAdjustment;
+        }
+
         if (IsDashing && CheckWall())
         {
             Vector3 correctionDir = FacingRight ? Vector3.forward : Vector3.back;
@@ -166,7 +175,6 @@ public class S_playerStates : MonoBehaviour
             if (Physics.Raycast(wallRay, out RaycastHit hit, _wallCheckDistance + 0.15f, Settings.wallJumpLayers))
             {
                 Debug.DrawLine(transform.position, hit.point, Color.magenta);
-
                 Vector3 targetPos = hit.point - correctionDir * 0.5f;
                 transform.position = new Vector3(transform.position.x, transform.position.y, targetPos.z);
             }
@@ -190,7 +198,6 @@ public class S_playerStates : MonoBehaviour
 
     #endregion
 
-
     #region === Mouvement, Dash & Jump ===
 
     public void StartSlowMotionDash() =>
@@ -205,13 +212,9 @@ public class S_playerStates : MonoBehaviour
     public void PerformWallJump()
     {
         Rigidbody.velocity = Vector3.zero;
-
         int direction = FacingRight ? -1 : 1;
-        Vector2 impulse = new Vector2(
-            direction * Settings.directionImpulsion.x,
-            Settings.directionImpulsion.y
-        );
 
+        Vector2 impulse = new Vector2(direction * Settings.directionImpulsion.x, Settings.directionImpulsion.y);
         Vector3 wallJumpForce = new Vector3(0, impulse.y, impulse.x) * Settings.wallJumpForce;
 
         Rigidbody.AddForce(wallJumpForce, ForceMode.Impulse);
@@ -234,19 +237,14 @@ public class S_playerStates : MonoBehaviour
     {
         if (!IsDashing) return;
 
-        // Stop net le dash
         Vector3 currentVelocity = Rigidbody.velocity;
         Vector3 blendedVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, 5f);
         Rigidbody.velocity = blendedVelocity;
 
         int direction = FacingRight ? 1 : -1;
-
-        Vector2 impulse2D = new Vector2(
-            direction * Settings.dashJumpDirection.x,
-            Settings.dashJumpDirection.y
-        );
-
+        Vector2 impulse2D = new Vector2(direction * Settings.dashJumpDirection.x, Settings.dashJumpDirection.y);
         Vector3 jumpForce = new Vector3(0f, impulse2D.y, impulse2D.x) * Settings.dashJumpForce;
+
         Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
 
         MovementLockTimer = 0.1f;
@@ -254,7 +252,6 @@ public class S_playerStates : MonoBehaviour
 
         HandleFlip(direction);
 
-        // Arrêt dash + coroutine
         if (_airDashCoroutine != null)
         {
             StopCoroutine(_airDashCoroutine);
@@ -265,8 +262,13 @@ public class S_playerStates : MonoBehaviour
         IsAirReboundDash = false;
         MoveInput = Vector2.zero;
 
-        CanAirDash = WasReboundInterrupted; 
-        IsAirReboundDash = false;
+        CanAirDash = HasActuallyRebounded;
+
+        if (CanAirDash)
+            Debug.Log("<color=green>[DASH]</color> Autorisé : dash après rebond réel");
+        else
+            Debug.Log("<color=red>[DASH]</color> Interdit : dash après saut sans rebond");
+
         SwitchState(AirState);
     }
 
@@ -274,13 +276,26 @@ public class S_playerStates : MonoBehaviour
     {
         if (_chargedJumpForce > 0f)
         {
-            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
+            // Impulsion de base vers le haut
+            Vector3 jumpForce = Vector3.up * _chargedJumpForce;
+
+            // Ajout de la vélocité de la plateforme (si présent)
+            Vector3 limitedVelocity = Vector3.ClampMagnitude(externalPlatformVelocity, 5f); // max 5 unités/sec
+            jumpForce += limitedVelocity;
+
+            // Appliquer la force combinée
+            Rigidbody.AddForce(jumpForce, ForceMode.Impulse);
+
+            // Reset des flags et états
             IsGrounded = false;
             CanJump = false;
             _chargedJumpForce = 0f;
+
+            // Passer en état aérien
             SwitchState(AirState);
         }
     }
+
 
     public void StartVariableJump() => StartCoroutine(ChargeJump());
 
@@ -313,11 +328,12 @@ public class S_playerStates : MonoBehaviour
 
     #endregion
 
-
     #region === Rebond Dash ===
 
     public void StartAirDashCoroutine(Vector3 direction)
     {
+        WasReboundDash = false;
+        HasActuallyRebounded = false;
         _airDashCoroutine = StartCoroutine(HandleAirDashWithRebound(direction, Settings.airDashForce));
     }
 
@@ -328,11 +344,7 @@ public class S_playerStates : MonoBehaviour
 
         Rigidbody.useGravity = false;
         IsDashing = true;
-        WasReboundInterrupted = false;
-        if (IsAirReboundDash){
-            WasReboundInterrupted = true;
-        }
-
+        WasReboundDash = IsAirReboundDash;
         Rigidbody.velocity = direction * dashForce;
         awaitingReboundInput = false;
 
@@ -361,6 +373,8 @@ public class S_playerStates : MonoBehaviour
                 }
 
                 if (awaitingReboundInput) break;
+
+                HasActuallyRebounded = true;
 
                 Vector3 reflected = Vector3.Reflect(direction, hit.normal).normalized;
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
@@ -440,6 +454,28 @@ public class S_playerStates : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlatformMove")){
+            isOnMovingPlatform = true;
+            transform.SetParent(collision.collider.transform);
+            print("On devient l'enfant de la plateforme.");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Vérifie si l'objet quitté ou son parent a le tag "PlatformMove"
+        if (collision.collider.CompareTag("PlatformMove")){
+            isOnMovingPlatform = false;
+            externalPlatformVelocity = Vector3.zero;
+            transform.SetParent(null);
+        }
+    }
+
+
+
+
     private void OnDrawGizmos()
     {
         if (_rigidbody == null) return;
@@ -473,4 +509,3 @@ public class S_playerStates : MonoBehaviour
 
     #endregion
 }
-
