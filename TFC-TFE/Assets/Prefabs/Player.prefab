@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1894529775724043467}
   - component: {fileID: 6469764009338311644}
   - component: {fileID: 6554124292900174336}
+  - component: {fileID: 4366173593980467676}
   - component: {fileID: 2597219210766312242}
   - component: {fileID: 8099734614925078272}
   - component: {fileID: 7841198325444945249}
-  - component: {fileID: 2123540245235087674}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -88,6 +88,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 114
   m_CollisionDetection: 0
+--- !u!114 &4366173593980467676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529776725966297697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34dcc5a54d2a3b84a8871401ec64736d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectToFlip: {fileID: 3520637777564457845}
+  _movementSettings: {fileID: 11400000, guid: 2dbe5a8af3d376244b03ce25c5936171, type: 2}
+  _rigidbody: {fileID: 6554124292900174336}
+  _groundCheckDistance: 1.25
+  _wallCheckDistance: 0.6
+  _groundRayColor: {r: 0, g: 1, b: 0, a: 1}
+  _wallRayColor: {r: 1, g: 0, b: 0, a: 1}
+  _ceilingRayColor: {r: 0, g: 0, b: 1, a: 1}
+  _bounceRayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _velocityRayColor: {r: 1, g: 0, b: 0.8006444, a: 1}
+  _maxFallSpeed: 50
 --- !u!114 &2597219210766312242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,29 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7b4c70973214a48bd0f935fcfacbb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2123540245235087674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529776725966297697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34dcc5a54d2a3b84a8871401ec64736d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectToFlip: {fileID: 3520637777564457845}
-  _movementSettings: {fileID: 11400000, guid: 2dbe5a8af3d376244b03ce25c5936171, type: 2}
-  _rigidbody: {fileID: 6554124292900174336}
-  _groundCheckDistance: 1
-  _wallCheckDistance: 0.6
-  _groundRayColor: {r: 0, g: 1, b: 0, a: 1}
-  _wallRayColor: {r: 1, g: 0, b: 0, a: 1}
-  _ceilingRayColor: {r: 0, g: 0, b: 1, a: 1}
-  _bounceRayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _velocityRayColor: {r: 1, g: 0.015686274, b: 0.6039666, a: 1}
-  _maxFallSpeed: 25
 --- !u!1 &3520637777564457845
 GameObject:
   m_ObjectHideFlags: 0

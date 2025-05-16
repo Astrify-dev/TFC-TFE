@@ -54,6 +54,9 @@ public class S_playerStates : MonoBehaviour
     public PlayerMovementSettings Settings => _movementSettings;
     public S_SlowMotion SlowMotion { get; private set; }
 
+    private Vector3 externalPlatformVelocity = Vector3.zero;
+    private bool isOnMovingPlatform = false;
+
     #endregion
 
     #region === États de la State Machine ===
@@ -155,6 +158,13 @@ public class S_playerStates : MonoBehaviour
         if (vel.y < -_maxFallSpeed)
             vel.y = -_maxFallSpeed;
         Rigidbody.velocity = vel;
+
+        if (isOnMovingPlatform)
+        {
+            // Applique l’effet de glissement de la plateforme (ex: tu restes dessus même si elle bouge)
+            Vector3 velocityAdjustment = new Vector3(0f, 0f, externalPlatformVelocity.z);
+            Rigidbody.velocity += velocityAdjustment;
+        }
 
         if (IsDashing && CheckWall())
         {
@@ -265,13 +275,26 @@ public class S_playerStates : MonoBehaviour
     {
         if (_chargedJumpForce > 0f)
         {
-            Rigidbody.AddForce(Vector3.up * _chargedJumpForce, ForceMode.Impulse);
+            // Impulsion de base vers le haut
+            Vector3 jumpForce = Vector3.up * _chargedJumpForce;
+
+            // Ajout de la vélocité de la plateforme (si présent)
+            Vector3 limitedVelocity = Vector3.ClampMagnitude(externalPlatformVelocity, 5f); // max 5 unités/sec
+            jumpForce += limitedVelocity;
+
+            // Appliquer la force combinée
+            Rigidbody.AddForce(jumpForce, ForceMode.Impulse);
+
+            // Reset des flags et états
             IsGrounded = false;
             CanJump = false;
             _chargedJumpForce = 0f;
+
+            // Passer en état aérien
             SwitchState(AirState);
         }
     }
+
 
     public void StartVariableJump() => StartCoroutine(ChargeJump());
 
@@ -429,6 +452,28 @@ public class S_playerStates : MonoBehaviour
             return false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlatformMove")){
+            isOnMovingPlatform = true;
+            transform.SetParent(collision.collider.transform);
+            print("On devient l'enfant de la plateforme.");
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Vérifie si l'objet quitté ou son parent a le tag "PlatformMove"
+        if (collision.collider.CompareTag("PlatformMove")){
+            isOnMovingPlatform = false;
+            externalPlatformVelocity = Vector3.zero;
+            transform.SetParent(null);
+        }
+    }
+
+
+
 
     private void OnDrawGizmos()
     {
