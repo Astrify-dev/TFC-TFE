@@ -10,11 +10,16 @@ public class S_inputPlayer : MonoBehaviour{
     public event Action OnJumpReleased;
     public event Action OnDashEvent;
     public event Action OnDashReleased;
+    public event Action OnPauseToggleEvent;
 
 
     private bool _moveEnabled = true;
     private bool _jumpEnabled = true;
     private bool _dashEnabled = true;
+    private bool _pauseEnabled = true;
+
+    private bool isPaused = false;
+
     public bool IsJumpHeld => _inputs.Player.Jump.IsPressed();
 
     private void Awake(){
@@ -29,6 +34,7 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Jump.canceled += OnJumpRelease;
         _inputs.Player.Dash.performed += OnDash;
         _inputs.Player.Dash.canceled += OnDashRelease;
+        _inputs.Player.Pause.performed += OnPauseToggle;
 
     }
 
@@ -40,7 +46,7 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs.Player.Jump.canceled -= OnJumpRelease;
         _inputs.Player.Dash.performed -= OnDash;
         _inputs.Player.Dash.canceled -= OnDashRelease;
-
+        _inputs.Player.Pause.performed -= OnPauseToggle;
     }
 
     private void OnMove(InputAction.CallbackContext context){
@@ -77,9 +83,20 @@ public class S_inputPlayer : MonoBehaviour{
         }
     }
 
+    private void OnPauseToggle(InputAction.CallbackContext context){
+        if (_pauseEnabled){
+            isPaused = !isPaused;
+            OnPauseToggleEvent?.Invoke();
+
+            EnableMove(!isPaused);
+            EnableJump(!isPaused);
+            EnableDash(!isPaused);
+        }
+    }
 
     public void EnableMove(bool enable) => _moveEnabled = enable;
     public void EnableJump(bool enable) => _jumpEnabled = enable;
     public void EnableDash(bool enable) => _dashEnabled = enable;
+    public void EnablePause(bool enable) => _pauseEnabled = enable;
 
 }
