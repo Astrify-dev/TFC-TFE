@@ -459,13 +459,11 @@ public class S_playerStates : MonoBehaviour
         if (collision.collider.CompareTag("PlatformMove")){
             isOnMovingPlatform = true;
             transform.SetParent(collision.collider.transform);
-            print("On devient l'enfant de la plateforme.");
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        // Vérifie si l'objet quitté ou son parent a le tag "PlatformMove"
         if (collision.collider.CompareTag("PlatformMove")){
             isOnMovingPlatform = false;
             externalPlatformVelocity = Vector3.zero;
