@@ -53,13 +53,12 @@ public class S_DeathFollow : MonoBehaviour{
         while (true){
             Vector3 target = waypoints[currentIndex].position;
 
-            while (Vector3.Distance(movingRigidbody.position, target) > 0.05f){
+            while (Vector3.Distance(movingRigidbody.position, target) > 0.05f)
+            {
                 Vector3 dir = (target - movingRigidbody.position).normalized;
                 Vector3 newPos = movingRigidbody.position + dir * moveSpeed * Time.fixedDeltaTime;
 
-                // Calcul de la rotation en fonction de la direction
-                float angleX = Mathf.Atan2(dir.y, dir.z) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(angleX, 0, 0);
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
                 movingRigidbody.MoveRotation(targetRotation);
 
                 movingRigidbody.MovePosition(newPos);
