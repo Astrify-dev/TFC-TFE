@@ -211,7 +211,7 @@ public class S_playerStates : MonoBehaviour
 
     public void PerformWallJump()
     {
-        Rigidbody.velocity = Vector3.zero;
+        //Rigidbody.velocity = Vector3.zero;
         int direction = FacingRight ? -1 : 1;
 
         Vector2 impulse = new Vector2(direction * Settings.directionImpulsion.x, Settings.directionImpulsion.y);
