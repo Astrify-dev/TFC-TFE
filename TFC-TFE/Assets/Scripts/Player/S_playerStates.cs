@@ -476,7 +476,7 @@ public class S_playerStates : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_rigidbody == null) return;
+        if (_rigidbody is null) return;
 
         Gizmos.color = _groundRayColor;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _groundCheckDistance);

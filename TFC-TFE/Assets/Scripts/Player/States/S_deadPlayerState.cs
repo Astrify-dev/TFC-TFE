@@ -5,10 +5,10 @@ public class S_deadPlayerState : S_basePlayerStates
     public override void EnterState(S_playerStates Player)
     {
         // Stoppe tout mouvement
-        Player.Rigidbody.velocity = Vector3.zero;
+        //Player.Rigidbody.velocity = Vector3.zero;
 
         // Bloque le Rigidbody pour éviter toute interaction physique
-        Player.Rigidbody.isKinematic = true;
+        //Player.Rigidbody.isKinematic = true;
     }
 
     public override void OnEnable(S_playerStates Player) { }
