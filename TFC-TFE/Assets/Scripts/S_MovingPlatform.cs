@@ -5,8 +5,8 @@ using UnityEngine;
 public class S_MovingPlatform : MonoBehaviour
 {
     [Header("Structure")]
-    [SerializeField] private Transform movingPart;  // Ex: "Plateforme"
-    [SerializeField] private Transform pointsRoot;  // Ex: "POINT"
+    [SerializeField] private Transform movingPart;
+    [SerializeField] private Transform pointsRoot;
 
     [Header("Mouvement")]
     [SerializeField] private float moveSpeed = 2f;
@@ -23,22 +23,19 @@ public class S_MovingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        if (movingPart == null || pointsRoot == null)
+        if (movingPart is null || pointsRoot is null)
         {
-            Debug.LogError($"[{name}] movingPart ou pointsRoot n'est pas assigné !");
             enabled = false;
             return;
         }
 
         movingRigidbody = movingPart.GetComponent<Rigidbody>();
-        if (movingRigidbody == null)
+        if (movingRigidbody is null)
         {
-            Debug.LogError($"[{name}] Le movingPart doit avoir un Rigidbody !");
             enabled = false;
             return;
         }
 
-        // Récupérer tous les enfants de POINT
         waypoints.Clear();
         foreach (Transform child in pointsRoot)
         {
@@ -47,7 +44,6 @@ public class S_MovingPlatform : MonoBehaviour
 
         if (waypoints.Count < 2)
         {
-            Debug.LogWarning($"[{name}] Il faut au moins 2 waypoints pour que la plateforme bouge.");
             enabled = false;
         }
     }
@@ -130,7 +126,7 @@ public class S_MovingPlatform : MonoBehaviour
         Transform prev = null;
         foreach (Transform point in pointsRoot)
         {
-            if (prev != null)
+            if (prev is not null)
                 Gizmos.DrawLine(prev.position, point.position);
             prev = point;
         }

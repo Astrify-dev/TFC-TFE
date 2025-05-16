@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
   rigidbodyMass: 1
-  rigidbodyDrag: 0
-  rigidbodyAngularDrag: 0.05
+  rigidbodyDrag: 0.99
+  rigidbodyAngularDrag: 0.07
   useGravity: 1
-  moveSpeed: 5
+  moveSpeed: 1
   dive: 2
-  minMoveSpeed: 5
-  maxMoveSpeed: 15
-  accelerationRate: 30
-  airMaxMoveSpeed: 6
-  airAccelerationRate: 10
-  fallSpeed: 3
-  minJumpForce: 8
-  maxJumpForce: 15
-  jumpChargeTime: 0.3
-  wallSlideSpeed: 0.5
-  wallJumpForce: 10
-  directionImpulsion: {x: 0.6, y: 0.7}
-  groundDashForce: 25
+  minMoveSpeed: 4.41
+  maxMoveSpeed: 11.65
+  accelerationRate: 40
+  airMaxMoveSpeed: 11.1
+  airAccelerationRate: 17.2
+  fallSpeed: 22
+  minJumpForce: 2.01
+  maxJumpForce: 10
+  jumpChargeTime: 0.2
+  wallSlideSpeed: 1.2
+  wallJumpForce: 6.97
+  directionImpulsion: {x: 1, y: 2.08}
+  groundDashForce: 22
   groundDashCooldown: 0
   groundDashCooldownTime: 0.2
-  airDashForce: 30
+  airDashForce: 24
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
   reboundInputWindow: 0.25
   dashJumpDirection: {x: 0.6, y: 1}
-  dashJumpForce: 10
+  dashJumpForce: 33.5
   slowMotionIntensity: 0.3
   slowMotionTimer: 10
   jumpResetLayers:

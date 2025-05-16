@@ -211,7 +211,7 @@ public class S_playerStates : MonoBehaviour
 
     public void PerformWallJump()
     {
-        Rigidbody.velocity = Vector3.zero;
+        //Rigidbody.velocity = Vector3.zero;
         int direction = FacingRight ? -1 : 1;
 
         Vector2 impulse = new Vector2(direction * Settings.directionImpulsion.x, Settings.directionImpulsion.y);
@@ -459,13 +459,11 @@ public class S_playerStates : MonoBehaviour
         if (collision.collider.CompareTag("PlatformMove")){
             isOnMovingPlatform = true;
             transform.SetParent(collision.collider.transform);
-            print("On devient l'enfant de la plateforme.");
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        // Vérifie si l'objet quitté ou son parent a le tag "PlatformMove"
         if (collision.collider.CompareTag("PlatformMove")){
             isOnMovingPlatform = false;
             externalPlatformVelocity = Vector3.zero;
@@ -478,7 +476,7 @@ public class S_playerStates : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_rigidbody == null) return;
+        if (_rigidbody is null) return;
 
         Gizmos.color = _groundRayColor;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * _groundCheckDistance);
