@@ -21,7 +21,11 @@ public class S_DeathFollow : MonoBehaviour{
     private bool movingForward = true;
 
     private Rigidbody movingRigidbody;
-
+    public int CurrentIndex
+    {
+        get => currentIndex; 
+        set => currentIndex = value; 
+    }
     private void Awake(){
         if (movingPart is null || pointsRoot is null){
             enabled = false;
@@ -87,19 +91,6 @@ public class S_DeathFollow : MonoBehaviour{
                     }
                 }
             }
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("Player")){
-            Debug.Log("GameOver");
-            S_playerStates playerStates = collision.gameObject.GetComponent<S_playerStates>();
-
-            if (playerStates is not null){
-                playerStates.SwitchState(playerStates.DeadState);
-            }
-
-            OnPlayerDead?.Invoke();
         }
     }
 
