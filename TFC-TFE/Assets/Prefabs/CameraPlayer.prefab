@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _speed: 50
-  _position: {x: 0, y: 1.5, z: 0}
+  _speed: 10
+  _position: {x: 0, y: 1, z: 1}
+  _distanceSpeed: 1
 --- !u!1 &4072664711750725346
 GameObject:
   m_ObjectHideFlags: 0
