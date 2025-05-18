@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 2853922096136303359}
   - component: {fileID: 2549288242418786241}
   - component: {fileID: 3012430077912105662}
+  - component: {fileID: 3450214481965168046}
   m_Layer: 0
   m_Name: Visuel
   m_TagString: Untagged
@@ -369,6 +370,19 @@ MonoBehaviour:
   moveSpeed: 2
   waitTimeAtPoints: 0
   loop: 0
+--- !u!114 &3450214481965168046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042808840266724088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7353f03d201707941a18edb2b5ca7bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGameOverOnDeath: 0
 --- !u!1 &6110326377912863482
 GameObject:
   m_ObjectHideFlags: 0

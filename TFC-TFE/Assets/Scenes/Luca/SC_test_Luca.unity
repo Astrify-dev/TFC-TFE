@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 83851375}
   - component: {fileID: 83851374}
   - component: {fileID: 83851373}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 352869848}
   - component: {fileID: 352869849}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CheckpointManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 804126344}
   - component: {fileID: 804126345}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 4445790c252970d45ae069bd9011b484, type: 3}
@@ -1240,25 +1240,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026324109}
   m_CullTransparentMesh: 1
---- !u!1 &1086800729 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4042808840266724088, guid: 0c1d38070beb05f49827a9958ae08ecc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8218105854575828821}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1086800734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086800729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7353f03d201707941a18edb2b5ca7bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameOverOnDeath: 0
 --- !u!1 &1249162048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1513304398}
   - component: {fileID: 1513304399}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sol
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 4445790c252970d45ae069bd9011b484, type: 3}
@@ -2545,7 +2526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1702067112}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MANAGER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2865,7 +2846,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1972393276}
   - component: {fileID: 1972393277}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PauseManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2913,7 +2894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2003020098}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3772,11 +3753,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3248164985893925731, guid: d9335feaf18a766459e19c983d05ac56,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6883735151534639267, guid: d9335feaf18a766459e19c983d05ac56,
         type: 3}
       propertyPath: deathRespawnPoint
       value: 
       objectReference: {fileID: 2084234422}
+    - target: {fileID: 8034178186754659211, guid: d9335feaf18a766459e19c983d05ac56,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8099645794864216140, guid: d9335feaf18a766459e19c983d05ac56,
         type: 3}
       propertyPath: m_Name
@@ -3784,8 +3775,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8099645794864216140, guid: d9335feaf18a766459e19c983d05ac56,
         type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099645794864216140, guid: d9335feaf18a766459e19c983d05ac56,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8733286478710282624, guid: d9335feaf18a766459e19c983d05ac56,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8733286478710282624, guid: d9335feaf18a766459e19c983d05ac56,
         type: 3}
@@ -3906,6 +3907,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartPositionMort
       objectReference: {fileID: 0}
+    - target: {fileID: 2853922096136303359, guid: 0c1d38070beb05f49827a9958ae08ecc,
+        type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 502
+      objectReference: {fileID: 0}
+    - target: {fileID: 2853922096136303359, guid: 0c1d38070beb05f49827a9958ae08ecc,
+        type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7936362048514528303, guid: 0c1d38070beb05f49827a9958ae08ecc,
         type: 3}
       propertyPath: m_Name
@@ -3919,11 +3930,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4042808840266724088, guid: 0c1d38070beb05f49827a9958ae08ecc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1086800734}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c1d38070beb05f49827a9958ae08ecc, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
