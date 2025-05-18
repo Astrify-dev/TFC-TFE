@@ -150,7 +150,7 @@ public class S_playerStates : MonoBehaviour
 
     private void Update()
     {
-        _currentState?.UpdateState(this);
+        //_currentState?.UpdateState(this);
 
         if (AirControlLockTimer > 0f)
             AirControlLockTimer -= Time.deltaTime;
@@ -181,8 +181,8 @@ public class S_playerStates : MonoBehaviour
         }
     }
 
-    private void OnEnable() => _currentState?.OnEnable(this);
-    private void OnDisable() => _currentState?.OnDisable(this);
+    //private void OnEnable() => _currentState?.OnEnable(this);
+    //private void OnDisable() => _currentState?.OnDisable(this);
 
     #endregion
 
@@ -190,10 +190,10 @@ public class S_playerStates : MonoBehaviour
 
     public void SwitchState(S_basePlayerStates newState)
     {
-        _currentState?.OnDisable(this);
-        _currentState = newState;
-        newState?.OnEnable(this);
-        newState?.EnterState(this);
+        //_currentState?.OnDisable(this);
+        //_currentState = newState;
+        //newState?.OnEnable(this);
+        //newState?.EnterState(this);
     }
 
     #endregion

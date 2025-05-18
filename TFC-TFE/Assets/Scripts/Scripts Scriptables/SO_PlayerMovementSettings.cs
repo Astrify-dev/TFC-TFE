@@ -2,7 +2,7 @@ using UnityEngine;
 using NaughtyAttributes;
 
 [CreateAssetMenu(fileName = "PlayerMovementSettings", menuName = "ScriptableObjects/PlayerMovementSettings", order = 1)]
-public class PlayerMovementSettings : ScriptableObject{
+public class PlayerMovementSettings : ScriptableObject {
     [BoxGroup("Rigidbody Settings")]
     [SerializeField, Tooltip("La masse du Rigidbody.")]
     public float rigidbodyMass = 1f;
@@ -57,6 +57,10 @@ public class PlayerMovementSettings : ScriptableObject{
     [SerializeField, Tooltip("Temps max de charge du saut.")]
     public float jumpChargeTime = 0.25f;
 
+    [BoxGroup("Jump Settings")]
+    [SerializeField, Tooltip("Repartition de la force durant le saut.")]
+    public AnimationCurve jumpCurve;
+
     [BoxGroup("Slide Settings"), SerializeField, Tooltip("La vitesse de quand on reste sur un mur et qu'on glisse.")]
     public float wallSlideSpeed = 2f;
 
@@ -66,12 +70,15 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("La force du wallJump")]
     public Vector2 directionImpulsion;
 
+    [field: BoxGroup("Wall Jump Settings"), SerializeField, Tooltip("Temps avant qu'on puisse se racrocher sur un mur apres un wallJump")]
+    public float SlideWallCooldownTimeAfterWallJump { get; private set; }
+
     [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("La force appliquée lors d'un dash au sol.")]
     public float groundDashForce = 10f;
 
     [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("cooldown entre 2 dash au sol ?")]
-    public bool groundDashCooldown = false ;    
-    
+    public bool groundDashCooldown = false;
+
     [BoxGroup("Dash sol Settings"), SerializeField, Tooltip("Le cooldown entre 2 dash au sol.")]
     public float groundDashCooldownTime = 0.2f;
 
@@ -87,6 +94,18 @@ public class PlayerMovementSettings : ScriptableObject{
     [BoxGroup("Dash air Settings"), SerializeField, Tooltip("Le temps qu'on peux appuier pour rebondir contre un mur etc")]
     public float reboundInputWindow = 1f;
 
+    [field: BoxGroup("Dash air Settings"), SerializeField, Tooltip("Duree du AirDash.")]
+    public float AirDashDuration { get; private set; } = 2;
+
+    [field: BoxGroup("Dash air Settings"), SerializeField, Tooltip("Maximum du nombre de Dash en generale.")]
+    public int MaxAirDashCount { get; private set; } = 1;
+
+    [field: BoxGroup("Dash air Settings"), SerializeField, Tooltip("Le nombre de Dash quand on touche le sol.")]
+    public int GroundAirDashCount { get; private set; } = 1;
+
+    [field: BoxGroup("Dash air Settings"), SerializeField, Tooltip("Le nombre de Dash Maximum qui sont donné par le WallDash.")]
+    public int WallDashMaxAirDashCount { get; private set; } = 1;
+
     [BoxGroup("Dash Jump Settings"), SerializeField, Tooltip("Direction de l'impulsion pour un saut pendant un dash")]
     public Vector2 dashJumpDirection = new Vector2(1f, 1f); // X = horizontal (Z), Y = vertical
 
@@ -99,6 +118,14 @@ public class PlayerMovementSettings : ScriptableObject{
 
     [BoxGroup("Slow Motion Settings"), SerializeField, Tooltip("La durée du slow motion.")]
     public float slowMotionTimer = 10f;
+
+    [field: BoxGroup("Slow Motion Settings")]
+    [field: SerializeField, Tooltip("Repartition du TimeScale durant l'activation du SlowMotion")]
+    public AnimationCurve SlowMotionAnimEnableCurve {  get; private set; }
+
+    [field: BoxGroup("Slow Motion Settings")]
+    [field: SerializeField, Tooltip("Duree de l'animation du SlowMotion")]
+    public float SlowMotionAnimSpeed { get; private set; } = 10;
 
     [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches permettant de resauter.")]
     public LayerMask jumpResetLayers;

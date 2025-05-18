@@ -17,30 +17,84 @@ MonoBehaviour:
   rigidbodyAngularDrag: 0.07
   useGravity: 1
   moveSpeed: 1
-  dive: 2
+  dive: 500
   minMoveSpeed: 4.41
   maxMoveSpeed: 11.65
   accelerationRate: 40
-  airMaxMoveSpeed: 11.1
+  airMaxMoveSpeed: 300
   airAccelerationRate: 17.2
   fallSpeed: 22
-  minJumpForce: 2.01
-  maxJumpForce: 10
+  minJumpForce: 10
+  maxJumpForce: 120
   jumpChargeTime: 0.2
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.018981341
+      outSlope: 0.018981341
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.805979
+      outSlope: -1.805979
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   wallSlideSpeed: 1.2
   wallJumpForce: 6.97
-  directionImpulsion: {x: 1, y: 2.08}
-  groundDashForce: 22
+  directionImpulsion: {x: 1, y: 1.5}
+  <SlideWallCooldownTimeAfterWallJump>k__BackingField: 0.1
+  groundDashForce: 35
   groundDashCooldown: 0
   groundDashCooldownTime: 0.2
   airDashForce: 24
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
   reboundInputWindow: 0.25
+  <AirDashDuration>k__BackingField: 0.5
+  <MaxAirDashCount>k__BackingField: 1
+  <GroundAirDashCount>k__BackingField: 1
+  <WallDashMaxAirDashCount>k__BackingField: 5
   dashJumpDirection: {x: 0.6, y: 1}
   dashJumpForce: 33.5
   slowMotionIntensity: 0.3
-  slowMotionTimer: 10
+  slowMotionTimer: 2
+  <SlowMotionAnimEnableCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <SlowMotionAnimSpeed>k__BackingField: 5
   jumpResetLayers:
     serializedVersion: 2
     m_Bits: 64

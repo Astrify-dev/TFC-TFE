@@ -51,15 +51,16 @@ Material:
     m_Ints: []
     m_Floats:
     - _Distance: 23
+    - _EnableEffect: 0
     - _LengthDi: 0
     - _LengthDistortion: 10
     - _Min: 0.7
-    - _ParallaxStrength: 0.1
+    - _ParallaxStrength: -0.14
     - _Power: 0.81
     - _Progress: 8.43
     - _RadialDistortion: 0.05
     - _SizeBorder: 0.02
-    - _SpeedDepthModifieur: 0.1
+    - _SpeedDepthModifieur: 0.25
     - _SpeedDistortion: -0.5
     - _SpeedFlowMap: 0
     - _SpeedNoise: 0.1
@@ -75,8 +76,8 @@ Material:
     - _ColorBorder: {r: 0.48146242, g: 0, b: 0.5566038, a: 0}
     - _ColorCoruption1: {r: 0.012606413, g: 0, b: 0.03773582, a: 0}
     - _ColorCoruption2: {r: 0.028301895, g: 0.003070489, b: 0.024847139, a: 0}
-    - _ColorDepthModifieur: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
-    - _Coord: {r: -0.73, g: 7.38, b: 16.1, a: 0}
+    - _ColorDepthModifieur: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
+    - _Coord: {r: -0.73, g: 5.01, b: -35.45, a: 0}
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
