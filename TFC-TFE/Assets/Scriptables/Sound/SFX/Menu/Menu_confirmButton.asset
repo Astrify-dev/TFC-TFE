@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855413ebe0ce7574e9b6b287a70752e4, type: 3}
   m_Name: Menu_confirmButton
   m_EditorClassIdentifier: 
-  _sounds: []
+  _sounds:
+  - {fileID: 8300000, guid: 5f6dd159b0c1a1d44b45e87d638889fc, type: 3}
   <FadeDuration>k__BackingField: 0
   _volume: {x: 0, y: 1}
   _randomVolumeCurve:

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class S_MainMenu : MonoBehaviour
 {
@@ -16,50 +17,66 @@ public class S_MainMenu : MonoBehaviour
     [SerializeField] private GameObject firstSliderOption;
     [SerializeField] private GameObject backButtonCredits;
 
+    [SerializeField] private float buttonDelay = 0.5f;
     public void OnPlayButtonPressed(){
-        if (!string.IsNullOrEmpty(playSceneName)){
-            SceneManager.LoadScene(playSceneName);
-        }
+        StartCoroutine(DelayedAction(() =>{
+            if (!string.IsNullOrEmpty(playSceneName)){
+                SceneManager.LoadScene(playSceneName);
+            }
+        }));
     }
-
     public void OnOptionsButtonPressed(){
-        if (mainMenuPanel is not null && optionsPanel is not null){
-            mainMenuPanel.SetActive(false);
-            optionsPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(firstSliderOption);
-        }
+        StartCoroutine(DelayedAction(() =>{
+            if (mainMenuPanel is not null && optionsPanel is not null){
+                mainMenuPanel.SetActive(false);
+                optionsPanel.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(firstSliderOption);
+            }
+        }));
     }
 
     public void OnCreditsButtonPressed(){
-        if (mainMenuPanel is not null && creditsPanel is not null){
-            mainMenuPanel.SetActive(false);
-            creditsPanel.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(backButtonCredits);
-        }
+        StartCoroutine(DelayedAction(() =>{
+            if (mainMenuPanel is not null && creditsPanel is not null){
+                mainMenuPanel.SetActive(false);
+                creditsPanel.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(backButtonCredits);
+            }
+        }));
     }
 
     public void OnQuitButtonPressed(){
-        Application.Quit();
+        StartCoroutine(DelayedAction(() =>{
+            Application.Quit();
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #endif
+        }));
     }
+
     public void OnBackButtonPressed(){
-        if (optionsPanel is not null && optionsPanel.activeSelf){
-            optionsPanel.SetActive(false);
-        }
+        StartCoroutine(DelayedAction(() =>{
+            if (optionsPanel is not null && optionsPanel.activeSelf){
+                optionsPanel.SetActive(false);
+            }
 
-        if (creditsPanel is not null && creditsPanel.activeSelf){
-            creditsPanel.SetActive(false);
-        }
+            if (creditsPanel is not null && creditsPanel.activeSelf){
+                creditsPanel.SetActive(false);
+            }
 
-        if (mainMenuPanel is not null){
-            mainMenuPanel.SetActive(true);
-        }
+            if (mainMenuPanel is not null){
+                mainMenuPanel.SetActive(true);
+            }
 
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(firstMainMenuButton);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstMainMenuButton);
+        }));
+    }
+
+    private IEnumerator DelayedAction(System.Action action){
+        yield return new WaitForSeconds(buttonDelay);
+        action?.Invoke(); 
     }
 }
