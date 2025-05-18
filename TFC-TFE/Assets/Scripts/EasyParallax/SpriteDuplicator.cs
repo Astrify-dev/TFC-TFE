@@ -1,105 +1,82 @@
 ﻿using UnityEngine;
 
-namespace EasyParallax
+[RequireComponent(typeof(SpriteRenderer))]
+public class SpriteDuplicator : MonoBehaviour
 {
-    /**
- * Creates copies of this object and arranges them seamlessly, so that one is right next to the other.
- */
-    [RequireComponent(
-        typeof(SpriteRenderer))] //Make sure we have a SpriteRenderer, because we need the width of the sprite
-    public class SpriteDuplicator : MonoBehaviour
+    [Header("Configuration du Pooling")]
+    [SerializeField, Tooltip("Nombre total de duplicatas à créer pour le sprite. Plus ce nombre est élevé, plus le scrolling sera fluide, mais cela consomme plus de mémoire.")]
+    private int poolSize = 5;
+
+    [SerializeField, Tooltip("Index à partir duquel un sprite sera repositionné lorsqu'il sort de l'écran. Par exemple, si la valeur est 2, le sprite sera repositionné après avoir dépassé 2 fois sa taille.")]
+    private int spriteRepositionIndex = 2;
+
+    [SerializeField, Tooltip("Correction pour éviter des chevauchements ou des espaces entre les duplicatas. Ajustez cette valeur si vous remarquez des artefacts visuels.")]
+    private float spriteRepositionCorrection = 0.03f;
+
+    private Transform[] duplicatesPool;
+    private float spriteSize;
+
+    private void Start()
     {
-        /**
-     * The number of copies of the object that we will have at any given time, including this object
-     */
-        [SerializeField] private int poolSize = 5;
+        duplicatesPool = new Transform[poolSize];
 
-        [Tooltip(
-            "Determines how long to wait until a sprite is repositioned. If you increase it by 1, the sprites need to go to the left 1 sprite width more before they get repositioned")]
-        [SerializeField]
-        private int spriteRepositionIndex = 2;
+        // Calcul de la taille du sprite uniquement sur l'axe Z
+        var spriteBounds = GetComponent<SpriteRenderer>().bounds.size;
+        spriteSize = spriteBounds.z; // Taille sur l'axe Z
 
-        [Tooltip(
-            "Adjust this if you have gaps between your sprites. Smaller correction -> more gap. Bigger correction -> less gap")]
-        [SerializeField]
-        private float spriteRepositionCorrection = 0.03f;
+        duplicatesPool[0] = transform;
 
-        /**
-     * An array of all current copies of this object, including this object
-     */
-        private Transform[] duplicatesPool;
+        var startingPos = transform.position;
 
-        /**
-     * Here we keep the width of the sprite, so we can later calculate where to place other objects
-     */
-        private float spriteWidth;
-
-        private void Start()
+        for (var i = 1; i < poolSize; i++)
         {
-            //First, we instantiate a number of objects that we will reuse. This is also called pooling. 
-            //We do this, because it's more efficient than creating and destroying objects over and over again.
-            duplicatesPool = new Transform[poolSize];
+            // Positionnement des duplicatas uniquement sur l'axe Z
+            var position = startingPos;
+            position.z += spriteSize - spriteRepositionCorrection;
+            startingPos = position;
 
-            //Now, we need to get the width of our sprite, because we will position the objects based on how wide they are
-            spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+            // Création du duplicata avec une rotation Y forcée à 0
+            var duplicate = Instantiate(gameObject, position, transform.rotation, transform.parent).transform;
 
-            //Let's populate our array with enough items. First add this object, as it's part of the pool.
-            duplicatesPool[0] = transform;
+            duplicatesPool[i] = duplicate;
 
-            var startingPos = transform.position;
+            // Suppression du script sur les duplicatas pour éviter des comportements indésirables
+            Destroy(duplicatesPool[i].GetComponent<SpriteDuplicator>());
+        }
+    }
 
-            //Next duplicate this and add the objects, until we fill our pool
-            for (var i = 1; i < poolSize; i++)
+    private void Update()
+    {
+        foreach (var duplicate in duplicatesPool)
+        {
+            // Vérifie si le duplicata est hors de l'écran sur l'axe Z
+            if (duplicate.transform.position.z < -spriteSize * spriteRepositionIndex)
             {
-                var position = new Vector2(CalculateX(startingPos), startingPos.y);
-                startingPos = position;
-                duplicatesPool[i] = Instantiate(gameObject, position, Quaternion.identity, transform.parent).transform;
-                //It's very important to remove the sprite duplicator script from the copied object
-                //Otherwise we will get an infinite loop of sprite duplication
-                Destroy(duplicatesPool[i].GetComponent<SpriteDuplicator>());
+                var rightmostSprite = GetRightMostSprite();
+                var startingPos = rightmostSprite.position;
+                var position = startingPos;
+                position.z += spriteSize - spriteRepositionCorrection;
+
+                duplicate.transform.position = position;
             }
         }
+    }
 
+    private Transform GetRightMostSprite()
+    {
+        // Trouve le duplicata le plus avancé sur l'axe Z
+        var rightmostValue = Mathf.NegativeInfinity;
+        Transform rightmostSprite = null;
 
-        private void Update()
+        foreach (var duplicate in duplicatesPool)
         {
-            //We need to check if any of our sprites has gone of screen. 
-            //We will reposition it to be on the right side if it is
-            foreach (var duplicate in duplicatesPool)
+            if (duplicate.position.z > rightmostValue)
             {
-                if (duplicate.transform.position.x < -spriteWidth * spriteRepositionIndex)
-                {
-                    //In order to reposition it, we need to get which sprite is the rightmost currently
-                    var rightmostSprite = GetRightMostSprite();
-
-                    //Let's position it to the right of that sprite
-                    var startingPos = rightmostSprite.position;
-                    var position =
-                        new Vector2(CalculateX(startingPos), startingPos.y);
-                    duplicate.transform.position = position;
-                }
-            }
-        }
-
-        private float CalculateX(Vector3 startingPos)
-        {
-            return Mathf.FloorToInt(startingPos.x + spriteWidth) -
-                   spriteRepositionCorrection * transform.lossyScale.magnitude;
-        }
-
-        private Transform GetRightMostSprite()
-        {
-            var rightmostX = Mathf.NegativeInfinity;
-            Transform rightmostSprite = null;
-            foreach (var duplicate in duplicatesPool)
-            {
-                if (!(duplicate.position.x > rightmostX)) continue;
-
                 rightmostSprite = duplicate;
-                rightmostX = duplicate.position.x;
+                rightmostValue = duplicate.position.z;
             }
-
-            return rightmostSprite;
         }
+
+        return rightmostSprite;
     }
 }
