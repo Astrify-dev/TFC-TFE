@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 224131191}
   - component: {fileID: 224131190}
   - component: {fileID: 224131189}
+  - component: {fileID: 224131192}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -653,6 +654,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224131187}
   m_CullTransparentMesh: 1
+--- !u!114 &224131192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224131187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 2
 --- !u!1 &284522784
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +795,7 @@ MonoBehaviour:
   firstMainMenuButton: {fileID: 347551258}
   firstSliderOption: {fileID: 82188824}
   backButtonCredits: {fileID: 801824613}
+  buttonDelay: 0.5
 --- !u!1 &312977199
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +942,7 @@ GameObject:
   - component: {fileID: 347551262}
   - component: {fileID: 347551261}
   - component: {fileID: 347551260}
+  - component: {fileID: 347551263}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -1044,6 +1064,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347551258}
   m_CullTransparentMesh: 1
+--- !u!114 &347551263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347551258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 2
 --- !u!1001 &375594584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1820,6 +1857,7 @@ GameObject:
   - component: {fileID: 801824617}
   - component: {fileID: 801824616}
   - component: {fileID: 801824615}
+  - component: {fileID: 801824618}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1941,6 +1979,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801824613}
   m_CullTransparentMesh: 1
+--- !u!114 &801824618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801824613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 5
 --- !u!224 &834159709 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2401418297808738568, guid: 4b77ec7aa2358a84dbcba84b9e29ca37,
@@ -2115,6 +2170,7 @@ GameObject:
   - component: {fileID: 1056822918}
   - component: {fileID: 1056822917}
   - component: {fileID: 1056822916}
+  - component: {fileID: 1056822919}
   m_Layer: 5
   m_Name: Quitter
   m_TagString: Untagged
@@ -2186,13 +2242,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284522789}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
-        m_MethodName: OnQuitButtonPressed
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2236,6 +2292,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056822914}
   m_CullTransparentMesh: 1
+--- !u!114 &1056822919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056822914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 2
 --- !u!224 &1097255380 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2401418297808738568, guid: 4b77ec7aa2358a84dbcba84b9e29ca37,
@@ -3115,6 +3188,29 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b77ec7aa2358a84dbcba84b9e29ca37, type: 3}
+--- !u!1 &1739868011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1955908273200859297, guid: 1de515383bf998b41b5f561390186251,
+    type: 3}
+  m_PrefabInstance: {fileID: 4923385930893929129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1739868016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739868011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 5
 --- !u!1 &1849155755
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,6 +3512,7 @@ GameObject:
   - component: {fileID: 2071138750}
   - component: {fileID: 2071138749}
   - component: {fileID: 2071138748}
+  - component: {fileID: 2071138751}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -3487,13 +3584,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 284522789}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
-        m_MethodName: OnCreditsButtonPressed
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3537,6 +3634,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071138746}
   m_CullTransparentMesh: 1
+--- !u!114 &2071138751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071138746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
+  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  scaleMultiplier: 1.2
+  clickScaleMultiplier: 0.8
+  animationSpeed: 2
 --- !u!1001 &2102906638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4074,7 +4188,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1955908273200859297, guid: 1de515383bf998b41b5f561390186251,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1739868016}
   m_SourcePrefab: {fileID: 100100000, guid: 1de515383bf998b41b5f561390186251, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

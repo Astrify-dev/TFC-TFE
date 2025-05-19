@@ -220,9 +220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a322b18aef4dbeb1f36b5797dcda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 3
+  poolSize: 5
   spriteRepositionIndex: 2
-  spriteRepositionCorrection: 0.01
+  spriteRepositionCorrection: 0.1
 --- !u!114 &15259149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ddf5cd4aa44013a1f18ea165ede923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeedType: {fileID: 11400000, guid: 65d7b20a4fd4f1b4bb074c43c0f3ca59, type: 2}
   speed: 5
 --- !u!1 &150963511
 GameObject:
@@ -261,8 +260,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150963511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.56, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 6.497589, y: -6.56, z: -6.6769786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -271,7 +270,7 @@ Transform:
   - {fileID: 15259146}
   - {fileID: 722094389}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &217341142
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,13 +357,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217341142}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -12.82}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 23, y: 0, z: -8.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &217341146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &722094389
 Transform:
   m_ObjectHideFlags: 0
@@ -503,7 +502,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 150963512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -571,9 +570,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a322b18aef4dbeb1f36b5797dcda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 3
+  poolSize: 5
   spriteRepositionIndex: 2
-  spriteRepositionCorrection: 0.01
+  spriteRepositionCorrection: 0.1
 --- !u!114 &722094392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ddf5cd4aa44013a1f18ea165ede923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeedType: {fileID: 11400000, guid: c28421d6e7abb844d929373b76e290fc, type: 2}
   speed: 5
 --- !u!1 &925989190
 GameObject:
@@ -686,9 +684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a322b18aef4dbeb1f36b5797dcda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 3
+  poolSize: 5
   spriteRepositionIndex: 2
-  spriteRepositionCorrection: 0.01
+  spriteRepositionCorrection: 0.1
 --- !u!114 &925989194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,8 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ddf5cd4aa44013a1f18ea165ede923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeedType: {fileID: 11400000, guid: 1862e59dae3f81f449c06d0cb3a7f4e1, type: 2}
-  speed: 50
+  speed: 1
 --- !u!1 &1213220876
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,9 +798,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a322b18aef4dbeb1f36b5797dcda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 3
+  poolSize: 5
   spriteRepositionIndex: 2
-  spriteRepositionCorrection: 0.01
+  spriteRepositionCorrection: 0.1
 --- !u!114 &1213220880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ddf5cd4aa44013a1f18ea165ede923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeedType: {fileID: 11400000, guid: 006ba316bcbf2474390172dea4bd6745, type: 2}
   speed: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
