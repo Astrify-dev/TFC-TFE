@@ -2,18 +2,53 @@
 
 public class S_JumpPlayerState : S_basePlayerStates
 {
-    public override void EnterState(S_playerStates Player)
+    S_playerManagerStates _player;
+    float _jumpDuration;
+    float _jumpSpeedDuration;
+    public override void EnterState(S_playerManagerStates Player)
     {
-        if (Player.IsGrounded && Player.CanJump)
-        {
-            Debug.Log("<color=green>[JUMP]</color> Ground jump triggered");
-            Player.StartVariableJump();
-        }
+        _jumpSpeedDuration = 1 / Player.MovementSettings.jumpChargeTime;
+        _player = Player;
+        _jumpDuration = 0;
+
     }
 
-    public override void OnEnable(S_playerStates Player) { }
+    public override void OnEnable(S_playerManagerStates Player)
+    {
+        Player.Inputs.OnJumpReleased += Inputs_OnJumpReleased;
+        Player.Inputs.OnDashEvent += Inputs_OnDashEvent;
+    }
+    public override void OnDisable(S_playerManagerStates Player)
+    {
+        Player.Inputs.OnJumpReleased -= Inputs_OnJumpReleased;
+        Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
+    }
+    public override void UpdateState(S_playerManagerStates Player)
+    {
+        _jumpDuration += Time.deltaTime * _jumpSpeedDuration;
 
-    public override void OnDisable(S_playerStates Player) { }
+        if(_jumpDuration > 1)
+            _player.SwitchState(_player.AirState);
 
-    public override void UpdateState(S_playerStates Player) { }
+        float ForceJump = Mathf.Lerp(Player.MovementSettings.maxJumpForce, Player.MovementSettings.minJumpForce, _jumpDuration);
+
+        Player.Rigidbody.AddForce(Vector3.up * ForceJump * Time.deltaTime , ForceMode.Impulse);
+
+
+        Vector3 VelocityDir = new Vector3(0, 0, Player.DirectionInput.x);
+
+        if(Player.MovementSettings.AirControlEnable)
+            Player.Rigidbody.AddForce(VelocityDir * Player.MovementSettings.airMaxMoveSpeed * Time.deltaTime, ForceMode.Acceleration);
+    }
+
+    private void Inputs_OnJumpReleased()
+    {
+        _player.SwitchState(_player.AirState);
+    }
+
+    private void Inputs_OnDashEvent()
+    {
+        if(_player.AirDashCount > 0)
+            _player.SwitchState(_player.SlowMotionDashState);
+    }
 }

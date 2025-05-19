@@ -13,34 +13,91 @@ MonoBehaviour:
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
   rigidbodyMass: 1
-  rigidbodyDrag: 0.99
-  rigidbodyAngularDrag: 0.07
+  rigidbodyDrag: 0.7
+  rigidbodyAngularDrag: 1
   useGravity: 1
   moveSpeed: 1
-  dive: 2
-  minMoveSpeed: 4.41
-  maxMoveSpeed: 11.65
-  accelerationRate: 40
-  airMaxMoveSpeed: 11.1
+  <FallSpeed>k__BackingField: 300
+  MaxFallSpeed: 20
+  minMoveSpeed: 4
+  maxMoveSpeed: 15
+  accelerationRate: 100
+  AirControlEnable: 1
+  airMaxMoveSpeed: 700
   airAccelerationRate: 17.2
-  fallSpeed: 22
-  minJumpForce: 2.01
-  maxJumpForce: 10
-  jumpChargeTime: 0.2
-  wallSlideSpeed: 1.2
-  wallJumpForce: 6.97
-  directionImpulsion: {x: 1, y: 2.08}
-  groundDashForce: 5
-  groundDashCooldown: 0
-  groundDashCooldownTime: 0.2
-  airDashForce: 24
-  rebounceBoostMultiplier: 2
-  reboundTimer: 0.5
-  reboundInputWindow: 0.25
+  <Dive>k__BackingField: 300
+  <minJumpForce>k__BackingField: 60
+  <maxJumpForce>k__BackingField: 300
+  <jumpChargeTime>k__BackingField: 0.12
+  <jumpCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <wallSlideSpeed>k__BackingField: 2
+  <wallJumpForce>k__BackingField: 10
+  <directionImpulsion>k__BackingField: {x: 1.2, y: 1}
+  <SlideWallCooldownTimeAfterWallJump>k__BackingField: 0.1
+  <groundDashForce>k__BackingField: 40
+  <groundDashCooldown>k__BackingField: 0
+  <groundDashCooldownTime>k__BackingField: 0.2
+  <airDashForce>k__BackingField: 50
+  <reboundTimer>k__BackingField: 0.8
+  <reboundInputWindow>k__BackingField: 0.3
+  <AirDashDuration>k__BackingField: 0.2
+  <BrakeAirDashPower>k__BackingField: 3
+  <ReboundCorrectionValueCapsule>k__BackingField: 1.5
+  <MaxAirDashCount>k__BackingField: 1
+  <GroundAirDashCount>k__BackingField: 1
+  <WallDashMaxAirDashCount>k__BackingField: 1
   dashJumpDirection: {x: 0.6, y: 1}
   dashJumpForce: 33.5
-  slowMotionIntensity: 0.3
-  slowMotionTimer: 10
+  slowMotionIntensity: 0.1
+  slowMotionTimer: 2
+  <SlowMotionAnimEnableCurve>k__BackingField:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <SlowMotionAnimSpeed>k__BackingField: 5
   jumpResetLayers:
     serializedVersion: 2
     m_Bits: 64

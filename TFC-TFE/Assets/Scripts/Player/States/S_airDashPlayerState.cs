@@ -1,38 +1,95 @@
 ﻿using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class S_airDashPlayerState : S_basePlayerStates
 {
-    public override void EnterState(S_playerStates Player)
+    //public override void EnterState(S_playerStates Player)
+    //{
+    //    if (!Player.CanAirDash || Player.IsDashing) return;
+
+    //    Player.IsDashing = true;
+    //    Player.CanAirDash = false;
+    //    Player.HasAirDashed = true;
+    //    Player.IsAirReboundDash = true;
+
+    //    // Calcule la direction du dash en fonction de l'input
+    //    Vector3 dashDirection = new Vector3(0, Player.MoveInput.y, Player.MoveInput.x).normalized;
+
+    //    // Si aucune direction, dash vers l'avant
+    //    if (dashDirection == Vector3.zero)
+    //    {
+    //        dashDirection = Player.FacingRight ? Player.transform.forward : -Player.transform.forward;
+    //    }
+
+    //    // Lance la coroutine de dash avec gestion du rebond
+    //    Player.StartAirDashCoroutine(dashDirection);
+    //}
+
+    //public override void OnEnable(S_playerStates Player) { }
+
+    //public override void OnDisable(S_playerStates Player)
+    //{
+    //    // Réactive la gravité et stoppe les flags liés au dash
+    //    Player.Rigidbody.useGravity = true;
+    //    Player.IsDashing = false;
+    //    Player.IsAirReboundDash = false;
+    //}
+
+    //public override void UpdateState(S_playerStates Player) { }
+
+    S_playerManagerStates _player;
+
+    Vector3 _dirAirDash;
+    float _strengthAirDash;
+    float _durationAirDash;
+    public override void EnterState(S_playerManagerStates Player)
     {
-        if (!Player.CanAirDash || Player.IsDashing) return;
+        _player = Player;
+        _player.SetfalsePressRebounds();
 
-        Player.IsDashing = true;
-        Player.CanAirDash = false;
-        Player.HasAirDashed = true;
-        Player.IsAirReboundDash = true;
+        _dirAirDash = Player.DashDirection;
+        _strengthAirDash = Player.MovementSettings.airDashForce;
+        _durationAirDash = Time.time + Player.MovementSettings.AirDashDuration;
+    }
 
-        // Calcule la direction du dash en fonction de l'input
-        Vector3 dashDirection = new Vector3(0, Player.MoveInput.y, Player.MoveInput.x).normalized;
+    public override void OnEnable(S_playerManagerStates Player)
+    {
+        Player.Inputs.OnJumpEvent += Inputs_OnJumpEvent;
+        Player.Inputs.OnDashEvent += Inputs_OnDashEvent;
+        
+    }
+    public override void OnDisable(S_playerManagerStates Player)
+    {
+        Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
+        Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
+        Player.Rigidbody.velocity = Player.Rigidbody.velocity/ Player.MovementSettings.BrakeAirDashPower;
+    }
+    public override void UpdateState(S_playerManagerStates Player)
+    {
+        Player.Rigidbody.velocity = _dirAirDash * _strengthAirDash;
 
-        // Si aucune direction, dash vers l'avant
-        if (dashDirection == Vector3.zero)
+        if (Time.time > _durationAirDash)
         {
-            dashDirection = Player.FacingRight ? Player.transform.forward : -Player.transform.forward;
+            _player.SetfalsePressRebounds();
+            Player.SwitchState(Player.AirState);
         }
 
-        // Lance la coroutine de dash avec gestion du rebond
-        Player.StartAirDashCoroutine(dashDirection);
+
+        float DistanceRay = ( Mathf.Abs(_dirAirDash.y * Player.MovementSettings.ReboundCorrectionValueCapsule) + 1) * Player.WallCheckDistance;
+        Debug.Log("DistanceRay: "+DistanceRay);
+
+        if (Physics.Raycast(Player.transform.position, _dirAirDash, DistanceRay, Player.MovementSettings.bounceLayers))
+            Player.SwitchState(Player.WallReboundState);
+
     }
 
-    public override void OnEnable(S_playerStates Player) { }
-
-    public override void OnDisable(S_playerStates Player)
+    private void Inputs_OnJumpEvent()
     {
-        // Réactive la gravité et stoppe les flags liés au dash
-        Player.Rigidbody.useGravity = true;
-        Player.IsDashing = false;
-        Player.IsAirReboundDash = false;
+        _player.SetfalsePressRebounds();
+        _player.SwitchState(_player.AirJumpState);
     }
-
-    public override void UpdateState(S_playerStates Player) { }
+    private void Inputs_OnDashEvent()
+    {
+        _player.StartDureationPushBounds();
+    }
 }
