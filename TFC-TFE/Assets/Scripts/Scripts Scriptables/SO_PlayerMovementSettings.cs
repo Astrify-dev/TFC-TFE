@@ -21,12 +21,16 @@ public class PlayerMovementSettings : ScriptableObject {
     public float moveSpeed = 5f;
 
     [field: BoxGroup("Movement Settings")]
-    [field: SerializeField, Tooltip("La force de plonger du joueur.")]
+    [field: SerializeField, Tooltip("La force acceleratrice de plonger du joueur.")]
     public float FallSpeed { get; private set; } = 5f;
 
     [BoxGroup("Movement Settings")]
-    [SerializeField, Tooltip("La force de plonger max du joueur.")]
+    [SerializeField, Tooltip("La force acceleratrice plonger max du joueur.")]
     public float MaxFallSpeed = 5f;
+
+    [BoxGroup("Movement Settings")]
+    [SerializeField, Tooltip("La velocite max de chut du joueur.")]
+    public float MaxBottomVelocity = 50f;
 
     [BoxGroup("Movement Settings"), SerializeField, Tooltip("Vitesse minimale du joueur (vitesse de départ).")]
     public float minMoveSpeed = 5f;
@@ -150,6 +154,11 @@ public class PlayerMovementSettings : ScriptableObject {
     [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches autorisant wall slide et wall jump.")]
     public LayerMask wallJumpLayers;
 
+    [field: BoxGroup("Juice"), SerializeField, Tooltip("Valeur min de down velocity pour declencher un rebond")]
+    public float JuiceFallVelocityMinRebounds { get; private set; } = 30f;
+
+    [field: BoxGroup("Juice"), SerializeField, Tooltip("Multiplicateur de la down velocity pour le rebond")]
+    public float JuiceMultiplyerFallVelocityRebounds { get; private set; } = 1.1f;
     public void ApplySettingsToRigidbody(Rigidbody rb){
         if (rb is null) return;
 

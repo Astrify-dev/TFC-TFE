@@ -9,6 +9,8 @@ public class S_groundPlayerState : S_basePlayerStates
     {
         _player = Player;
         Player.SetAirDash(Player.MovementSettings.GroundAirDashCount);
+
+        GroundRebound();
     }
 
     public override void OnEnable(S_playerManagerStates Player)
@@ -51,5 +53,16 @@ public class S_groundPlayerState : S_basePlayerStates
     {
         if(_player.EnableGroundDash)
             _player.SwitchState(_player.DashGroundState);
+    }
+
+    private void GroundRebound()
+    {
+        float MinRebounds = _player.MovementSettings.JuiceFallVelocityMinRebounds;
+        float MultiplyRebounds = _player.MovementSettings.JuiceMultiplyerFallVelocityRebounds;
+
+        if (_player.Rigidbody.velocity.y < -MinRebounds)
+        {
+            _player.Rigidbody.AddForce(Vector3.up * -_player.Rigidbody.velocity.y * MultiplyRebounds, ForceMode.Impulse);
+        }
     }
 }
