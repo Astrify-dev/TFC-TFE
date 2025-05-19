@@ -69,6 +69,8 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
 
             if (Physics.Raycast(Player.transform.position, _dirAirDash,out hit, Player.WallCheckDistance, Player.MovementSettings.bounceLayers))
             {
+                Debug.LogWarning("ReboundsDetect");
+
                 Vector3 reflected = Vector3.Reflect(Player.DashDirection, hit.normal).normalized;
                 if (Vector3.Angle(reflected, Vector3.down) < 20f)
                     reflected = new Vector3(reflected.x, -0.5f, reflected.z).normalized;
@@ -79,7 +81,10 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
                 Player.DashDirection = reflected;
                 Player.SwitchState(Player.AirDashState);
                 return;
+
+                
             }
+            Debug.LogWarning("ReboundsNotDetect");
             Player.SwitchState(Player.AirState);
 
         }

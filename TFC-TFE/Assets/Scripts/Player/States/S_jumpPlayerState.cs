@@ -34,9 +34,11 @@ public class S_JumpPlayerState : S_basePlayerStates
 
         Player.Rigidbody.AddForce(Vector3.up * ForceJump * Time.deltaTime , ForceMode.Impulse);
 
+
         Vector3 VelocityDir = new Vector3(0, 0, Player.DirectionInput.x);
 
-        Player.Rigidbody.AddForce(VelocityDir * Player.MovementSettings.airMaxMoveSpeed * Time.deltaTime, ForceMode.Acceleration);
+        if(Player.MovementSettings.AirControlEnable)
+            Player.Rigidbody.AddForce(VelocityDir * Player.MovementSettings.airMaxMoveSpeed * Time.deltaTime, ForceMode.Acceleration);
     }
 
     private void Inputs_OnJumpReleased()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445f4119e5c82e408faaa4b548ae25e, type: 3}
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
-  rigidbodyMass: 1
+  rigidbodyMass: 3.5
   rigidbodyDrag: 0.99
   rigidbodyAngularDrag: 0.07
   useGravity: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
   airDashForce: 24
   rebounceBoostMultiplier: 2
   reboundTimer: 0.5
-  reboundInputWindow: 0.25
+  reboundInputWindow: 0.4
   <AirDashDuration>k__BackingField: 0.5
   <MaxAirDashCount>k__BackingField: 1
   <GroundAirDashCount>k__BackingField: 1

@@ -108,7 +108,8 @@ public class S_airPlayerState : S_basePlayerStates
 
         Vector3 VelocityDir = new Vector3(0, AirControlDir.y, AirControlDir.x);
 
-        Player.Rigidbody.AddForce(VelocityDir * Time.deltaTime,ForceMode.Acceleration);
+        if(Player.MovementSettings.AirControlEnable) 
+            Player.Rigidbody.AddForce(VelocityDir * Time.deltaTime,ForceMode.Force);
     }
 
     private void Inputs_OnDashEvent()

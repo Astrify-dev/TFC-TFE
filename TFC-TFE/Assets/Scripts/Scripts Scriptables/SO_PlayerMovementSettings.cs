@@ -34,6 +34,10 @@ public class PlayerMovementSettings : ScriptableObject {
     public float accelerationRate = 20f;
 
     [BoxGroup("Air Movement Settings")]
+    [SerializeField, Tooltip("Activer l'air control.")]
+    public bool AirControlEnable = true;
+
+    [BoxGroup("Air Movement Settings")]
     [SerializeField, Tooltip("Vitesse max dans les airs.")]
     public float airMaxMoveSpeed = 6f;
 
