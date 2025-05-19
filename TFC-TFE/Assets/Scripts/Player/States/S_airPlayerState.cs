@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class S_airPlayerState : S_basePlayerStates
 {
@@ -115,8 +114,9 @@ public class S_airPlayerState : S_basePlayerStates
 
         _fallSpeed += Player.MovementSettings.FallSpeed * Time.deltaTime;
         _fallSpeed = Mathf.Min(_fallSpeed, Player.MovementSettings.MaxFallSpeed);
-        Player.Rigidbody.AddForce(Vector3.down * _fallSpeed, ForceMode.Acceleration);
-
+        Debug.Log(_fallSpeed);
+        Player.Rigidbody.AddForce(Vector3.down * _fallSpeed * Time.deltaTime, ForceMode.Acceleration);
+        Player.Rigidbody.velocity = new Vector3(0, Mathf.Max(Player.Rigidbody.velocity.y, - Player.MovementSettings.MaxBottomVelocity), Player.Rigidbody.velocity.z);
     }
 
     private void Inputs_OnDashEvent()
