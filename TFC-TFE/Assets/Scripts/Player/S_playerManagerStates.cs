@@ -15,6 +15,11 @@ public class S_playerManagerStates : MonoBehaviour
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
 
+    [Header("Camera Settings")]
+    [SerializeField] private Cinemachine.CinemachineVirtualCamera _cameraVirtuelle;
+    [SerializeField] private AnimationCurve _smoothTransitionCurve; // Courbe pour la transition
+    [SerializeField] private float _transitionDuration = 0.5f; // Durée de la transition
+
     [Header("Détection environnement")]
     [SerializeField] private float _groundCheckDistance = 0.5f;
     [field: SerializeField] public float WallCheckDistance { get; private set; } = 0.5f;
@@ -41,6 +46,7 @@ public class S_playerManagerStates : MonoBehaviour
     private IEnumerator _reloadGroundDashCoroutine;
     private IEnumerator _reloadWallSlideCoroutine;
     private IEnumerator _durationPressReboundsCoroutine;
+    private Coroutine _currentTransition;
 
     #endregion
 
@@ -152,8 +158,28 @@ public class S_playerManagerStates : MonoBehaviour
         Vector3 rot = _visualObject.transform.eulerAngles;
         rot.y = value;
         _visualObject.transform.eulerAngles = rot;
-    }
 
+        // Ajuster la position de la caméra virtuelle avec une transition fluide
+        if (_cameraVirtuelle != null)
+        {
+            var composer = _cameraVirtuelle.GetCinemachineComponent<Cinemachine.CinemachineFramingTransposer>();
+            if (composer != null)
+            {
+                float targetScreenX = FacingRight ? 0.25f : 0.75f;
+
+                // Arrêter la transition en cours si nécessaire
+                if (_currentTransition != null)
+                {
+                    StopCoroutine(_currentTransition);
+                }
+
+                // Lancer une nouvelle transition
+                _currentTransition = StartCoroutine(SmoothTransition(composer, targetScreenX));
+            }
+        }
+    }
+    // 0.15 quand on chute
+    //0.85 au sol
     public void AddAirDash(int Count)
     {
         AirDashCount += Count;
@@ -236,6 +262,25 @@ public class S_playerManagerStates : MonoBehaviour
     {
         yield return new WaitForSeconds(ReloadDuration);
         EnableWallSlide = true;
+    }
+
+    private IEnumerator SmoothTransition(Cinemachine.CinemachineFramingTransposer composer, float targetScreenX)
+    {
+        float startScreenX = composer.m_ScreenX;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _transitionDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / _transitionDuration;
+
+            // Appliquer la courbe pour une interpolation fluide
+            composer.m_ScreenX = Mathf.Lerp(startScreenX, targetScreenX, _smoothTransitionCurve.Evaluate(t));
+            yield return null;
+        }
+
+        // S'assurer que la valeur finale est bien atteinte
+        composer.m_ScreenX = targetScreenX;
     }
     #endregion
 
