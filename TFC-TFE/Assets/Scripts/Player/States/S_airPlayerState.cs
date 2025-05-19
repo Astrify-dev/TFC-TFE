@@ -73,9 +73,11 @@ public class S_airPlayerState : S_basePlayerStates
     //    }
 
     private S_playerManagerStates _player;
+    private float _fallSpeed; 
     public override void EnterState(S_playerManagerStates Player)
     {
         _player = Player;
+        _fallSpeed = 0;
     }
     public override void OnEnable(S_playerManagerStates Player)
     {
@@ -103,13 +105,18 @@ public class S_airPlayerState : S_basePlayerStates
         Player.HandleFlip(Player.DirectionInput.x);
 
         Vector2 AirControlDir = Player.DirectionInput.normalized;
-        AirControlDir.y = Mathf.Min(AirControlDir.y, 0) * Player.MovementSettings.dive;
+        AirControlDir.y = Mathf.Min(AirControlDir.y, 0) * Player.MovementSettings.Dive;
         AirControlDir.x *= Player.MovementSettings.airMaxMoveSpeed;
 
         Vector3 VelocityDir = new Vector3(0, AirControlDir.y, AirControlDir.x);
 
         if(Player.MovementSettings.AirControlEnable) 
-            Player.Rigidbody.AddForce(VelocityDir * Time.deltaTime,ForceMode.Force);
+            Player.Rigidbody.AddForce(VelocityDir * Time.deltaTime,ForceMode.Acceleration);
+
+        _fallSpeed += Player.MovementSettings.FallSpeed * Time.deltaTime;
+        _fallSpeed = Mathf.Min(_fallSpeed, Player.MovementSettings.MaxFallSpeed);
+        Player.Rigidbody.AddForce(Vector3.down * _fallSpeed, ForceMode.Acceleration);
+
     }
 
     private void Inputs_OnDashEvent()

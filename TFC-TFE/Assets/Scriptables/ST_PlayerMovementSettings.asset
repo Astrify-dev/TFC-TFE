@@ -12,20 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445f4119e5c82e408faaa4b548ae25e, type: 3}
   m_Name: ST_PlayerMovementSettings
   m_EditorClassIdentifier: 
-  rigidbodyMass: 3.5
-  rigidbodyDrag: 0.99
-  rigidbodyAngularDrag: 0.07
+  rigidbodyMass: 1
+  rigidbodyDrag: 0.7
+  rigidbodyAngularDrag: 1
   useGravity: 1
   moveSpeed: 1
-  dive: 500
-  minMoveSpeed: 4.41
-  maxMoveSpeed: 11.65
-  accelerationRate: 40
-  airMaxMoveSpeed: 300
+  <FallSpeed>k__BackingField: 6
+  minMoveSpeed: 4
+  maxMoveSpeed: 15
+  accelerationRate: 30
+  AirControlEnable: 1
+  airMaxMoveSpeed: 500
   airAccelerationRate: 17.2
-  fallSpeed: 22
-  minJumpForce: 10
-  maxJumpForce: 120
+  <Dive>k__BackingField: 300
+  minJumpForce: 50
+  maxJumpForce: 100
   jumpChargeTime: 0.2
   jumpCurve:
     serializedVersion: 2
@@ -52,17 +53,18 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   wallSlideSpeed: 1.2
-  wallJumpForce: 6.97
-  directionImpulsion: {x: 1, y: 1.5}
+  wallJumpForce: 12
+  directionImpulsion: {x: 1, y: 1.3}
   <SlideWallCooldownTimeAfterWallJump>k__BackingField: 0.1
   groundDashForce: 35
   groundDashCooldown: 0
   groundDashCooldownTime: 0.2
-  airDashForce: 24
+  airDashForce: 30
   rebounceBoostMultiplier: 2
-  reboundTimer: 0.5
-  reboundInputWindow: 0.4
-  <AirDashDuration>k__BackingField: 0.5
+  reboundTimer: 0.8
+  reboundInputWindow: 1
+  <AirDashDuration>k__BackingField: 0.4
+  <ReboundCorrectionValueCapsule>k__BackingField: 1.5
   <MaxAirDashCount>k__BackingField: 1
   <GroundAirDashCount>k__BackingField: 1
   <WallDashMaxAirDashCount>k__BackingField: 5

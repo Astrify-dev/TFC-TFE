@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -12,7 +13,7 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] GameObject _visualObject;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
-
+    [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
 
     [Header("Détection environnement")]
     [SerializeField] private float _groundCheckDistance = 0.5f;
@@ -25,7 +26,7 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] private Color _bounceRayColor = Color.yellow;
     [SerializeField] private Color _velocityRayColor = Color.yellow;
 
-
+    [SerializeField] bool _debugState = false;
     public Vector2 DirectionInput { get; private set; }
     public bool FacingRight { get; private set; }
     public bool EnableGroundDash { get; private set; } = true;
@@ -35,8 +36,7 @@ public class S_playerManagerStates : MonoBehaviour
     public S_inputPlayer Inputs { get; private set; }
     public int AirDashCount { get; private set; }
     public Vector3 DashDirection { get; set; }
-
-    private S_basePlayerStates _currentState;
+    public S_basePlayerStates CurrentState { get; private set; }
 
     private IEnumerator _reloadGroundDashCoroutine;
     private IEnumerator _reloadWallSlideCoroutine;
@@ -78,20 +78,26 @@ public class S_playerManagerStates : MonoBehaviour
 
     private void OnEnable()
     {
-        _currentState?.OnEnable(this);
+        CurrentState?.OnEnable(this);
 
         Inputs.OnMoveEvent += Inputs_OnMoveEvent;
     }
     private void OnDisable()
     {
-        _currentState?.OnDisable(this);
+        CurrentState?.OnDisable(this);
 
         Inputs.OnMoveEvent -= Inputs_OnMoveEvent;
     }
 
     private void Update()
     {
-        _currentState?.UpdateState(this);
+        CurrentState?.UpdateState(this);
+
+        SpeedShow.text = $"Speed: {Mathf.Round(Vector3.Distance(Vector3.zero, Rigidbody.velocity)*20)/20}\n" +
+            $"X : {Mathf.Round(Rigidbody.velocity.z*20)/20}\n" +
+            $"Y : {Mathf.Round(Rigidbody.velocity.y*20)/20}";
+
+
     }
     private void Inputs_OnMoveEvent(Vector2 Dir)
     {
@@ -99,9 +105,12 @@ public class S_playerManagerStates : MonoBehaviour
     }
     public void SwitchState(S_basePlayerStates newState)
     {
-        _currentState?.OnDisable(this);
-        _currentState = newState;
-        Debug.Log($"New state: {_currentState}");
+        CurrentState?.OnDisable(this);
+        CurrentState = newState;
+
+        if (_debugState)
+            Debug.Log($"New state: {CurrentState}");
+
         newState?.OnEnable(this);
         newState?.EnterState(this);
     }
@@ -149,7 +158,8 @@ public class S_playerManagerStates : MonoBehaviour
     {
         AirDashCount += Count;
         AirDashCount = Mathf.Clamp(AirDashCount, 0, MovementSettings.MaxAirDashCount);
-        Debug.LogWarning("AirDash count: "+Count);
+        
+        Debug.LogWarning("AirDash count: "+ AirDashCount);
     }
 
     public void SetAirDash(int Value)

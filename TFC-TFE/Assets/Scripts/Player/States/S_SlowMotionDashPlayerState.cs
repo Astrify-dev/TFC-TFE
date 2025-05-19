@@ -62,6 +62,7 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
     {
         ResetTimeScale();
         _player.DashDirection = _dirAirDash;
+        _player.AddAirDash(-1);
         _player.SwitchState(_player.AirDashState);
     }
 }

@@ -47,8 +47,6 @@ public class S_airDashPlayerState : S_basePlayerStates
         _player = Player;
         _player.SetfalsePressRebounds();
 
-        Player.AddAirDash(-1);
-
         _dirAirDash = Player.DashDirection;
         _strengthAirDash = Player.MovementSettings.airDashForce;
         _durationAirDash = Time.time + Player.MovementSettings.AirDashDuration;
@@ -58,11 +56,13 @@ public class S_airDashPlayerState : S_basePlayerStates
     {
         Player.Inputs.OnJumpEvent += Inputs_OnJumpEvent;
         Player.Inputs.OnDashEvent += Inputs_OnDashEvent;
+        
     }
     public override void OnDisable(S_playerManagerStates Player)
     {
         Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
         Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
+        Player.Rigidbody.velocity = Player.Rigidbody.velocity/ Player.MovementSettings.BrakeAirDashPower;
     }
     public override void UpdateState(S_playerManagerStates Player)
     {
@@ -73,9 +73,12 @@ public class S_airDashPlayerState : S_basePlayerStates
             _player.SetfalsePressRebounds();
             Player.SwitchState(Player.AirState);
         }
-            
 
-        if (Physics.Raycast(Player.transform.position, _dirAirDash, Player.WallCheckDistance, Player.MovementSettings.bounceLayers))
+
+        float DistanceRay = ( Mathf.Abs(_dirAirDash.y * Player.MovementSettings.ReboundCorrectionValueCapsule) + 1) * Player.WallCheckDistance;
+        Debug.Log("DistanceRay: "+DistanceRay);
+
+        if (Physics.Raycast(Player.transform.position, _dirAirDash, DistanceRay, Player.MovementSettings.bounceLayers))
             Player.SwitchState(Player.WallReboundState);
 
     }

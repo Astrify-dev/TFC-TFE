@@ -3,6 +3,7 @@ using UnityEngine;
 public class S_groundPlayerState : S_basePlayerStates
 {
     S_playerManagerStates _player;
+    
 
     public override void EnterState(S_playerManagerStates Player)
     {
