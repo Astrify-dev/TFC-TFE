@@ -160,8 +160,7 @@ public class S_playerManagerStates : MonoBehaviour
     {
         AirDashCount += Count;
         AirDashCount = Mathf.Clamp(AirDashCount, 0, MovementSettings.MaxAirDashCount);
-        
-        Debug.LogWarning("AirDash count: "+ AirDashCount);
+       
     }
 
     public void SetAirDash(int Value)
