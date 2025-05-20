@@ -17,8 +17,9 @@ MonoBehaviour:
   rigidbodyAngularDrag: 1
   useGravity: 1
   moveSpeed: 1
-  <FallSpeed>k__BackingField: 300
-  MaxFallSpeed: 20
+  <FallSpeed>k__BackingField: 4000
+  MaxFallSpeed: 4000
+  MaxBottomVelocity: 45
   minMoveSpeed: 4
   maxMoveSpeed: 15
   accelerationRate: 100
@@ -28,7 +29,7 @@ MonoBehaviour:
   <Dive>k__BackingField: 300
   <minJumpForce>k__BackingField: 60
   <maxJumpForce>k__BackingField: 300
-  <jumpChargeTime>k__BackingField: 0.12
+  <jumpChargeTime>k__BackingField: 0.1
   <jumpCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -54,8 +55,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <wallSlideSpeed>k__BackingField: 2
-  <wallJumpForce>k__BackingField: 10
-  <directionImpulsion>k__BackingField: {x: 1.2, y: 1}
+  <wallJumpForce>k__BackingField: 20
+  <directionImpulsion>k__BackingField: {x: 1, y: 1}
   <SlideWallCooldownTimeAfterWallJump>k__BackingField: 0.1
   <groundDashForce>k__BackingField: 40
   <groundDashCooldown>k__BackingField: 0
@@ -69,8 +70,8 @@ MonoBehaviour:
   <MaxAirDashCount>k__BackingField: 1
   <GroundAirDashCount>k__BackingField: 1
   <WallDashMaxAirDashCount>k__BackingField: 1
-  dashJumpDirection: {x: 0.6, y: 1}
-  dashJumpForce: 33.5
+  dashJumpDirection: {x: 1, y: 1.5}
+  dashJumpForce: 10
   slowMotionIntensity: 0.1
   slowMotionTimer: 2
   <SlowMotionAnimEnableCurve>k__BackingField:
@@ -110,3 +111,5 @@ MonoBehaviour:
   wallJumpLayers:
     serializedVersion: 2
     m_Bits: 256
+  <JuiceFallVelocityMinRebounds>k__BackingField: 44
+  <JuiceMultiplyerFallVelocityRebounds>k__BackingField: 1.1
