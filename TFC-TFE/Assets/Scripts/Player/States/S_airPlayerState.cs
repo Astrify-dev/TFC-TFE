@@ -117,7 +117,6 @@ public class S_airPlayerState : S_basePlayerStates
 
         _fallSpeed += Player.MovementSettings.FallSpeed * Time.deltaTime;
         _fallSpeed = Mathf.Min(_fallSpeed, Player.MovementSettings.MaxFallSpeed);
-        Debug.Log(_fallSpeed);
         Player.Rigidbody.AddForce(Vector3.down * _fallSpeed * Time.deltaTime, ForceMode.Acceleration);
         Player.Rigidbody.velocity = new Vector3(0, Mathf.Max(Player.Rigidbody.velocity.y, -Player.MovementSettings.MaxBottomVelocity), Player.Rigidbody.velocity.z);
 
