@@ -1,97 +1,91 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class S_cameraFollow : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Player")]
     [SerializeField] private GameObject _player;
 
-    [Header("Camera Settings")]
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private Vector3 _position = new Vector3(50, 15, 0);
+    [Header("Movement")]
+    [SerializeField] private float _speed = 5f;
     [SerializeField] private float _distanceSpeed = 1f;
 
-    [Header("Ground Detection")]
-    [Tooltip("Layer utilisé pour détecter le sol.")]
-    [SerializeField] private LayerMask _groundLayer;
+    [Header("Camera Offset")]
+    [SerializeField] private Vector3 _baseOffset;
 
-    [Tooltip("Distance max du raycast (affecte aussi le gizmo).")]
-    [SerializeField] private float _rayLength = 100f;
+    [Header("Level Boundaries (Y axis)")]
+    [SerializeField] private float _minHeight = -10f;
+    [SerializeField] private float _maxHeight = 50f;
+    [SerializeField] private float _triggerDistance = 5f;
 
-    [Tooltip("Distance max pour considérer que le joueur est 'au sol'.")]
-    [SerializeField] private float _groundThreshold = 0.5f;
+    private float _fixedX = 50f;
 
-    [Tooltip("Distance à partir de laquelle l'offset Y atteint 0.")]
-    [SerializeField] private float _airMaxDistance = 5f;
-
-    // Debug info
     private Vector3 _lastTargetPosition;
-    private float _lastRayDistance;
-    private float _currentOffsetY;
 
     private void FixedUpdate()
     {
-        if (_player == null) return;
+        if (!_player) return;
 
-        Vector3 playerPos = _player.transform.position;
-        Vector3 dynamicOffset = _position;
+        float distance = Vector3.Distance(_player.transform.position, transform.position);
+        distance *= _distanceSpeed;
 
-        RaycastHit hit;
-        if (Physics.Raycast(playerPos, Vector3.down, out hit, _rayLength, _groundLayer))
+        float playerY = _player.transform.position.y;
+        float offsetY = CalculateDynamicOffsetY(playerY);
+
+        Vector3 dynamicOffset = new Vector3(0f, offsetY, _baseOffset.z);
+        Vector3 targetPosition = _player.transform.position + dynamicOffset;
+        _lastTargetPosition = targetPosition;
+
+        Vector3 cameraPosition = Vector3.MoveTowards(transform.position, targetPosition, distance * _speed * Time.deltaTime);
+        transform.position = new Vector3(_fixedX, cameraPosition.y, cameraPosition.z);
+    }
+
+    private float CalculateDynamicOffsetY(float playerY)
+    {
+        // Vers le bas
+        if (playerY < _minHeight + _triggerDistance)
         {
-            _lastRayDistance = hit.distance;
-
-            if (hit.distance <= _groundThreshold)
-            {
-                dynamicOffset.y = _position.y;
-            }
-            else
-            {
-                float t = Mathf.Clamp01((hit.distance - _groundThreshold) / (_airMaxDistance - _groundThreshold));
-                dynamicOffset.y = Mathf.Lerp(_position.y, 0f, t);
-                Debug.Log($"<color=cyan>Dist sol: {hit.distance:F2} | t = {t:F2} | OffsetY = {dynamicOffset.y:F2}</color>");
-            }
+            float t = Mathf.InverseLerp(_minHeight, _minHeight + _triggerDistance, playerY);
+            return Mathf.Lerp(_baseOffset.y, 0f, t);
+        }
+        // Vers le haut
+        else if (playerY > _maxHeight - _triggerDistance)
+        {
+            float t = Mathf.InverseLerp(_maxHeight, _maxHeight - _triggerDistance, playerY);
+            return Mathf.Lerp(-_baseOffset.y, 0f, t);
         }
 
-        _currentOffsetY = dynamicOffset.y;
-
-        Vector3 targetPos = playerPos + dynamicOffset;
-        _lastTargetPosition = targetPos;
-
-        float moveStep = Vector3.Distance(transform.position, targetPos) * _distanceSpeed * _speed * Time.deltaTime;
-        Vector3 moveTo = Vector3.MoveTowards(transform.position, targetPos, moveStep);
-
-        transform.position = new Vector3(transform.position.x, moveTo.y, moveTo.z);
+        // Entre les deux, pas de décalage
+        return 0f;
     }
 
     private void OnDrawGizmos()
     {
-        if (_player != null)
-        {
-            Vector3 playerPos = _player.transform.position;
+        if (!_player) return;
 
-            // Raycast vers le sol (rouge)
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(playerPos, playerPos + Vector3.down * _rayLength);
+        Color levelColor = new Color(0f, 1f, 0f, 0.3f);
+        Color triggerColor = new Color(1f, 1f, 0f, 0.3f);
+        Color targetColor = new Color(0f, 0.5f, 1f, 1f);
 
-            // Position cible (vert)
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(_lastTargetPosition, 0.3f);
+        // --- BORNES DU NIVEAU SUR Z ---
+        Gizmos.color = levelColor;
+        Gizmos.DrawLine(new Vector3(_fixedX, _minHeight, -1000), new Vector3(_fixedX, _minHeight, 1000)); // Min Y
+        Gizmos.DrawLine(new Vector3(_fixedX, _maxHeight, -1000), new Vector3(_fixedX, _maxHeight, 1000)); // Max Y
 
-            // Ligne de l’offset actuel (bleu)
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(playerPos, playerPos + Vector3.up * _currentOffsetY);
+        // --- ZONES DE TRANSITION SUR Z ---
+        Gizmos.color = triggerColor;
+        Gizmos.DrawLine(new Vector3(_fixedX, _minHeight + _triggerDistance, -1000), new Vector3(_fixedX, _minHeight + _triggerDistance, 1000));
+        Gizmos.DrawLine(new Vector3(_fixedX, _maxHeight - _triggerDistance, -1000), new Vector3(_fixedX, _maxHeight - _triggerDistance, 1000));
 
-#if UNITY_EDITOR
-            // Affiche la distance au sol (jaune)
-            UnityEditor.Handles.color = Color.yellow;
-            UnityEditor.Handles.Label(playerPos + Vector3.up * 2f, $"Dist sol: {_lastRayDistance:F2}");
+        // --- OFFSET ACTUEL ---
+        float dynamicOffsetY = CalculateDynamicOffsetY(_player.transform.position.y);
+        Vector3 offsetPosition = _player.transform.position + new Vector3(0f, dynamicOffsetY, _baseOffset.z);
 
-            // Affiche l’offset dynamique (cyan)
-            UnityEditor.Handles.color = Color.cyan;
-            UnityEditor.Handles.Label(playerPos + Vector3.up * (_currentOffsetY + 1f), $"OffsetY: {_currentOffsetY:F2}");
-#endif
-        }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(offsetPosition, 0.3f);
+
+        // --- POSITION CIBLE CAMERA ---
+        Gizmos.color = targetColor;
+        Gizmos.DrawLine(_player.transform.position, offsetPosition);
+        Gizmos.DrawWireSphere(_lastTargetPosition, 0.5f);
     }
 }
