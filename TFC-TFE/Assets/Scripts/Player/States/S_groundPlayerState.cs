@@ -5,15 +5,16 @@ public class S_groundPlayerState : S_basePlayerStates
 {
     S_playerManagerStates _player;
     private float _targetScreenY = 0.9f;
+    private Vector3 _velocity;
 
     private CinemachineVirtualCamera _virtualCamera;
 
     public override void EnterState(S_playerManagerStates Player)
     {
+
         _player = Player;
         Player.SetAirDash(Player.MovementSettings.GroundAirDashCount);
-
-        GroundRebound();
+        _velocity = Player.Rigidbody.velocity;
     }
 
     public override void OnEnable(S_playerManagerStates Player)
@@ -42,6 +43,7 @@ public class S_groundPlayerState : S_basePlayerStates
 
     public override void UpdateState(S_playerManagerStates Player)
     {
+
         if (!Player.CheckGrounded())
         {
             Player.SwitchState(Player.AirState);
@@ -50,12 +52,16 @@ public class S_groundPlayerState : S_basePlayerStates
 
         float moveInput = Player.DirectionInput.x;
         float targetSpeed = moveInput * Player.MovementSettings.maxMoveSpeed;
-        Vector3 velocity = Player.Rigidbody.velocity;
 
-        // Modifie uniquement la vitesse horizontale (z)
-        velocity.z = Mathf.MoveTowards(velocity.z, targetSpeed, Player.MovementSettings.accelerationRate * Time.deltaTime);
-        Player.Rigidbody.velocity = velocity;
+        if(_velocity.y < 0)
+            _velocity = Player.Rigidbody.velocity.z * Vector3.forward;
 
+        float AccelerationDeltaTime = Player.MovementSettings.accelerationRate * Time.deltaTime;
+
+        _velocity.z = Mathf.MoveTowards(_velocity.z, targetSpeed, AccelerationDeltaTime);
+        
+
+        Player.Rigidbody.velocity = _velocity;
         Player.HandleFlip(moveInput);
 
         if (_virtualCamera is not null){
@@ -77,14 +83,5 @@ public class S_groundPlayerState : S_basePlayerStates
             _player.SwitchState(_player.DashGroundState);
     }
 
-    private void GroundRebound()
-    {
-        float MinRebounds = _player.MovementSettings.JuiceFallVelocityMinRebounds;
-        float MultiplyRebounds = _player.MovementSettings.JuiceMultiplyerFallVelocityRebounds;
-
-        if (_player.Rigidbody.velocity.y < -MinRebounds)
-        {
-            _player.Rigidbody.AddForce(Vector3.up * -_player.Rigidbody.velocity.y * MultiplyRebounds, ForceMode.Impulse);
-        }
-    }
+    
 }

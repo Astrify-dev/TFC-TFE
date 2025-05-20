@@ -76,7 +76,6 @@ public class S_airDashPlayerState : S_basePlayerStates
 
 
         float DistanceRay = ( Mathf.Abs(_dirAirDash.y * Player.MovementSettings.ReboundCorrectionValueCapsule) + 1) * Player.WallCheckDistance;
-        Debug.Log("DistanceRay: "+DistanceRay);
 
         if (Physics.Raycast(Player.transform.position, _dirAirDash, DistanceRay, Player.MovementSettings.bounceLayers))
             Player.SwitchState(Player.WallReboundState);

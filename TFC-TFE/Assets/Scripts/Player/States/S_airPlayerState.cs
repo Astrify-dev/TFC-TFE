@@ -99,7 +99,8 @@ public class S_airPlayerState : S_basePlayerStates
     {
         if (Player.CheckGrounded())
         {
-            Player.SwitchState(Player.GroundState);
+            if(!GroundRebound(Player.Rigidbody.velocity.y))
+                Player.SwitchState(Player.GroundState);
             return;
         }
 
@@ -122,7 +123,6 @@ public class S_airPlayerState : S_basePlayerStates
 
         _fallSpeed += Player.MovementSettings.FallSpeed * Time.deltaTime;
         _fallSpeed = Mathf.Min(_fallSpeed, Player.MovementSettings.MaxFallSpeed);
-        Debug.Log(_fallSpeed);
         Player.Rigidbody.AddForce(Vector3.down * _fallSpeed * Time.deltaTime, ForceMode.Acceleration);
         Player.Rigidbody.velocity = new Vector3(0, Mathf.Max(Player.Rigidbody.velocity.y, -Player.MovementSettings.MaxBottomVelocity), Player.Rigidbody.velocity.z);
 
@@ -144,6 +144,21 @@ public class S_airPlayerState : S_basePlayerStates
     {
         if(_player.AirDashCount > 0)
             _player.SwitchState(_player.SlowMotionDashState);
+    }
+
+    private bool GroundRebound(float VelocityFall)
+    {
+
+        float MinRebounds = _player.MovementSettings.JuiceFallVelocityMinRebounds;
+        float MultiplyRebounds = _player.MovementSettings.JuiceMultiplyerFallVelocityRebounds;
+
+        if (VelocityFall < -MinRebounds)
+        {
+            _player.Rigidbody.AddForce(Vector3.up * -VelocityFall * MultiplyRebounds, ForceMode.Impulse);
+            _player.SwitchState(_player.AirState);
+            return true;
+        }
+        return false;
     }
 }
 
