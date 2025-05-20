@@ -52,6 +52,7 @@ Material:
     m_Floats:
     - _Distance: 23
     - _EnableEffect: 0
+    - _EnableSlowMotion: 0.333
     - _LengthDi: 0
     - _LengthDistortion: 10
     - _Min: 0.7
@@ -77,7 +78,8 @@ Material:
     - _ColorCoruption1: {r: 0.012606413, g: 0, b: 0.03773582, a: 0}
     - _ColorCoruption2: {r: 0.028301895, g: 0.003070489, b: 0.024847139, a: 0}
     - _ColorDepthModifieur: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
-    - _Coord: {r: -0.73, g: 5.01, b: -39.5, a: 0}
+    - _Coord: {r: -0.73, g: -9.1, b: -85, a: 0}
     - _Direction: {r: 0, g: 0, b: 0, a: 0}
+    - _PlayerCoord: {r: -1.49, g: -22.5, b: 6, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
