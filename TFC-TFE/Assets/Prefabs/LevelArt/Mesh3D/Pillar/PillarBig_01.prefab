@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6291577419518974575
+--- !u!1001 &8331382780451908207
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -58,6 +58,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 65d6c3e8968b6d04ea047c61b09de32f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dd9c4dab36d53b429212eddde23b6f8, type: 2}
     - target: {fileID: 919132149155446097, guid: 65d6c3e8968b6d04ea047c61b09de32f,
         type: 3}
       propertyPath: m_Name
