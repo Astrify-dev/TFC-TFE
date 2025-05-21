@@ -101,15 +101,15 @@ MonoBehaviour:
   <SlowMotionAnimSpeed>k__BackingField: 5
   jumpResetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   dashResetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4160
   bounceLayers:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 4544
   wallJumpLayers:
     serializedVersion: 2
     m_Bits: 256
   <JuiceFallVelocityMinRebounds>k__BackingField: 44
-  <JuiceMultiplyerFallVelocityRebounds>k__BackingField: 0.3
+  <JuiceMultiplyerFallVelocityRebounds>k__BackingField: 0.01

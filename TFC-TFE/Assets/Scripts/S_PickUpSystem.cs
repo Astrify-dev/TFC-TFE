@@ -8,7 +8,8 @@ public class S_PickUpSystem : MonoBehaviour{
     private void OnTriggerEnter(Collider other){
         if (other.CompareTag("Player")){
             if (pickupScriptable is not null){
-                pickupScriptable.ExecutePickup();
+                S_playerManagerStates playerManagerStates = other.GetComponent<S_playerManagerStates>();
+                pickupScriptable.ExecutePickup(playerManagerStates);
             }
             Destroy(gameObject);
         }

@@ -7,14 +7,14 @@ public class S_DeadObject : MonoBehaviour{
     private void OnCollisionEnter(Collision collision){
         if (collision.collider.CompareTag("Player")){
             Debug.Log("Game Over !");
-            /*S_playerStates playerStates = collision.collider.GetComponent<S_playerStates>();
-            if (playerStates is not null){
+            S_playerManagerStates playerManagerStates = collision.collider.GetComponent<S_playerManagerStates>();
+            if (playerManagerStates is not null){
                 if (isGameOverOnDeath){
-                    //playerStates.SwitchState(playerStates.DeadState);
+                    playerManagerStates.SwitchState(playerManagerStates.DeadState);
                 }else{
                     RespawnPlayer();
                 }
-            }*/
+            }
         }
     }
 
@@ -32,6 +32,8 @@ public class S_DeadObject : MonoBehaviour{
                     deathFollow.transform.position = deathRespawnPoint.position;
                 }
             }
+        }else{
+            Debug.LogWarning("Aucun point de respawn trouvé !");
         }
     }
 }
