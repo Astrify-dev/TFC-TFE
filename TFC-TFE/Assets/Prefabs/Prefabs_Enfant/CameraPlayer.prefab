@@ -126,7 +126,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _speed: 10
   _distanceSpeed: 2
-  _positionGround: {x: 0, y: 8, z: 0}
+  _positionGround: {x: 0, y: 3, z: 0}
   _positionAir: {x: 0, y: 2.5, z: 0}
   _speedTypeTransition: 40
   _switchTypeCurve:
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _switchPourcentage: 0.698
   _enableDistanceGround: 1
-  _additionalInputValue: 5
+  _additionalInputValue: 2
   _moveInputStrength:
     serializedVersion: 2
     m_Curve:
