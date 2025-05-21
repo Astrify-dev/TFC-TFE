@@ -13,11 +13,16 @@ public class S_arrowScript : MonoBehaviour
     private bool _isActive = false;
     private float _time = 0;
 
-    public void ArrowSpawn(Vector3 direction)
+    private void Start()
+    {
+        ArrowReset();
+    }
+
+    public void ArrowSpawn(float Angle)
     {
         if (!_isActive) Initialize();
 
-        transform.LookAt(transform.position + direction);
+        transform.eulerAngles = new Vector3(Angle, 0,0);
 
         Animation();
     }
@@ -40,7 +45,7 @@ public class S_arrowScript : MonoBehaviour
 
     private void Animation()
     {
-        _time += Time.deltaTime * _arrowSpawnSpeed;
+        _time += Time.unscaledDeltaTime * _arrowSpawnSpeed;
         float size = _arrowSpawnCurve.Evaluate(_time) * _arrowSize.x;
         _arrowMesh.transform.localScale = new Vector3(size, _arrowMesh.transform.localScale.y, 0);
     }

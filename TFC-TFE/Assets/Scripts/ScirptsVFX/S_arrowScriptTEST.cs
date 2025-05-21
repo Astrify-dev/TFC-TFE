@@ -24,6 +24,8 @@ public class S_arrowScriptTEST : MonoBehaviour
             return;
         }
         _reset = false;
-        _arrowScript.ArrowSpawn(_direction);
+        _arrowScript.ArrowSpawn(Vector3.Angle(Vector3.forward, _direction));
+        
+
     }
 }
