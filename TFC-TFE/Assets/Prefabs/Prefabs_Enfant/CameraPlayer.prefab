@@ -125,8 +125,99 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _speed: 10
-  _position: {x: 0, y: 4, z: 0}
-  _distanceSpeed: 1
+  _distanceSpeed: 2
+  _positionGround: {x: 0, y: 15, z: -5}
+  _positionAir: {x: 0, y: 7, z: -5}
+  _speedTypeTransition: 40
+  _switchTypeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _maxDistanceRay: 25
+  _cameraColidder:
+    serializedVersion: 2
+    m_Bits: 8256
+  _distanceCameraGround: 10
+  _groundDistanceModif:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.004347822
+      value: -0.001224065
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5129716
+      value: 0.9962722
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9913044
+      value: -0.0036720082
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _switchPourcentage: 0.698
+  _enableDistanceGround: 1
+  _additionalInputValue: 5
+  _moveInputStrength:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0012239716
+      inSlope: -0.0092772385
+      outSlope: -0.0092772385
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2466155
+    - serializedVersion: 3
+      time: 1.0086957
+      value: 1.0073439
+      inSlope: -0.2542744
+      outSlope: -0.2542744
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26724142
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9101748300006148589
 GameObject:
   m_ObjectHideFlags: 0
