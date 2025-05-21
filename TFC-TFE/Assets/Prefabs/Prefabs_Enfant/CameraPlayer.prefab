@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _speed: 10
-  _position: {x: 50, y: 15, z: 0}
+  _position: {x: 0, y: 4, z: 0}
   _distanceSpeed: 1
 --- !u!1 &9101748300006148589
 GameObject:
@@ -196,7 +196,7 @@ Camera:
   far clip plane: 5000
   field of view: 8
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
