@@ -75,16 +75,11 @@ public class S_airPlayerState : S_basePlayerStates
 
     private S_playerManagerStates _player;
     private float _fallSpeed;
-    private CinemachineVirtualCamera _virtualCamera;
 
     public override void EnterState(S_playerManagerStates Player)
     {
         _player = Player;
         _fallSpeed = 0;
-
-        if (_virtualCamera is null){
-            _virtualCamera = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
-        }
 
     }
     public override void OnEnable(S_playerManagerStates Player)
@@ -126,16 +121,6 @@ public class S_airPlayerState : S_basePlayerStates
         Player.Rigidbody.AddForce(Vector3.down * _fallSpeed * Time.deltaTime, ForceMode.Acceleration);
         Player.Rigidbody.velocity = new Vector3(0, Mathf.Max(Player.Rigidbody.velocity.y, -Player.MovementSettings.MaxBottomVelocity), Player.Rigidbody.velocity.z);
 
-        // Ajuster Cinemachine uniquement pendant la chute avec une transition fluide
-        if (_virtualCamera is not null)
-        {
-            var framingTransposer = _virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            if (framingTransposer is not null)
-            {
-                float targetScreenY = Player.Rigidbody.velocity.y < 0 ? 0.1f : 0.9f; // Valeur cible selon la chute
-                framingTransposer.m_ScreenY = Mathf.Lerp(framingTransposer.m_ScreenY, targetScreenY, Time.deltaTime * 5f); // Interpolation fluide
-            }
-        }
     }
 
 
