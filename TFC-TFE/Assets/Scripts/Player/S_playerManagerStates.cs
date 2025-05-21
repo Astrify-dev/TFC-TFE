@@ -99,6 +99,8 @@ public class S_playerManagerStates : MonoBehaviour
     {
         CurrentState?.UpdateState(this);
 
+        Shader.SetGlobalVector("_PlayerPosition",transform.position);
+
         SpeedShow.text = $"Speed: {Mathf.Round(Vector3.Distance(Vector3.zero, Rigidbody.velocity)*20)/20}\n" +
             $"X : {Mathf.Round(Rigidbody.velocity.z*20)/20}\n" +
             $"Y : {Mathf.Round(Rigidbody.velocity.y*20)/20}";
