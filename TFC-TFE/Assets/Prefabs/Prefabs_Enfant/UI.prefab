@@ -589,7 +589,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5516018953225016020}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
         m_MethodName: OnQuitButtonPressed
         m_Mode: 1
@@ -784,7 +784,6 @@ GameObject:
   - component: {fileID: 7167901059585096176}
   - component: {fileID: 1165746396983137766}
   - component: {fileID: 6704094494369865860}
-  - component: {fileID: 5516018953225016020}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -876,23 +875,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5516018953225016020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5171861866653083975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f300a9b919afd4abe164d49aa18767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 5171861866653083975}
-  mainMenuPanel: {fileID: 4702043700585029182}
-  optionsPanel: {fileID: 8933306318617151334}
-  firstMainMenuButton: {fileID: 5473269585029631434}
-  firstSliderOption: {fileID: 5676712540230856604}
 --- !u!1 &5226192912735268651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1130,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5516018953225016020}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
         m_MethodName: OnOptionsButtonPressed
         m_Mode: 1
@@ -1281,7 +1263,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5516018953225016020}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
         m_MethodName: OnContinueButtonPressed
         m_Mode: 1
@@ -1446,7 +1428,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5516018953225016020}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
         m_MethodName: OnRetryPressed
         m_Mode: 1
@@ -1991,21 +1973,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de515383bf998b41b5f561390186251, type: 3}
---- !u!1 &5676712540230856604 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 915369693182751352, guid: 1de515383bf998b41b5f561390186251,
-    type: 3}
-  m_PrefabInstance: {fileID: 4788364447228354020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5710143838591605903 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 958476760306188651, guid: 1de515383bf998b41b5f561390186251,
-    type: 3}
-  m_PrefabInstance: {fileID: 4788364447228354020}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8933306318617151334 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4146349454578571906, guid: 1de515383bf998b41b5f561390186251,
     type: 3}
   m_PrefabInstance: {fileID: 4788364447228354020}
   m_PrefabAsset: {fileID: 0}

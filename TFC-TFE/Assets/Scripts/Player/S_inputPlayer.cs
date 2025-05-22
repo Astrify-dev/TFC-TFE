@@ -84,15 +84,20 @@ public class S_inputPlayer : MonoBehaviour{
     }
 
     private void OnPauseToggle(InputAction.CallbackContext context){
-        print("Pause toggled");
+        //PauseGame(!isPaused);
+        OnPauseToggleEvent?.Invoke();
+    }
+
+    public void PauseGame(bool pause){
         if (_pauseEnabled){
-            isPaused = !isPaused;
-            OnPauseToggleEvent?.Invoke();
-            print("Pause event triggered"+isPaused);
+            isPaused = pause;
+
             EnableMove(!isPaused);
             EnableJump(!isPaused);
-            EnableDash(!isPaused);
-       } 
+            EnableDash(!isPaused);       
+            Time.timeScale = isPaused ? 0 : 1;
+            
+        }
     }
 
     public void EnableMove(bool enable) => _moveEnabled = enable;

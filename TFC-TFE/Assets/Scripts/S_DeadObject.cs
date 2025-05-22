@@ -3,9 +3,9 @@ using UnityEngine;
 public class S_DeadObject : MonoBehaviour{
     [Header("Paramètres de mort")]
     [SerializeField] private bool isGameOverOnDeath = false;
-
+    [SerializeField] private S_CheckpointManager checkpointManager;
     private void Start(){
-        RespawnPlayer();
+        checkpointManager.RespawnPlayer();
     }
 
     private void OnCollisionEnter(Collision collision){
@@ -16,28 +16,11 @@ public class S_DeadObject : MonoBehaviour{
                 if (isGameOverOnDeath){
                     playerManagerStates.SwitchState(playerManagerStates.DeadState);
                 }else{
-                    RespawnPlayer();
+                    checkpointManager.RespawnPlayer();
                 }
             }
         }
     }
 
-    private void RespawnPlayer(){
-        Transform respawnPoint = S_CheckpointManager.instance.GetPlayerRespawnPoint();
-        if (respawnPoint is not null){
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player is not null){
-                player.transform.position = respawnPoint.position;
-            }
-            S_DeathFollow deathFollow = FindObjectOfType<S_DeathFollow>();
-            if (deathFollow is not null){
-                Transform deathRespawnPoint = S_CheckpointManager.instance.GetDeathRespawnPoint();
-                if (deathRespawnPoint is not null){
-                    deathFollow.transform.position = deathRespawnPoint.position;
-                }
-            }
-        }else{
-            Debug.LogWarning("Aucun point de respawn trouvé !");
-        }
-    }
+
 }
