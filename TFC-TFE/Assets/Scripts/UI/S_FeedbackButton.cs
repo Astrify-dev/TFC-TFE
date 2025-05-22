@@ -47,7 +47,10 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
         isSelected = false;
     }
-    public void OnButtonClick(){
+    public void OnDisable(){
+        transform.localScale = originalScale;
+        isSelected = false;
+        isClicked = false;
         if (SFX_Confirm is not null){
             SFX_Confirm.Play();
         }
