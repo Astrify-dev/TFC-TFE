@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.VFX;
 
 public class S_playerManagerStates : MonoBehaviour
 {
