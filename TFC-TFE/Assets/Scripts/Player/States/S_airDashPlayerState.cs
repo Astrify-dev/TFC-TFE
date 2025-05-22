@@ -80,6 +80,17 @@ public class S_airDashPlayerState : S_basePlayerStates
         if (Physics.Raycast(Player.transform.position, _dirAirDash, DistanceRay, Player.MovementSettings.bounceLayers))
             Player.SwitchState(Player.WallReboundState);
 
+        RaycastHit hit;
+
+        if (Physics.Raycast(Player.transform.position, _dirAirDash, out hit, DistanceRay, Player.MovementSettings.breakWall))
+        {
+            if(hit.transform.parent.TryGetComponent<IbreakWall>(out IbreakWall BreakingWall))
+            {
+                BreakingWall.BreakWall(Player.DashDirection.z);
+                Player.SwitchState(Player.AirDashState);
+            }
+        }
+
     }
 
     private void Inputs_OnJumpEvent()

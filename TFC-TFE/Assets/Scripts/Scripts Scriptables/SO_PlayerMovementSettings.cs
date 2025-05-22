@@ -154,6 +154,9 @@ public class PlayerMovementSettings : ScriptableObject {
     [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches autorisant wall slide et wall jump.")]
     public LayerMask wallJumpLayers;
 
+    [BoxGroup("Collision Settings"), SerializeField, Tooltip("Couches autorisant le BreakWall.")]
+    public LayerMask breakWall;
+
     [field: BoxGroup("Juice"), SerializeField, Tooltip("Valeur min de down velocity pour declencher un rebond")]
     public float JuiceFallVelocityMinRebounds { get; private set; } = 30f;
 

@@ -9,6 +9,9 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
     [SerializeField] float _speed;
     [SerializeField] AnimationCurve _curveDestruct;
 
+    [SerializeField] float _cameraShakeDuration = 1f;
+    [SerializeField] float _cameraShakeStrength = 0.2f;
+
     private MaterialPropertyBlock _mpb;
     private IEnumerator _coroutine;
 
@@ -18,9 +21,20 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
         _mpb = new MaterialPropertyBlock();
     }
 
-    public void BreakWall()
+    public void BreakWall(float VelocityX)
     {
         _wallCollider.SetActive(false);
+
+        bool Right = VelocityX > 0;
+
+        S_controllerPlayer.Instance.CameraShake.Shake(_cameraShakeDuration, _cameraShakeStrength);
+
+        if (_coroutine is not null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = _StartDestruct(Right);
+        StartCoroutine(_coroutine);
+
     }
 
     private IEnumerator _StartDestruct(bool RightBreak)
@@ -34,11 +48,20 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
         {
             Timer += Time.deltaTime * _speed;
 
-            Value = _curveDestruct.Evaluate(Value) * 0.5f;
+            Value = _curveDestruct.Evaluate(Timer) * 0.45f;
 
+            Value *= RightBreak? 1:-1;
+
+            _mpb.SetFloat("_SliderDirBreak", Value);
+            _render.SetPropertyBlock(_mpb);
 
             yield return null;
         }
+
+
+        Value = 0.45f * (RightBreak ? 1 : -1);
+        _mpb.SetFloat("_SliderDirBreak", Value);
+        _render.SetPropertyBlock(_mpb);
     }
 
 
