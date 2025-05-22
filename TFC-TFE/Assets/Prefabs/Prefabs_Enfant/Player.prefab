@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9213199167277731979}
   - component: {fileID: 1255367709666934412}
   - component: {fileID: 3831123598536429942}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CharaEarings_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,8 @@ GameObject:
   - component: {fileID: 7841198325444945249}
   - component: {fileID: 2122699394742934772}
   - component: {fileID: 8837899418004597195}
-  m_Layer: 0
+  - component: {fileID: 1362769989289084390}
+  m_Layer: 14
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -115,12 +116,13 @@ Transform:
   m_GameObject: {fileID: 1529776725966297697}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 5.98, z: -14.95}
+  m_LocalPosition: {x: 0.6999998, y: -7.9000006, z: -3.0599995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7135303744397249296}
   - {fileID: 2433440647945041567}
+  - {fileID: 7240787620445213734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &6469764009338311644
@@ -199,6 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputPlayer: {fileID: 2597219210766312242}
   slowMotionHandler: {fileID: 7841198325444945249}
+  <SlowMotionEffect>k__BackingField: {fileID: 1362769989289084390}
+  <ArrowEffect>k__BackingField: {fileID: 538541194228736178}
 --- !u!114 &7841198325444945249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +239,7 @@ MonoBehaviour:
   _ceilingRayColor: {r: 0, g: 0, b: 1, a: 1}
   _bounceRayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _velocityRayColor: {r: 1, g: 0, b: 0.8, a: 1}
-  _debugState: 0
+  _debugState: 1
 --- !u!114 &8837899418004597195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +257,133 @@ MonoBehaviour:
   _playerColorDash: {r: 1, g: 0, b: 0, a: 0}
   _playerColorRebounds: {r: 1, g: 0, b: 0.8955884, a: 0}
   _playerMaterial: {fileID: 2100000, guid: a5d4c570c57d8d740b9f55a57c3ba57c, type: 2}
+--- !u!114 &1362769989289084390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529776725966297697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a307529095f0c384db08155da1106fbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableEffectCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _material: {fileID: 2100000, guid: b278fb28c5fc27e4992685754d0de9be, type: 2}
+--- !u!1 &2117819778739208078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7240787620445213734}
+  - component: {fileID: 538541194228736178}
+  m_Layer: 14
+  m_Name: ArrowEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7240787620445213734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117819778739208078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7217615482226957709}
+  m_Father: {fileID: 1894529775724043467}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538541194228736178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117819778739208078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7418a9125f6ad374cbbf95badfcb8cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrowMesh: {fileID: 7286664444323338709}
+  _arrowSpawnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.6469779
+      value: 1.2566698
+      inSlope: 0.7099843
+      outSlope: 0.7099843
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85134524
+      value: 0.8847951
+      inSlope: -0.7114581
+      outSlope: -0.7114581
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _arrowSpawnSpeed: 5
+  _arrowSize: {x: 3, y: 2}
 --- !u!1 &2918763271780177196
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +395,7 @@ GameObject:
   - component: {fileID: 6347197672498951877}
   - component: {fileID: 3218449995127253495}
   - component: {fileID: 8327652043419668414}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CharaEyelashes_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +478,7 @@ GameObject:
   - component: {fileID: 7135303744397249296}
   - component: {fileID: 1724524288709331791}
   - component: {fileID: 7872615358164679622}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Visuel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4196613447562139930}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Chara_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2433440647945041567}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: visuel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +628,7 @@ GameObject:
   - component: {fileID: 4980986974442485449}
   - component: {fileID: 4308484677558446574}
   - component: {fileID: 3751172041274750987}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CharaBody_Low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,6 +700,112 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7286664444323338709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7217615482226957709}
+  - component: {fileID: 4687106022317513181}
+  - component: {fileID: 4085544424854287532}
+  - component: {fileID: 216698583514445114}
+  m_Layer: 15
+  m_Name: Quad (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7217615482226957709
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286664444323338709}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 2.78, y: 0, z: 2.3199997}
+  m_LocalScale: {x: 3, y: 2, z: 2.1809}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7240787620445213734}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!33 &4687106022317513181
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286664444323338709}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4085544424854287532
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286664444323338709}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: c30c1c4c5f048f440bf34c02b4a7e577, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &216698583514445114
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286664444323338709}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &8525780260586331535
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,7 +817,7 @@ GameObject:
   - component: {fileID: 6756501009104373547}
   - component: {fileID: 3974742481282386229}
   - component: {fileID: 338426643168825311}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
