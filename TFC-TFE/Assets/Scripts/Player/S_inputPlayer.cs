@@ -84,14 +84,15 @@ public class S_inputPlayer : MonoBehaviour{
     }
 
     private void OnPauseToggle(InputAction.CallbackContext context){
+        print("Pause toggled");
         if (_pauseEnabled){
             isPaused = !isPaused;
             OnPauseToggleEvent?.Invoke();
-
+            print("Pause event triggered"+isPaused);
             EnableMove(!isPaused);
             EnableJump(!isPaused);
             EnableDash(!isPaused);
-        }
+       } 
     }
 
     public void EnableMove(bool enable) => _moveEnabled = enable;

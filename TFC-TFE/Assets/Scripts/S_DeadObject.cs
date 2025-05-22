@@ -4,6 +4,10 @@ public class S_DeadObject : MonoBehaviour{
     [Header("Paramètres de mort")]
     [SerializeField] private bool isGameOverOnDeath = false;
 
+    private void Start(){
+        RespawnPlayer();
+    }
+
     private void OnCollisionEnter(Collision collision){
         if (collision.collider.CompareTag("Player")){
             Debug.Log("Game Over !");

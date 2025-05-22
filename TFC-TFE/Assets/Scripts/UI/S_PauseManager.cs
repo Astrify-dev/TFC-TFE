@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class S_PauseManager : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class S_PauseManager : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1; // Reprend le temps
         }
+    }
+
+    public void OnRetryPressed() { 
+        Debug.Log("Recommencer le niveau !");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void OnBackButtonPressed(){
         if (optionsPanel is not null && optionsPanel.activeSelf)
