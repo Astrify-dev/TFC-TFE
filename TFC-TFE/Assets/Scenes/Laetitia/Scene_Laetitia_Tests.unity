@@ -1397,7 +1397,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1ae33f38bdeda8843b96219342040bca,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -21.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1ae33f38bdeda8843b96219342040bca,
         type: 3}
@@ -2549,6 +2549,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Environement_Stars_Particle
       objectReference: {fileID: 0}
+    - target: {fileID: 3552380846675846809, guid: 33c152fbabdbfc241a100884a991da61,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2566,6 +2571,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_ShootingStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3455237498200277675, guid: d7c2d4b259174404f8a71fac5f606491,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8881135872507748401, guid: d7c2d4b259174404f8a71fac5f606491,
         type: 3}
