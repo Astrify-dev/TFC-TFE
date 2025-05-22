@@ -18,6 +18,8 @@ public class S_dashGroundPlayerState : S_basePlayerStates
 
         // Retour immédiat à l'état de sol après l'impulsion
         Player.SwitchState(Player.GroundState);
+
+        Player.AnimatorPlayer.SetTrigger("Dash");
     }
 
     public override void OnDisable(S_playerManagerStates Player)

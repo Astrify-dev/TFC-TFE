@@ -11,6 +11,8 @@ public class S_JumpPlayerState : S_basePlayerStates
         _player = Player;
         _jumpDuration = 0;
 
+        Player.AnimatorPlayer.SetTrigger("JumpStart");
+
     }
 
     public override void OnEnable(S_playerManagerStates Player)
