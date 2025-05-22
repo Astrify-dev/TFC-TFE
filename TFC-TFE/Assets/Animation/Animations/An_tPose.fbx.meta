@@ -17,44 +17,7 @@ ModelImporter:
     removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'Character1_LeftUpLeg'
-      : position error = 99.560822 mm\n\t'Character1_LeftLeg' : position error =
-      408.073792 mm\n\t'Character1_LeftFoot' : position error = 486.844696 mm\n\t'Character1_RightUpLeg'
-      : position error = 99.560822 mm\n\t'Character1_RightLeg' : position error =
-      408.074219 mm\n\t'Character1_RightFoot' : position error = 486.843933 mm\n\t'Character1_Spine'
-      : position error = 81.660667 mm\n\t'Character1_Spine1' : position error = 106.997345
-      mm\n\t'Character1_Spine2' : position error = 106.723488 mm\n\t'Character1_LeftShoulder'
-      : position error = 82.990356 mm\n\t'Character1_LeftArm' : position error =
-      62.369019 mm\n\t'Character1_LeftForeArm' : position error = 195.131836 mm\n\t'Character1_LeftHand'
-      : position error = 257.662415 mm\n\t'Character1_LeftHandThumb1' : position
-      error = 36.687904 mm\n\t'Character1_LeftHandThumb2' : position error = 52.428120
-      mm\n\t'Character1_LeftHandThumb3' : position error = 28.326195 mm\n\t'Character1_LeftHandIndex1'
-      : position error = 102.534546 mm\n\t'Character1_LeftHandIndex2' : position
-      error = 38.570770 mm\n\t'Character1_LeftHandIndex3' : position error = 31.087311
-      mm\n\t'Character1_LeftHandMiddle1' : position error = 101.279945 mm\n\t'Character1_LeftHandMiddle2'
-      : position error = 41.030022 mm\n\t'Character1_LeftHandMiddle3' : position
-      error = 31.170794 mm\n\t'Character1_LeftHandRing1' : position error = 102.686401
-      mm\n\t'Character1_LeftHandRing2' : position error = 36.936825 mm\n\t'Character1_LeftHandRing3'
-      : position error = 30.307810 mm\n\t'Character1_LeftHandPinky1' : position error
-      = 103.375198 mm\n\t'Character1_LeftHandPinky2' : position error = 22.689270
-      mm\n\t'Character1_LeftHandPinky3' : position error = 17.360432 mm\n\t'Character1_RightShoulder'
-      : position error = 82.990326 mm\n\t'Character1_RightArm' : position error =
-      62.369030 mm\n\t'Character1_RightForeArm' : position error = 195.131989 mm\n\t'Character1_RightHand'
-      : position error = 257.662628 mm\n\t'Character1_RightHandThumb1' : position
-      error = 36.687965 mm\n\t'Character1_RightHandThumb2' : position error = 52.428154
-      mm\n\t'Character1_RightHandThumb3' : position error = 28.326162 mm\n\t'Character1_RightHandIndex1'
-      : position error = 102.534706 mm\n\t'Character1_RightHandIndex2' : position
-      error = 38.570793 mm\n\t'Character1_RightHandIndex3' : position error = 31.087273
-      mm\n\t'Character1_RightHandMiddle1' : position error = 101.280083 mm\n\t'Character1_RightHandMiddle2'
-      : position error = 41.030079 mm\n\t'Character1_RightHandMiddle3' : position
-      error = 31.170790 mm\n\t'Character1_RightHandRing1' : position error = 102.686531
-      mm\n\t'Character1_RightHandRing2' : position error = 36.936882 mm\n\t'Character1_RightHandRing3'
-      : position error = 30.307810 mm\n\t'Character1_RightHandPinky1' : position
-      error = 103.375328 mm\n\t'Character1_RightHandPinky2' : position error = 22.689276
-      mm\n\t'Character1_RightHandPinky3' : position error = 17.360437 mm\n\t'Character1_Neck'
-      : position error = 107.318657 mm\n\t'Character1_Head' : position error = 83.117470
-      mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -549,13 +512,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Character_Rig(Clone)
+    - name: Rig(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Reference
-      parentName: Character_Rig(Clone)
+      parentName: Rig(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -860,7 +823,7 @@ ModelImporter:
       rotation: {x: 0.18365276, y: -0.2704487, z: 0.6148332, w: 0.7177112}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_Reference
-      parentName: Character_Rig(Clone)
+      parentName: Rig(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}

@@ -34,6 +34,8 @@ public class S_playerManagerStates : MonoBehaviour
     public bool EnableWallSlide { get; private set; } = true;
     public bool PressRebounds { get; private set; } = true;
     public S_SlowMotion SlowMotion { get; private set; }
+
+    public Animator AnimatorPlayer { get; private set; }
     public S_inputPlayer Inputs { get; private set; }
     public int AirDashCount { get; private set; }
     public Vector3 DashDirection { get; set; }
@@ -74,7 +76,7 @@ public class S_playerManagerStates : MonoBehaviour
         SlowMotion = S_controllerPlayer.Instance.slowMotionHandler;
         MovementSettings.ApplySettingsToRigidbody(Rigidbody);
 
-
+        AnimatorPlayer = S_controllerPlayer.Instance.AnimatorPlayer;
         SwitchState(InitialyzePlayerState);
     }
 
@@ -101,6 +103,9 @@ public class S_playerManagerStates : MonoBehaviour
             $"X : {Mathf.Round(Rigidbody.velocity.z*20)/20}\n" +
             $"Y : {Mathf.Round(Rigidbody.velocity.y*20)/20}";
 
+        //Animator
+        AnimatorPlayer.SetFloat("VelocityX", Mathf.Abs(Rigidbody.velocity.z/MovementSettings.maxMoveSpeed));
+        AnimatorPlayer.SetFloat("VelocityY", Mathf.Clamp(Rigidbody.velocity.y/2, -1, 1));
 
     }
     private void Inputs_OnMoveEvent(Vector2 Dir)

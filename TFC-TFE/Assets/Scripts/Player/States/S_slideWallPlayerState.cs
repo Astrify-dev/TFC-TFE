@@ -53,6 +53,8 @@ public class S_slideWallPlayerState : S_basePlayerStates
         // Active le mode wall slide (gravité désactivée, glisse lente)
         _player = Player;
         Player.Rigidbody.useGravity = false;
+
+        Player.AnimatorPlayer.SetBool("IsLandingWall", true);
     }
     public override void OnEnable(S_playerManagerStates Player)
     {
@@ -62,6 +64,8 @@ public class S_slideWallPlayerState : S_basePlayerStates
     {
         Player.Rigidbody.useGravity = true;
         Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
+
+        Player.AnimatorPlayer.SetBool("IsLandingWall", false);
     }
     public override void UpdateState(S_playerManagerStates Player)
     {

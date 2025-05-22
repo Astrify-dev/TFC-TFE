@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93599990a387bed4e9cecc90cc3c391e
+guid: 30efd3b03ca2e5947a5a73d0bddc0ec9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -19,7 +19,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Character1_LeftLeg' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -33,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: JumpB
+      name: FixWall
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 12
-      lastFrame: 28
+      firstFrame: 21
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -60,7 +63,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0.96
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
