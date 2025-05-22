@@ -9,6 +9,9 @@ public class S_controllerPlayer : MonoBehaviour{
     public S_inputPlayer inputPlayer;
     public S_SlowMotion slowMotionHandler;
 
+    [field: SerializeField] public S_slowMotionEffect SlowMotionEffect { get; private set;}
+    [field: SerializeField] public S_arrowScript ArrowEffect { get; private set; }
+
     private void Awake(){
         if (inputPlayer is null){
             inputPlayer = GetComponent<S_inputPlayer>();
@@ -27,6 +30,16 @@ public class S_controllerPlayer : MonoBehaviour{
         }
         if (slowMotionHandler is null){
             slowMotionHandler = GetComponent<S_SlowMotion>();
+        }
+
+        if(SlowMotionEffect is null)
+        {
+            SlowMotionEffect = GetComponent<S_slowMotionEffect>();
+        }
+
+        if(ArrowEffect is null)
+        {
+            ArrowEffect = GetComponent<S_arrowScript>();
         }
 
     }
