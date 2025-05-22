@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 0
+  checkpointManager: {fileID: 0}
 --- !u!1 &5488247776945737543
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,8 +236,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualChild: {fileID: 5358314816785741385}
   movementArea: {fileID: 6596847893689926463}
-  moveSpeed: 1
-  followSpeed: 3
+  moveSpeed: 4
+  followSpeed: 7
   ennemyAttack: {fileID: 8668393077686560577}
 --- !u!1 &5669647488548563202
 GameObject:

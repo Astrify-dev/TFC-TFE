@@ -16,6 +16,8 @@ public class S_PauseManager : MonoBehaviour
     [SerializeField] private GameObject firstSliderOption;
     [SerializeField] private S_CheckpointManager checkpointManager;
     [SerializeField] private S_inputPlayer s_InputPlayer;
+    [SerializeField] private S_CanvasEnd s_CanvasEnd;
+    [SerializeField] private S_playerManagerStates Player;
     private bool isPaused = false;
 
     private void Start(){
@@ -60,9 +62,16 @@ public class S_PauseManager : MonoBehaviour
 
     public void OnRetryPressed() { 
         Debug.Log("Recommencer le niveau !");
+        S_TimerSpeedrun.OnPlayerDeath?.Invoke();
+        S_CanvasEnd.OnPlayerDeath?.Invoke();
         checkpointManager.RespawnPlayer();
-        TogglePause();
+        if(isPaused)
+            TogglePause();
+        S_CanvasEnd.OnPlayerRetry?.Invoke();
+        Player.SwitchState(Player.InitialyzePlayerState);
+        S_TimerSpeedrun.OnPlayerStart?.Invoke();
     }
+
     public void OnBackButtonPressed(){
         if (optionsPanel is not null && optionsPanel.activeSelf)
         {

@@ -26,7 +26,7 @@ public class S_inputPlayer : MonoBehaviour{
         _inputs = new Inputs();
     }
 
-    private void OnEnable(){
+    public void OnEnable(){
         _inputs.Player.Enable();
         _inputs.Player.Direction.performed += OnMove;
         _inputs.Player.Direction.canceled += OnMove;
@@ -38,7 +38,7 @@ public class S_inputPlayer : MonoBehaviour{
 
     }
 
-    private void OnDisable(){
+    public void OnDisable(){
         _inputs.Player.Disable();
         _inputs.Player.Direction.performed -= OnMove;
         _inputs.Player.Direction.canceled -= OnMove;

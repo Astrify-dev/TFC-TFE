@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class S_CheckpointManager : SingletonBehaviour<S_CheckpointManager>{
     private S_Checkpoint _activeCheckpoint;

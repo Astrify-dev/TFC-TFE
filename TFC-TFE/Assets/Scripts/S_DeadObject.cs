@@ -18,6 +18,8 @@ public class S_DeadObject : MonoBehaviour{
                 }else{
                     checkpointManager.RespawnPlayer();
                 }
+                S_TimerSpeedrun.OnPlayerDeath?.Invoke();
+                S_CanvasEnd.OnPlayerDeath?.Invoke();
             }
         }
     }
