@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7728961939766505050
+--- !u!114 &-3428389265221292441
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_BubbleParticles
-  m_Shader: {fileID: -6465566751694194690, guid: 1da37c83f99f9c143bcb38821481d73c,
+  m_Name: M_particleBlur
+  m_Shader: {fileID: -6465566751694194690, guid: 597cd65f7f210004c882e1c958b68234,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,12 +37,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BacteriaTexture:
-        m_Texture: {fileID: 2800000, guid: 9a4ad909f20f18141b81834c1e2979a4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 2800000, guid: e636f919ff64d7942b3323d7e2aa2ddd, type: 3}
+    - _StarTexture:
+        m_Texture: {fileID: 2800000, guid: c5b03c187142d4e40a8dc6a32d000077, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
