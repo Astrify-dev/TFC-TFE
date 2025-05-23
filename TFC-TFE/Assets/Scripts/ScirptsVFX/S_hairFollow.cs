@@ -8,6 +8,8 @@ public class S_hairFollow : MonoBehaviour
     [SerializeField] GameObject _target1;
     [SerializeField] GameObject _target2;
     [SerializeField] GameObject _target3;
+    [SerializeField] GameObject _player;
+    [SerializeField] Vector3 _positionPlayer;
 
     [Header("Speed")]
     [SerializeField] float _speed1;
@@ -38,9 +40,15 @@ public class S_hairFollow : MonoBehaviour
         _posTarget1 = _target1.transform.position - _target2.transform.position;
         _posTarget2 = _target2.transform.position - _target3.transform.position;
         _posTarget3 = _target3.transform.position - transform.position;
+
     }
 
     private void Update()
+    {
+        transform.position = _player.transform.position + _positionPlayer;
+    }
+
+    private void FixedUpdate()
     {
 
         Vector3 posTargetRand = Turbulance(_posTarget3);
