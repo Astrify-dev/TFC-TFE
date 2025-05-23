@@ -11,7 +11,12 @@ public class S_controllerPlayer : MonoBehaviour{
 
     [field: SerializeField] public S_slowMotionEffect SlowMotionEffect { get; private set;}
     [field: SerializeField] public S_arrowScript ArrowEffect { get; private set; }
+
     [field: SerializeField] public Animator AnimatorPlayer { get; private set; }
+
+    [field: SerializeField] public S_cameraShake CameraShake { get; private set; }
+
+
 
     private void Awake(){
         if (inputPlayer is null){
@@ -46,6 +51,11 @@ public class S_controllerPlayer : MonoBehaviour{
         if (AnimatorPlayer is null)
         {
             AnimatorPlayer = GetComponent<Animator>();
+
+        if (CameraShake is null)
+        {
+            Debug.LogError("Not CameraShake Scripts");
+
         }
 
     }
