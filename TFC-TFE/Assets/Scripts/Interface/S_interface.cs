@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IbreakWall
 {
-    void BreakWall();
+    void BreakWall(float Dir);
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class S_hairFollow : MonoBehaviour
 {
     [Header("Target")]
+    [SerializeField] GameObject _playerTarget;
+    [SerializeField] Vector3 _positionHair;
     [SerializeField] GameObject _target1;
     [SerializeField] GameObject _target2;
     [SerializeField] GameObject _target3;
@@ -41,6 +43,11 @@ public class S_hairFollow : MonoBehaviour
     }
 
     private void Update()
+    {
+        transform.position = _playerTarget.transform.position + _positionHair;
+    }
+
+    private void FixedUpdate()
     {
 
         Vector3 posTargetRand = Turbulance(_posTarget3);
