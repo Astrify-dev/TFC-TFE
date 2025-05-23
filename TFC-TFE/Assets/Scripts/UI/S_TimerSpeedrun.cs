@@ -5,24 +5,22 @@ using TMPro;
 using UnityEngine;
 
 public class S_TimerSpeedrun : MonoBehaviour{
+    public static Action OnTimerSaved;
     [SerializeField] private TextMeshProUGUI timerText;
     private bool isRunning;
     private float finalTime;
     public float FinalTime => finalTime;
     public static Action OnPlayerDeath;
-    public static Action OnPlayerWin;
     public static Action OnPlayerStart;
 
     float StartTimer;
     private void OnEnable(){
         OnPlayerDeath += StopTimer;
-        OnPlayerWin += StopTimer;
         OnPlayerStart += ResetTimer;
     }
 
     private void OnDisable(){
         OnPlayerDeath -= StopTimer;
-        OnPlayerWin -= StopTimer;
         OnPlayerStart -= ResetTimer;
     }
 
@@ -48,11 +46,21 @@ public class S_TimerSpeedrun : MonoBehaviour{
     public void StopTimer(){
         isRunning = false;
         finalTime = Time.time - StartTimer;
-        PlayerPrefs.SetFloat("FinalTime", finalTime);
-        PlayerPrefs.Save();
 
+        PlayerPrefs.SetFloat("FinalTime", finalTime);
+
+        float bestTime = PlayerPrefs.GetFloat("BestTime", 6039.999f);
+        if (finalTime < bestTime){
+            PlayerPrefs.SetFloat("BestTime", finalTime);
+            Debug.Log($"Nouveau meilleur temps : {FormatTime(finalTime)}");
+        }
+
+        PlayerPrefs.Save();
         Debug.Log($"Timer arrêté. Temps final : {FormatTime(finalTime)}");
+
+        OnTimerSaved?.Invoke();
     }
+
 
     public void ResetTimer(){
         StartTimer = Time.time;
