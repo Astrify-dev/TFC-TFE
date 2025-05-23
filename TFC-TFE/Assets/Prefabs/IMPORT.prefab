@@ -566,6 +566,11 @@ PrefabInstance:
       objectReference: {fileID: 2141352038764750816}
     - target: {fileID: 8099734614925078272, guid: 60d849f1f32c87947b70db379c63ba85,
         type: 3}
+      propertyPath: <CameraShake>k__BackingField
+      value: 
+      objectReference: {fileID: 1651764430191069855}
+    - target: {fileID: 8099734614925078272, guid: 60d849f1f32c87947b70db379c63ba85,
+        type: 3}
       propertyPath: <AnimatorPlayer>k__BackingField
       value: 
       objectReference: {fileID: 1768300368414143428}
@@ -750,6 +755,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4e5022516e4e24bb7922243356dc59, type: 3}
+--- !u!114 &1651764430191069855 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 692098275432834658, guid: 5c4e5022516e4e24bb7922243356dc59,
+    type: 3}
+  m_PrefabInstance: {fileID: 2267260362413812989}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2ce2efae85d8842b08c25a8f3356ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &9192823477577227008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6982151134653921277, guid: 5c4e5022516e4e24bb7922243356dc59,

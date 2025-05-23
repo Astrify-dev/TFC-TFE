@@ -9,19 +9,30 @@ public class S_AudioSettings : MonoBehaviour{
     public Slider musicSlider;
     public Slider sfxSlider;
 
-    void Start(){
-        //Charger des valeurs sauvegardées ici
+    public void Start(){
+        masterSlider.onValueChanged.AddListener(SetMasterVolume);
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     public void SetMasterVolume(float value){
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
+        float steppedValue = Mathf.Round(value * 10f) / 10f;
+        float clamped = Mathf.Max(steppedValue, 0.0001f);
+        float dB = Mathf.Log10(clamped) * 20f;
+        audioMixer.SetFloat("Master", dB);
     }
 
     public void SetMusicVolume(float value){
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+        float steppedValue = Mathf.Round(value * 10f) / 10f;
+        float clamped = Mathf.Max(steppedValue, 0.0001f);
+        float dB = Mathf.Log10(clamped) * 20f;
+        audioMixer.SetFloat("Music", dB);
     }
 
     public void SetSFXVolume(float value){
-        audioMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20);
+        float steppedValue = Mathf.Round(value * 10f) / 10f;
+        float clamped = Mathf.Max(steppedValue, 0.0001f);
+        float dB = Mathf.Log10(clamped) * 20f;
+        audioMixer.SetFloat("SFX", dB);
     }
 }

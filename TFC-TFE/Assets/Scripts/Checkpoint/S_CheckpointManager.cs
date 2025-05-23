@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class S_CheckpointManager : SingletonBehaviour<S_CheckpointManager>{
     private S_Checkpoint _activeCheckpoint;
@@ -30,6 +31,25 @@ public class S_CheckpointManager : SingletonBehaviour<S_CheckpointManager>{
             return deathStartPosition;
         }else{
             return null;
+        }
+    }
+
+    public void RespawnPlayer(){
+        Transform respawnPoint = GetPlayerRespawnPoint();
+        if (respawnPoint is not null){
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player is not null){
+                player.transform.position = respawnPoint.position;
+            }
+            S_DeathFollow deathFollow = FindObjectOfType<S_DeathFollow>();
+            if (deathFollow is not null){
+                Transform deathRespawnPoint = S_CheckpointManager.instance.GetDeathRespawnPoint();
+                if (deathRespawnPoint is not null){
+                    deathFollow.transform.position = deathRespawnPoint.position;
+                }
+            }
+        }else{
+            Debug.LogWarning("Aucun point de respawn trouvé !");
         }
     }
 }

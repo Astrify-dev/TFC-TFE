@@ -14,7 +14,10 @@ public class S_PauseManager : MonoBehaviour
 
     [SerializeField] private GameObject firstMainMenuButton;
     [SerializeField] private GameObject firstSliderOption;
-
+    [SerializeField] private S_CheckpointManager checkpointManager;
+    [SerializeField] private S_inputPlayer s_InputPlayer;
+    [SerializeField] private S_CanvasEnd s_CanvasEnd;
+    [SerializeField] private S_playerManagerStates Player;
     private bool isPaused = false;
 
     private void Start(){
@@ -27,8 +30,7 @@ public class S_PauseManager : MonoBehaviour
     private void TogglePause(){
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
-
-        Time.timeScale = isPaused ? 0 : 1;
+        s_InputPlayer.PauseGame(isPaused);
     }
 
     private void OnDestroy(){
@@ -54,20 +56,22 @@ public class S_PauseManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
-    public void OnContinueButtonPressed()
-    {
-        if (pauseMenu != null)
-        {
-            isPaused = false;
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1; // Reprend le temps
-        }
+    public void OnContinueButtonPressed(){
+        TogglePause();
     }
 
     public void OnRetryPressed() { 
         Debug.Log("Recommencer le niveau !");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        S_TimerSpeedrun.OnPlayerDeath?.Invoke();
+        S_CanvasEnd.OnPlayerDeath?.Invoke();
+        checkpointManager.RespawnPlayer();
+        if(isPaused)
+            TogglePause();
+        S_CanvasEnd.OnPlayerRetry?.Invoke();
+        Player.SwitchState(Player.InitialyzePlayerState);
+        S_TimerSpeedrun.OnPlayerStart?.Invoke();
     }
+
     public void OnBackButtonPressed(){
         if (optionsPanel is not null && optionsPanel.activeSelf)
         {

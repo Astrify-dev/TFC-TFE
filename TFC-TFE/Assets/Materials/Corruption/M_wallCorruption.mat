@@ -41,6 +41,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 27f56eff71160034f9c2f450a0ffb8c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise2:
+        m_Texture: {fileID: 2800000, guid: 12bd9c3c391862044898d76d8d125af0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _PerlinNoise:
         m_Texture: {fileID: 2800000, guid: 6f03c32583448a04f9bbcadeec6affb8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -59,9 +63,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _FlowMapSpeed: 0.76
+    - _FlowMapSpeedMove: 0.05
+    - _HoleMultiply: 4
+    - _HolePower: 8
+    - _HoleSize: 0.02
+    - _HoleSpeed: 0.2
+    - _HoleSpeedMove: 0.2
+    - _HoleSpeedSwitch: 0.2
+    - _MultiplyNoiseBorder: 0.05
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SizeBorder: 0.06
+    - _SliderDirBreak: 0
+    - _StrengthFlowMap: 0.25
+    - _TilingFlowMap: 0.05
+    - _TilingNoiseBorder: 0.38
+    - _TilingNoiseFlowMap: 0.07
     m_Colors:
     - _BaseColor: {r: 0.7433963, g: 0, b: 0.5290822, a: 0}
-    - _BorderColor: {r: 0.7450981, g: 0, b: 0.24780086, a: 0}
+    - _BaseColor1: {r: 0.54901963, g: 0, b: 0.5201855, a: 0}
+    - _BaseColor2: {r: 0.14186467, g: 0, b: 0.2905661, a: 0}
+    - _BorderColor: {r: 1.0252341, g: 0, b: 3.7271597, a: 0}
   m_BuildTextureStacks: []
