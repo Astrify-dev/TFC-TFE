@@ -38,7 +38,9 @@ public class S_CanvasEnd : MonoBehaviour{
     public void ShowWin(){
         Time.timeScale = 0;
         _canvasWin.SetActive(true);
-        _winTimeText.text = $"Temps final : {FormatTime(_timerSpeedrun.FinalTime)}";
+        float Timing = PlayerPrefs.GetFloat("FinalTime");
+        print("PLAYPREF "+Timing);
+        _winTimeText.text = $"Temps final : {FormatTime(Timing)}";
 
     }
 

@@ -61,3 +61,4 @@ public class S_controllerPlayer : MonoBehaviour{
     }
 
 }
+}
