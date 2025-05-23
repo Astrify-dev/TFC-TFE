@@ -14,12 +14,12 @@ public class S_DeadObject : MonoBehaviour{
             S_playerManagerStates playerManagerStates = collision.collider.GetComponent<S_playerManagerStates>();
             if (playerManagerStates is not null){
                 if (isGameOverOnDeath){
-                    playerManagerStates.SwitchState(playerManagerStates.DeadState);
+                    //playerManagerStates.SwitchState(playerManagerStates.DeadState);
                 }else{
-                    checkpointManager.RespawnPlayer();
+                    //checkpointManager.RespawnPlayer();
                 }
-                S_TimerSpeedrun.OnPlayerDeath?.Invoke();
-                S_CanvasEnd.OnPlayerDeath?.Invoke();
+                //S_TimerSpeedrun.OnPlayerDeath?.Invoke();
+                //S_CanvasEnd.OnPlayerDeath?.Invoke();
             }
         }
     }
