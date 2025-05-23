@@ -23,6 +23,4 @@ public class S_DeadObject : MonoBehaviour{
             }
         }
     }
-
-
 }

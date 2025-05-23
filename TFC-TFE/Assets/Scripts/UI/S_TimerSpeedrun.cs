@@ -15,12 +15,12 @@ public class S_TimerSpeedrun : MonoBehaviour{
 
     float StartTimer;
     private void OnEnable(){
-        OnPlayerDeath += StopTimer;
+        OnPlayerDeath += PlayerDeath;
         OnPlayerStart += ResetTimer;
     }
 
     private void OnDisable(){
-        OnPlayerDeath -= StopTimer;
+        OnPlayerDeath -= PlayerDeath;
         OnPlayerStart -= ResetTimer;
     }
 
@@ -41,6 +41,11 @@ public class S_TimerSpeedrun : MonoBehaviour{
         int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
 
         return $"{minutes:D2}:{seconds:D2}:{milliseconds:D3}";
+    }
+
+    public void PlayerDeath(){
+        isRunning = false;
+        ResetTimer();
     }
 
     public void StopTimer(){

@@ -38,6 +38,7 @@ public class S_CanvasEnd : MonoBehaviour{
 
     public void ShowGameOver(){
         _canvasGameOver.SetActive(true);
+        _canvasWin.SetActive(false);
         _timerGame.SetActive(false);
         Time.timeScale = 0;
     }
@@ -45,6 +46,7 @@ public class S_CanvasEnd : MonoBehaviour{
     public void ShowWin(){
         Time.timeScale = 0;
         _canvasWin.SetActive(true);
+        _canvasGameOver.SetActive(false);
         _timerGame.SetActive(false);
 
         float finalTime = PlayerPrefs.GetFloat("FinalTime");
