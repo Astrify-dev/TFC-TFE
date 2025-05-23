@@ -14,7 +14,7 @@ public class S_DeadObject : MonoBehaviour{
             S_playerManagerStates playerManagerStates = collision.collider.GetComponent<S_playerManagerStates>();
             if (playerManagerStates is not null){
                 if (isGameOverOnDeath){
-                    //playerManagerStates.SwitchState(playerManagerStates.DeadState);
+                    playerManagerStates.SwitchState(playerManagerStates.DeadState);
                 }else{
                     //checkpointManager.RespawnPlayer();
                 }
