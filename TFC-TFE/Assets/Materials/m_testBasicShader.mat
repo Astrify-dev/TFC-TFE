@@ -20,13 +20,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_chara
+  m_Name: m_testBasicShader
   m_Shader: {fileID: -6465566751694194690, guid: a9066069e35dcc74681356f551df89b0,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - _ADDITIONALLIGHTENABLE
+  - _FLOATINGENABLE
+  - _ROTATIONENABLE
+  m_InvalidKeywords:
+  - _ADDITIONALLIGHT
+  - _ROTATION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -42,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 3876bf282457fe0449ce9e42550fa5dc, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,14 +64,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ADDITIONALLIGHT: 0
+    - _ADDITIONALLIGHT: 1
+    - _ADDITIONALLIGHTENABLE: 1
+    - _Axis_or_Random: 0
+    - _FLOATINGENABLE: 1
+    - _FLOTTIONENABLE: 0
     - _Float: 0
+    - _ParallaxStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ROTATION: 1
+    - _ROTATIONENABLE: 1
     - _Saturate: 1
     - _Smoothness: 0
+    - _SpeedFloating: 0.5
+    - _SpeedRotation: 0.5
+    - _StrengthFloating: 5
     m_Colors:
     - _AddColor: {r: 0.5622641, g: 0.5622641, b: 0.5622641, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _CustomThreshold: {r: -0.6, g: 0, b: 0, a: 0}
+    - _BaseColor: {r: 0.48584908, g: 0.53207827, b: 1, a: 0}
+    - _CustomThreshold: {r: -1, g: -1, b: 0, a: 0}
+    - _PivotPoint: {r: 0, g: -6.6, b: 0, a: 0}
+    - _RotationAxis: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
