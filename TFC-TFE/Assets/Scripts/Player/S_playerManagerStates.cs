@@ -82,7 +82,7 @@ public class S_playerManagerStates : MonoBehaviour
 
         AnimatorPlayer = S_controllerPlayer.Instance.AnimatorPlayer;
         SwitchState(InitialyzePlayerState);
-        SFX_Slowmotion.Play();
+        //SFX_Slowmotion.Play();
     }
 
     private void OnEnable()

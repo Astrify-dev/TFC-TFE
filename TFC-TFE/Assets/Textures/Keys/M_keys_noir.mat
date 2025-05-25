@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7222462304309504133
+--- !u!114 &-2616734307322191772
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_ChessPieces_mur
+  m_Name: M_keys_noir
   m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 769a0389d1ab5dc45b9c0f34290416dd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0c748c5f9d886c74ebac4b6dd027f3e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 769a0389d1ab5dc45b9c0f34290416dd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0c748c5f9d886c74ebac4b6dd027f3e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -128,8 +128,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5924529, g: 0, b: 0.3949685, a: 1}
-    - _Color: {r: 0.5924529, g: 0, b: 0.39496848, a: 1}
+    - _BaseColor: {r: 0.05245867, g: 0.03473831, b: 0.15471691, a: 1}
+    - _Color: {r: 0.052458644, g: 0.03473831, b: 0.15471688, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
