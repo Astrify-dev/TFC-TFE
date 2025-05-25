@@ -44,12 +44,16 @@ public class S_airDashPlayerState : S_basePlayerStates
     float _durationAirDash;
     public override void EnterState(S_playerManagerStates Player)
     {
+
+
         _player = Player;
         _player.SetfalsePressRebounds();
 
         _dirAirDash = Player.DashDirection;
         _strengthAirDash = Player.MovementSettings.airDashForce;
         _durationAirDash = Time.time + Player.MovementSettings.AirDashDuration;
+
+        Player.SwitchVisual(true);
     }
 
     public override void OnEnable(S_playerManagerStates Player)
@@ -63,6 +67,8 @@ public class S_airDashPlayerState : S_basePlayerStates
         Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
         Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
         Player.Rigidbody.velocity = Player.Rigidbody.velocity/ Player.MovementSettings.BrakeAirDashPower;
+
+        
     }
     public override void UpdateState(S_playerManagerStates Player)
     {
@@ -72,6 +78,7 @@ public class S_airDashPlayerState : S_basePlayerStates
         {
             _player.SetfalsePressRebounds();
             Player.SwitchState(Player.AirState);
+            
         }
 
 

@@ -19,6 +19,7 @@ public class S_controllerPlayer : MonoBehaviour
 
     [field: SerializeField] public S_playerManagerStates PlayerManagerStates { get; private set; }
 
+    [field: SerializeField] public S_hairFollow HairFollow { get; private set; }
 
     private void Awake()
     {
@@ -70,6 +71,12 @@ public class S_controllerPlayer : MonoBehaviour
         if(PlayerManagerStates is null)
         {
             PlayerManagerStates = GetComponent<S_playerManagerStates>();
+        }
+
+        if (HairFollow is null)
+        {
+            Debug.LogError("Not HairFollow Scripts");
+
         }
 
     }

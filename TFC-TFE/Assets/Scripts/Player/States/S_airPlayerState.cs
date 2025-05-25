@@ -83,6 +83,8 @@ public class S_airPlayerState : S_basePlayerStates
 
         Player.AnimatorPlayer.SetBool("IsInTheAir", true);
 
+        Player.SwitchVisual(false);
+
     }
     public override void OnEnable(S_playerManagerStates Player)
     {

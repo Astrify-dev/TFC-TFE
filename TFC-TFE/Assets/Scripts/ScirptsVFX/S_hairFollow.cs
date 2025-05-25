@@ -35,12 +35,18 @@ public class S_hairFollow : MonoBehaviour
     private Vector3 _vectorTarget2;
     private Vector3 _vectorTarget3;
 
-    private void Start()
+    private void Awake()
     {
         _posTarget1 = _target1.transform.position - _target2.transform.position;
         _posTarget2 = _target2.transform.position - _target3.transform.position;
         _posTarget3 = _target3.transform.position - transform.position;
-
+    }
+    private void OnEnable()
+    {
+        transform.position = _player.transform.position + _positionPlayer;
+        _target3.transform.position = transform.position;
+        _target2.transform.position = transform.position;
+        _target1.transform.position = transform.position;
     }
 
     private void Update()
@@ -87,6 +93,22 @@ public class S_hairFollow : MonoBehaviour
         return vec/ _velocityLose;
     }
 
+    public void FlipHair(bool Right)
+    {
+
+        _posTarget1.z = Mathf.Abs(_posTarget1.z) * -1;
+        _posTarget2.z = Mathf.Abs(_posTarget2.z);
+        _posTarget3.z = Mathf.Abs(_posTarget3.z);
+
+        if (Right)
+        {
+            _posTarget1.z *= -1;
+            _posTarget2.z *= -1;
+            _posTarget3.z *= -1;
+        }
+       
+        
+    }
     private void OnDrawGizmos()
     {
         if(!_drawGizmos) return;

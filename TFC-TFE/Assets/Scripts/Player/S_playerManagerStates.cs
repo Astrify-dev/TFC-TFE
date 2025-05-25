@@ -12,6 +12,8 @@ public class S_playerManagerStates : MonoBehaviour
 
     [Header("Références")]
     [SerializeField] GameObject _visualObject;
+    [SerializeField] VisualEffect _visualEffectSphereObject;
+    [SerializeField] GameObject _hairEffect;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
@@ -44,6 +46,7 @@ public class S_playerManagerStates : MonoBehaviour
     private IEnumerator _reloadGroundDashCoroutine;
     private IEnumerator _reloadWallSlideCoroutine;
     private IEnumerator _durationPressReboundsCoroutine;
+    private IEnumerator _disableSphereEffect;
     private Coroutine _currentTransition;
 
     #endregion
@@ -78,6 +81,8 @@ public class S_playerManagerStates : MonoBehaviour
 
         AnimatorPlayer = S_controllerPlayer.Instance.AnimatorPlayer;
         SwitchState(InitialyzePlayerState);
+
+        _visualEffectSphereObject.gameObject.SetActive(false);   
     }
 
     private void OnEnable()
@@ -151,8 +156,20 @@ public class S_playerManagerStates : MonoBehaviour
 
     public void HandleFlip(float moveInput)
     {
-        if (moveInput > 0 && !FacingRight) SetFlip(0);
-        else if (moveInput < 0 && FacingRight) SetFlip(180);
+        S_hairFollow HairFollow = S_controllerPlayer.Instance.HairFollow;
+
+        if (moveInput > 0 && !FacingRight)
+        {
+            SetFlip(0);
+            HairFollow.FlipHair(true);
+        }
+        else if (moveInput < 0 && FacingRight)
+        {
+            SetFlip(180);
+            HairFollow.FlipHair(false);
+        }
+
+        
     }
 
     public void SetFlip(int value)
@@ -175,6 +192,33 @@ public class S_playerManagerStates : MonoBehaviour
     {
         AirDashCount = Value;
         AirDashCount = Mathf.Clamp(AirDashCount, 0, MovementSettings.MaxAirDashCount);
+    }
+
+    public void SwitchVisual(bool Enable)
+    {
+        GameObject ObjectCorp = _visualObject.GetComponentInChildren<Transform>().gameObject;
+
+        if (_disableSphereEffect is not null)
+            StopCoroutine(_disableSphereEffect);
+
+
+        if (Enable)
+        { 
+            ObjectCorp.SetActive(false);
+            _hairEffect.SetActive(false);
+            _visualEffectSphereObject.gameObject.SetActive(true);
+            _visualEffectSphereObject.Play();
+            _visualEffectSphereObject.SetVector2("DirectionSphere",new Vector2(DashDirection.y,DashDirection.z));
+        }
+        else
+        {
+            _visualEffectSphereObject.Stop();
+            _hairEffect.SetActive(true);
+            ObjectCorp.SetActive(true);
+            _disableSphereEffect = DisableSpherEffect();
+            StartCoroutine(_disableSphereEffect);
+        }
+
     }
 
     #region === Coroutine ===
@@ -245,6 +289,12 @@ public class S_playerManagerStates : MonoBehaviour
     {
         yield return new WaitForSeconds(ReloadDuration);
         EnableWallSlide = true;
+    }
+
+    IEnumerator DisableSpherEffect()
+    {
+        yield return new WaitForSeconds(1);
+        _visualEffectSphereObject.gameObject.SetActive(false);
     }
     #endregion
 
