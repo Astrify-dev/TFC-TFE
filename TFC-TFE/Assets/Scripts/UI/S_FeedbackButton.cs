@@ -33,7 +33,7 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData){
         if (layoutElement is not null){
-            layoutElement.ignoreLayout = true;
+            //layoutElement.ignoreLayout = true;
         }
         isSelected = true;
         if(SFX_Select is not null){
@@ -43,7 +43,7 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData eventData){
         if (layoutElement is not null){
-            layoutElement.ignoreLayout = false;
+            //layoutElement.ignoreLayout = false;
         }
         isSelected = false;
     }

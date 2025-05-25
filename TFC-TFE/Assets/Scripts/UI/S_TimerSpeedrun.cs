@@ -5,36 +5,33 @@ using TMPro;
 using UnityEngine;
 
 public class S_TimerSpeedrun : MonoBehaviour{
+    public static Action OnTimerSaved;
     [SerializeField] private TextMeshProUGUI timerText;
-    private float elapsedTime;
     private bool isRunning;
     private float finalTime;
     public float FinalTime => finalTime;
     public static Action OnPlayerDeath;
-    public static Action OnPlayerWin;
     public static Action OnPlayerStart;
 
+    float StartTimer;
     private void OnEnable(){
-        OnPlayerDeath += StopTimer;
-        OnPlayerWin += StopTimer;
+        OnPlayerDeath += PlayerDeath;
         OnPlayerStart += ResetTimer;
     }
 
     private void OnDisable(){
-        OnPlayerDeath -= StopTimer;
-        OnPlayerWin -= StopTimer;
+        OnPlayerDeath -= PlayerDeath;
         OnPlayerStart -= ResetTimer;
     }
 
     private void Start(){
         isRunning = true;
-        elapsedTime = 0f;
+        StartTimer = Time.time;
     }
 
     private void Update(){
         if (isRunning){
-            elapsedTime += Time.deltaTime;
-            timerText.text = FormatTime(elapsedTime);
+            timerText.text = FormatTime(Time.time - StartTimer);
         }
     }
 
@@ -46,14 +43,32 @@ public class S_TimerSpeedrun : MonoBehaviour{
         return $"{minutes:D2}:{seconds:D2}:{milliseconds:D3}";
     }
 
-    public void StopTimer(){
+    public void PlayerDeath(){
         isRunning = false;
-        finalTime = elapsedTime;
-        Debug.Log($"Timer arrêté. Temps final : {FormatTime(finalTime)}");
+        ResetTimer();
     }
 
+    public void StopTimer(){
+        isRunning = false;
+        finalTime = Time.time - StartTimer;
+
+        PlayerPrefs.SetFloat("FinalTime", finalTime);
+
+        float bestTime = PlayerPrefs.GetFloat("BestTime", 6039.999f);
+        if (finalTime < bestTime){
+            PlayerPrefs.SetFloat("BestTime", finalTime);
+            Debug.Log($"Nouveau meilleur temps : {FormatTime(finalTime)}");
+        }
+
+        PlayerPrefs.Save();
+        Debug.Log($"Timer arrêté. Temps final : {FormatTime(finalTime)}");
+
+        OnTimerSaved?.Invoke();
+    }
+
+
     public void ResetTimer(){
-        elapsedTime = 0f;
+        StartTimer = Time.time;
         timerText.text = "00:00:000";
         isRunning = true;
     }

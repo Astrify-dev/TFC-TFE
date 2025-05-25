@@ -6,6 +6,8 @@ public class S_deadPlayerState : S_basePlayerStates
         Player.Rigidbody.velocity = Vector3.zero;
         Player.Rigidbody.isKinematic = true;
         Player.Inputs.OnDisable();
+
+        Player.AnimatorPlayer.SetTrigger("IsDead");
     }
 
     public override void OnDisable(S_playerManagerStates Player)
