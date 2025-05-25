@@ -1,16 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class S_SoundPool : SingletonBehaviour<S_SoundPool>{
     private Pool<AudioSource> _audioSourcePool = new Pool<AudioSource>("Prefabs/Audio/AudioSource");
-
+    public static Action<bool> OnPitchChange;
+    private float _defaultPitch = 1f;
+    private float _SlowPitch = 0.5f;
     protected override void OnInstanceDestroyed(){
         base.OnInstanceDestroyed();
         StopAllCoroutines();
         _audioSourcePool.ClearPool();
     }
 
+    public static void SetPitch(bool end){
+        OnPitchChange?.Invoke(end);
+    }
+
+    private void OnEnable()
+    {
+        OnPitchChange += ChangePitch;
+    }
+
+    private void OnDisable()
+    {
+        OnPitchChange -= ChangePitch;
+    }
+
+    private void ChangePitch(bool End){
+        foreach (var audioSource in _audioSourcePool.GetActiveElements()){
+            if (audioSource is not null){
+                if (End) 
+                    audioSource.pitch = _defaultPitch;
+                else
+                    audioSource.pitch = _SlowPitch;
+            }
+        }
+    }
 
     public AudioSource PlaySound(SoundSystem data, Vector3 position){
         AudioSource poolObject = PlaySound(data, true);
@@ -20,6 +47,7 @@ public class S_SoundPool : SingletonBehaviour<S_SoundPool>{
     public AudioSource PlaySound(SoundSystem data){
         AudioSource poolObject = PlaySound(data, false);
         poolObject.transform.position = Vector3.zero;
+        _SlowPitch = data.PitchOnSlow;
         return poolObject;
     }
     private AudioSource PlaySound(SoundSystem data, bool spatialized){
@@ -36,7 +64,6 @@ public class S_SoundPool : SingletonBehaviour<S_SoundPool>{
 
         source.spatialize = spatialized;
         source.spatialBlend = spatialized ? 1 : 0;
-        source.ignoreListenerPause = data.affectedByTimescale;
         source.outputAudioMixerGroup = data.mixerGroup;
     }
 

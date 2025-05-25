@@ -55,11 +55,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Disable: 1
     - _GradientPower: 2
     - _InvertMoveY: 0
-    - _PlayerDistance: 1
-    - _PlayerHeightStrength: 0.5
-    - _PlayerStrength: 2
+    - _PlayerDistance: 0
+    - _PlayerHeightStrength: 0
+    - _PlayerStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 1

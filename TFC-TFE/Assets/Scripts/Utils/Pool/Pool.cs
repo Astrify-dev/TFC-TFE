@@ -67,5 +67,10 @@ public class Pool<E> : Pool where E : Object{
         _outElements.Remove(element);
     }
     private E GetNext() => _elements.Count <= 0 ? MonoBehaviour.Instantiate<E>(_prefab, _poolTransform) : _elements.Dequeue();
+
+    public List<E> GetActiveElements()
+    {
+        return _outElements;
+    }
 }
 public abstract class Pool { }

@@ -3008,7 +3008,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGameOver: {fileID: 6980816392119986150}
   _canvasWin: {fileID: 7240524730260395388}
-  _winTimeText: {fileID: 1656154229279861597}
+  _timerGame: {fileID: 0}
+  _NoBestTime: {fileID: 0}
+  _BestTime: {fileID: 0}
+  _winTimeNewBestText: {fileID: 0}
+  _winTimeLastBestText: {fileID: 0}
+  _winTimeNoBestText: {fileID: 0}
 --- !u!1001 &1900573585020298908
 PrefabInstance:
   m_ObjectHideFlags: 0

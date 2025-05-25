@@ -15,7 +15,6 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
     {
         _player = Player;
 
-        
         S_controllerPlayer.Instance.ArrowEffect.ArrowReset();
 
         float speed = Player.MovementSettings.SlowMotionAnimSpeed;
@@ -28,6 +27,8 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
 
         _slowMotionDuration = Time.unscaledTime + Player.MovementSettings.slowMotionTimer;
         _slowMotionEffectEnable = false;
+        S_SoundPool.SetPitch(false);
+
     }
     public override void OnEnable(S_playerManagerStates Player)
     {
@@ -38,6 +39,7 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
         Player.Inputs.OnDashReleased -= Inputs_OnDashReleased;
         S_controllerPlayer.Instance.SlowMotionEffect.StartSlowMotion(false, 50f);
         S_controllerPlayer.Instance.ArrowEffect.ArrowReset();
+        S_SoundPool.SetPitch(true);
     }
 
     public override void UpdateState(S_playerManagerStates Player)

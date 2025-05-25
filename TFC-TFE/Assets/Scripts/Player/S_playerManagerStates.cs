@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.VFX;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class S_playerManagerStates : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class S_playerManagerStates : MonoBehaviour
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
+
+    [Header("Sound Design")]
+    [SerializeField] public SoundSystem SFX_Slowmotion;
 
     [Header("Détection environnement")]
     [SerializeField] private float _groundCheckDistance = 0.5f;
@@ -78,6 +82,7 @@ public class S_playerManagerStates : MonoBehaviour
 
         AnimatorPlayer = S_controllerPlayer.Instance.AnimatorPlayer;
         SwitchState(InitialyzePlayerState);
+        SFX_Slowmotion.Play();
     }
 
     private void OnEnable()
