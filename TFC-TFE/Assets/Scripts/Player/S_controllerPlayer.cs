@@ -17,6 +17,7 @@ public class S_controllerPlayer : MonoBehaviour
 
     [field: SerializeField] public S_cameraShake CameraShake { get; private set; }
 
+    [field: SerializeField] public S_playerManagerStates PlayerManagerStates { get; private set; }
 
 
     private void Awake()
@@ -58,12 +59,17 @@ public class S_controllerPlayer : MonoBehaviour
         {
             AnimatorPlayer = GetComponent<Animator>();
 
-            if (CameraShake is null)
-            {
-                Debug.LogError("Not CameraShake Scripts");
+        }
 
-            }
+        if (CameraShake is null)
+        {
+            Debug.LogError("Not CameraShake Scripts");
 
+        }
+
+        if(PlayerManagerStates is null)
+        {
+            PlayerManagerStates = GetComponent<S_playerManagerStates>();
         }
 
     }

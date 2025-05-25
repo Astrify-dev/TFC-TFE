@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEngine.Splines;
 
 public class S_DeathFollow : MonoBehaviour{
     [Header("Structure")]
@@ -13,6 +14,8 @@ public class S_DeathFollow : MonoBehaviour{
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float waitTimeAtPoints = 0.5f;
     [SerializeField] private bool loop = true;
+
+    [SerializeField] private SplineContainer _directionCurve;
 
     public static event Action OnPlayerDead;
 

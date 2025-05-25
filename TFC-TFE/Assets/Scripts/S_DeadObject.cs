@@ -16,10 +16,12 @@ public class S_DeadObject : MonoBehaviour{
                 if (isGameOverOnDeath){
                     playerManagerStates.SwitchState(playerManagerStates.DeadState);
                 }else{
-                    //checkpointManager.RespawnPlayer();
+                    checkpointManager.RespawnPlayer();
                 }
-                //S_TimerSpeedrun.OnPlayerDeath?.Invoke();
-                //S_CanvasEnd.OnPlayerDeath?.Invoke();
+
+                S_deathAlongueSpline.RestDeadZone?.Invoke();
+                S_TimerSpeedrun.OnPlayerDeath?.Invoke();
+                S_CanvasEnd.OnPlayerDeath?.Invoke();
             }
         }
     }
