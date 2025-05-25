@@ -53,6 +53,7 @@ public class S_airDashPlayerState : S_basePlayerStates
         _strengthAirDash = Player.MovementSettings.airDashForce;
         _durationAirDash = Time.time + Player.MovementSettings.AirDashDuration;
 
+        S_controllerPlayer.Instance.ParticleDashManager.StartDashPulse(Player.transform.position,Player.DashDirection);
         Player.SwitchVisual(true);
     }
 
