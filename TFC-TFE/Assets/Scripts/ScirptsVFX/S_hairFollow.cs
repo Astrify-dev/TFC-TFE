@@ -95,13 +95,14 @@ public class S_hairFollow : MonoBehaviour
 
     public void FlipHair(bool Right)
     {
-
-        _posTarget1.z = Mathf.Abs(_posTarget1.z) * -1;
+        _positionPlayer.z = -Mathf.Abs(_positionPlayer.z);
+        _posTarget1.z = -Mathf.Abs(_posTarget1.z);
         _posTarget2.z = Mathf.Abs(_posTarget2.z);
         _posTarget3.z = Mathf.Abs(_posTarget3.z);
 
         if (Right)
         {
+            _positionPlayer.z *= -1;
             _posTarget1.z *= -1;
             _posTarget2.z *= -1;
             _posTarget3.z *= -1;
