@@ -60,7 +60,7 @@ public class S_SoundPool : SingletonBehaviour<S_SoundPool>{
         source.clip = data.getRandomSong;
         source.volume = data.getRandomVolume;
         source.pitch = data.getRandomPitch;
-        source.loop = false;
+        source.loop = data.Loop;
 
         source.spatialize = spatialized;
         source.spatialBlend = spatialized ? 1 : 0;

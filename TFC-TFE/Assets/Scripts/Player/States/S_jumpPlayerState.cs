@@ -7,6 +7,7 @@ public class S_JumpPlayerState : S_basePlayerStates
     float _jumpSpeedDuration;
     public override void EnterState(S_playerManagerStates Player)
     {
+        Player.SFX_Jump.Play();
         _jumpSpeedDuration = 1 / Player.MovementSettings.jumpChargeTime;
         _player = Player;
         _jumpDuration = 0;

@@ -7,6 +7,7 @@ public class S_wallJumpPlayerState : S_basePlayerStates
 {
     public override void EnterState(S_playerManagerStates Player)
     {
+        Player.SFX_WallJump.Play();
         int direction = Player.FacingRight ? -1 : 1;
 
         Player.StartReloadWallSlide();

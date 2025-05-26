@@ -42,6 +42,7 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
     Vector3 _dirAirDash;
     public override void EnterState(S_playerManagerStates Player)
     {
+        Player.SFX_Rebound.Play();
         _player = Player;
         _dirAirDash = Player.DashDirection;
         _durationWidowsPress = Time.time + Player.MovementSettings.reboundInputWindow;

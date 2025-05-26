@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] private SoundSystem SFX_Select, SFX_Confirm;
+    [SerializeField] private SoundSystem SFX_Switch;
     [SerializeField] private float scaleMultiplier = 1.2f;
     [SerializeField] private float clickScaleMultiplier = 0.8f;
     [SerializeField] private float animationSpeed = 5f;
@@ -36,8 +36,8 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
             //layoutElement.ignoreLayout = true;
         }
         isSelected = true;
-        if(SFX_Select is not null){
-            SFX_Select.Play();
+        if(SFX_Switch is not null){
+            SFX_Switch.Play();
         }
     }
 
@@ -51,9 +51,6 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         transform.localScale = originalScale;
         isSelected = false;
         isClicked = false;
-        if (SFX_Confirm is not null){
-            SFX_Confirm.Play();
-        }
     }
 
 }

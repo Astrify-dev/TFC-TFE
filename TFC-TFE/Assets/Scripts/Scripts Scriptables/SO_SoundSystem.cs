@@ -17,6 +17,7 @@ public class SoundSystem : ScriptableObject{
     [field: SerializeField] private AnimationCurve _randomPitchCurve = AnimationCurve.Linear(0, 1, 1, 1);
     [field: SerializeField] public float PitchOnSlow { get; private set; } = 0.5f;
     [field: SerializeField] public AudioMixerGroup mixerGroup { get; private set; }
+    [field: SerializeField] public bool Loop { get; private set; } = false;
 
     public AudioClip getRandomSong => _sounds[Random.Range(0, _sounds.Count)];
     public float getRandomVolume => Mathf.Lerp(_volume.x, _volume.y, _randomVolumeCurve.Evaluate(UnityEngine.Random.value));

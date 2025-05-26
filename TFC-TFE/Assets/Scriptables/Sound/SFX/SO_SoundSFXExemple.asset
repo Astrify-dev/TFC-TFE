@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sounds: []
   <FadeDuration>k__BackingField: 0
-  _volume: {x: 0, y: 1}
+  _volume: {x: 0.1, y: 1}
   _randomVolumeCurve:
     serializedVersion: 2
     m_Curve:
@@ -39,7 +39,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _pitch: {x: -3, y: 3}
+  _pitch: {x: 1, y: 1}
   _randomPitchCurve:
     serializedVersion: 2
     m_Curve:
@@ -64,6 +64,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <affectedByTimescale>k__BackingField: 1
+  <PitchOnSlow>k__BackingField: 0.5
   <mixerGroup>k__BackingField: {fileID: -9133147831234582075, guid: b052663f003ebc046b6d1d471ea91dea,
     type: 2}
+  <Loop>k__BackingField: 0

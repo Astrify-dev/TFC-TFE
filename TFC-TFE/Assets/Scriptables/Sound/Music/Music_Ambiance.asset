@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855413ebe0ce7574e9b6b287a70752e4, type: 3}
   m_Name: Music_Ambiance
   m_EditorClassIdentifier: 
-  _sounds: []
+  _sounds:
+  - {fileID: 8300000, guid: 9a3434ae650e06f48a31a9783dd34a58, type: 3}
   <FadeDuration>k__BackingField: 0
   _volume: {x: 0, y: 1}
   _randomVolumeCurve:
@@ -39,7 +40,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _pitch: {x: -3, y: 3}
+  _pitch: {x: 1, y: 1}
   _randomPitchCurve:
     serializedVersion: 2
     m_Curve:
@@ -64,6 +65,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <affectedByTimescale>k__BackingField: 1
-  <mixerGroup>k__BackingField: {fileID: 5633259807042726514, guid: b052663f003ebc046b6d1d471ea91dea,
+  <PitchOnSlow>k__BackingField: 0.5
+  <mixerGroup>k__BackingField: {fileID: -9133147831234582075, guid: b052663f003ebc046b6d1d471ea91dea,
     type: 2}
+  <Loop>k__BackingField: 0

@@ -6,6 +6,7 @@ public class S_dashGroundPlayerState : S_basePlayerStates
     //public override void UpdateState(S_playerStates Player) { }
     public override void EnterState(S_playerManagerStates Player)
     {
+        Player.SFX_Dash.Play();
         if(Player.MovementSettings.groundDashCooldown)
             Player.StartReloadGroundDash();
 

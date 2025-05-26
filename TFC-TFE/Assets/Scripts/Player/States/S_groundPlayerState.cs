@@ -6,7 +6,7 @@ public class S_groundPlayerState : S_basePlayerStates
     S_playerManagerStates _player;
     private float _targetScreenY = 0.9f;
     private Vector3 _velocity;
-
+    private float _stepTimer = 0f;
 
     public override void EnterState(S_playerManagerStates Player)
     {
@@ -42,8 +42,10 @@ public class S_groundPlayerState : S_basePlayerStates
         float moveInput = Player.DirectionInput.x;
         float targetSpeed = moveInput * Player.MovementSettings.maxMoveSpeed;
 
-        if(_velocity.y < 0)
+        if(_velocity.y < 0){
             _velocity = Player.Rigidbody.velocity.z * Vector3.forward;
+        }
+
 
         float AccelerationDeltaTime = Player.MovementSettings.accelerationRate * Time.deltaTime;
 

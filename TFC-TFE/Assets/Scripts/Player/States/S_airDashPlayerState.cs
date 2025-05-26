@@ -44,7 +44,7 @@ public class S_airDashPlayerState : S_basePlayerStates
     float _durationAirDash;
     public override void EnterState(S_playerManagerStates Player)
     {
-
+        Player.SFX_Dash.Play();
 
         _player = Player;
         _player.SetfalsePressRebounds();

@@ -376,6 +376,12 @@ MonoBehaviour:
   _bounceRayColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _velocityRayColor: {r: 1, g: 0, b: 0.8, a: 1}
   _debugState: 0
+  SFX_Dash: {fileID: 11400000, guid: 58108ef86f011774b819211e7c98b963, type: 2}
+  SFX_WallJump: {fileID: 11400000, guid: 939597c8b9f6cce469f6579ae59f8869, type: 2}
+  SFX_Step: {fileID: 11400000, guid: 606b6eac4ea2bc547b2ee8b92d074adc, type: 2}
+  SFX_Jump: {fileID: 11400000, guid: 7121ab80cfad3214da8f41e3735963b9, type: 2}
+  SFX_Rebound: {fileID: 11400000, guid: b0e11eaccf572c54d81cb3d28d3aeeec, type: 2}
+  SFX_SlowMotion: {fileID: 11400000, guid: 97ac927f1d1ef0342a0650a293fedebc, type: 2}
 --- !u!114 &5371485918319545177
 MonoBehaviour:
   m_ObjectHideFlags: 0

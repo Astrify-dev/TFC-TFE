@@ -13,6 +13,7 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
 
     public override void EnterState(S_playerManagerStates Player)
     {
+
         _player = Player;
 
         S_controllerPlayer.Instance.ArrowEffect.ArrowReset();
@@ -28,7 +29,7 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
         _slowMotionDuration = Time.unscaledTime + Player.MovementSettings.slowMotionTimer;
         _slowMotionEffectEnable = false;
         S_SoundPool.SetPitch(false);
-
+        Player.SFX_SlowMotion.Play();
     }
     public override void OnEnable(S_playerManagerStates Player)
     {

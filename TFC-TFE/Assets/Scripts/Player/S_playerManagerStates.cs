@@ -33,6 +33,15 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] private Color _velocityRayColor = Color.yellow;
 
     [SerializeField] bool _debugState = false;
+
+    [Header("Sound Design")]
+    [SerializeField] public SoundSystem SFX_Dash;
+    [SerializeField] public SoundSystem SFX_WallJump;
+    [SerializeField] public SoundSystem SFX_Jump;
+    [SerializeField] public SoundSystem SFX_Rebound;
+    [SerializeField] public SoundSystem SFX_SlowMotion;
+    [SerializeField] public SoundSystem SFX_Death;
+
     public Vector2 DirectionInput { get; private set; }
     public bool FacingRight { get; private set; }
     public bool EnableGroundDash { get; private set; } = true;

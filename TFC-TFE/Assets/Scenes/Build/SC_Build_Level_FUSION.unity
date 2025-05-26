@@ -22503,7 +22503,7 @@ PrefabInstance:
     - target: {fileID: 1781698395597820794, guid: 4f5a54fb30943344eac4d7914f562f71,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.06
+      value: 7.41
       objectReference: {fileID: 0}
     - target: {fileID: 1781698395597820794, guid: 4f5a54fb30943344eac4d7914f562f71,
         type: 3}
@@ -35523,8 +35523,8 @@ Transform:
   m_GameObject: {fileID: 919992008}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.1005, y: 27.9834, z: 50.9014}
-  m_LocalScale: {x: 1, y: 26.72577, z: 2.4203987}
+  m_LocalPosition: {x: 1.1005, y: 27.9834, z: 51.2913}
+  m_LocalScale: {x: 1, y: 23.010517, z: 2.4203987}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 438651669}
@@ -35543,6 +35543,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
+  _corruption: 1
 --- !u!65 &919992011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40081,6 +40083,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
+  _corruption: 1
 --- !u!65 &1012807506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42622,6 +42626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 0}
+  _corruption: 1
 --- !u!65 &1079671068
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43745,6 +43751,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2663792401033188294, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: SFX_Switch
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711,
+        type: 2}
     - target: {fileID: 2749034496442206741, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -43841,6 +43853,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3223347039560542680, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: SFX_Switch
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711,
+        type: 2}
     - target: {fileID: 3302025246367232894, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_fontAsset
@@ -44022,6 +44040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124667238176798928, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4276862489685177668, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -44568,6 +44591,12 @@ PrefabInstance:
       objectReference: {fileID: 997343560}
     - target: {fileID: 6948506629734284569, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
+      propertyPath: SFX_Confirm
+      value: 
+      objectReference: {fileID: 11400000, guid: 84de57f0cacdfc446a1970343b9cffca,
+        type: 2}
+    - target: {fileID: 6948506629734284569, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
       propertyPath: s_InputPlayer
       value: 
       objectReference: {fileID: 997343563}
@@ -44652,6 +44681,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 7416787071735333730, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: SFX_Switch
+      value: 
+      objectReference: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711,
+        type: 2}
+    - target: {fileID: 7480162521805014373, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: SFX_Step
+      value: 
+      objectReference: {fileID: 11400000, guid: 606b6eac4ea2bc547b2ee8b92d074adc,
+        type: 2}
     - target: {fileID: 7483071391983712132, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -52613,6 +52654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 0}
+  _corruption: 1
 --- !u!65 &1266972559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -55787,8 +55830,8 @@ Transform:
   m_GameObject: {fileID: 1327324910}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.1005, y: 67.4505, z: 111.5336}
-  m_LocalScale: {x: 1, y: 12.574516, z: 0.8924626}
+  m_LocalPosition: {x: 1.1005, y: 70.9959, z: 111.5336}
+  m_LocalScale: {x: 1, y: 12.574516, z: 0.8248925}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 438651669}
@@ -55807,6 +55850,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
+  _corruption: 1
 --- !u!65 &1327324913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63239,6 +63284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
+  _corruption: 1
 --- !u!65 &1501577247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -68402,6 +68449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 0}
+  _corruption: 1
 --- !u!65 &1637406180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71855,6 +71904,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 0}
+  _corruption: 1
 --- !u!65 &1728224747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -82355,6 +82406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
   checkpointManager: {fileID: 1564426996}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
+  _corruption: 1
 --- !u!65 &2013120261
 BoxCollider:
   m_ObjectHideFlags: 0

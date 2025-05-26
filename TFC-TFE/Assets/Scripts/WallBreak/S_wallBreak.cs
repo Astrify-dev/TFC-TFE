@@ -15,6 +15,8 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
     [SerializeField] float _speedScreenShake = 2;
     [SerializeField] float _strengthScreenShake = 0.2f;
 
+    [SerializeField] SoundSystem SFX_WallBreak;
+
     private MaterialPropertyBlock _mpb;
     private IEnumerator _coroutine;
 
@@ -46,6 +48,7 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
             StopCoroutine(_coroutine);
 
         _coroutine = _StartDestruct(RightBreak);
+        SFX_WallBreak.Play();
         StartCoroutine(_coroutine);
     }
 

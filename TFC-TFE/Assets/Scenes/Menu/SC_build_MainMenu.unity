@@ -146,8 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 0}
   scaleMultiplier: 1.05
   clickScaleMultiplier: 0.8
   animationSpeed: 3
@@ -685,8 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 2
@@ -1095,8 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 2
@@ -1326,8 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 0}
   scaleMultiplier: 1.05
   clickScaleMultiplier: 0.8
   animationSpeed: 3
@@ -2033,8 +2029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 0}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 5
@@ -2050,6 +2045,51 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 143391189}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &876137845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876137847}
+  - component: {fileID: 876137846}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &876137846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876137845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6a5e2c74581df46bbee7f1955ca4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicAmbiance: {fileID: 11400000, guid: c530cab15a3105441a317a34df72858a, type: 2}
+--- !u!4 &876137847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876137845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.149082, y: 114.91959, z: 96.739975}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &876753372 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3323142135946792097, guid: 1de515383bf998b41b5f561390186251,
@@ -2364,8 +2404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 2
@@ -3342,8 +3381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 0}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 5
@@ -3359,8 +3397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 5
@@ -3382,8 +3419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 0}
   scaleMultiplier: 1.05
   clickScaleMultiplier: 0.8
   animationSpeed: 3
@@ -3941,8 +3977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFX_Select: {fileID: 11400000, guid: 87b151f0d374ddd468c45713f57e9f40, type: 2}
-  SFX_Confirm: {fileID: 11400000, guid: ac5e6633a59d94c4aaa61616848a2dbf, type: 2}
+  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
   scaleMultiplier: 1.2
   clickScaleMultiplier: 0.8
   animationSpeed: 2
@@ -5098,3 +5133,4 @@ SceneRoots:
   - {fileID: 284522788}
   - {fileID: 1519250389}
   - {fileID: 1323553660}
+  - {fileID: 876137847}

@@ -18,6 +18,8 @@ public class S_PauseManager : MonoBehaviour
     [SerializeField] private S_inputPlayer s_InputPlayer;
     [SerializeField] private S_CanvasEnd s_CanvasEnd;
     [SerializeField] private S_playerManagerStates Player;
+
+    [SerializeField] private SoundSystem SFX_Confirm;
     private bool isPaused = false;
 
     private void Start(){
@@ -39,8 +41,8 @@ public class S_PauseManager : MonoBehaviour
             inputPlayer.OnPauseToggleEvent -= TogglePause;
         }
     }
-    public void OnOptionsButtonPressed()
-    {
+    public void OnOptionsButtonPressed(){
+        PlayConfirmSoundWithDelay();
         if (mainMenuPanel is not null && optionsPanel is not null)
         {
             mainMenuPanel.SetActive(false);
@@ -51,18 +53,20 @@ public class S_PauseManager : MonoBehaviour
     }
     public void OnQuitButtonPressed()
     {
+        PlayConfirmSoundWithDelay();
         Application.Quit();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
     public void OnContinueButtonPressed(){
+        PlayConfirmSoundWithDelay();
         TogglePause();
     }
 
-    public void OnRetryPressed() { 
+    public void OnRetryPressed() {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        PlayConfirmSoundWithDelay();
         Debug.Log("Recommencer le niveau !");
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
@@ -80,6 +84,7 @@ public class S_PauseManager : MonoBehaviour
     }
 
     public void OnBackButtonPressed(){
+        PlayConfirmSoundWithDelay();
         if (optionsPanel is not null && optionsPanel.activeSelf)
         {
             optionsPanel.SetActive(false);
@@ -93,4 +98,16 @@ public class S_PauseManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(firstMainMenuButton);
     }
+
+    public void PlayConfirmSoundWithDelay(){
+        StartCoroutine(PlaySoundAndWaitCoroutine());
+    }
+
+    private IEnumerator PlaySoundAndWaitCoroutine(){
+        if (SFX_Confirm != null){
+            SFX_Confirm.Play();
+        }
+        yield return new WaitForSeconds(1f); 
+    }
+
 }
