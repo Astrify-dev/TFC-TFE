@@ -68,6 +68,11 @@ public class S_PauseManager : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         PlayConfirmSoundWithDelay();
         Debug.Log("Recommencer le niveau !");
+        S_GhostManager ghostManager = FindObjectOfType<S_GhostManager>();
+        if (ghostManager is not null)
+        {
+            ghostManager.OnRunStart();
+        }
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
         S_TrainReset.OnResetSpline?.Invoke();

@@ -41,6 +41,7 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] public SoundSystem SFX_SlowMotion;
     [SerializeField] public SoundSystem SFX_Death;
 
+    public bool IsDashing { get; private set; } = false;
     public Vector2 DirectionInput { get; private set; }
     public bool FacingRight { get; private set; }
     public bool EnableGroundDash { get; private set; } = true;
@@ -94,6 +95,7 @@ public class S_playerManagerStates : MonoBehaviour
         SwitchState(InitialyzePlayerState);
 
         _visualEffectSphereObject.gameObject.SetActive(false);   
+        IsDashing = false;
     }
 
     private void OnEnable()
@@ -217,9 +219,11 @@ public class S_playerManagerStates : MonoBehaviour
         { 
             ObjectCorp.SetActive(false);
             _hairEffect.SetActive(false);
-            _visualEffectSphereObject.gameObject.SetActive(true);
+            _visualEffectSphereObject.gameObject.SetActive(true); 
+            IsDashing = true;
             _visualEffectSphereObject.Play();
             _visualEffectSphereObject.SetVector2("DirectionSphere",new Vector2(DashDirection.y,DashDirection.z));
+
         }
         else
         {
@@ -306,6 +310,7 @@ public class S_playerManagerStates : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         _visualEffectSphereObject.gameObject.SetActive(false);
+        IsDashing = false;
     }
 
     #endregion

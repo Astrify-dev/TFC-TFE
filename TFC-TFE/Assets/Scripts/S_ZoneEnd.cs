@@ -11,7 +11,7 @@ public class S_ZoneEnd : MonoBehaviour{
             if (timerSpeedrun is not null){
                 timerSpeedrun.StopTimer();
             }
-
+            FindObjectOfType<S_GhostManager>()?.OnRunEnd();
             S_playerManagerStates playerManagerStates = other.GetComponent<S_playerManagerStates>();
             playerManagerStates.SwitchState(playerManagerStates.DeadState);
         }
