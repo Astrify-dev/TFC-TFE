@@ -20,10 +20,13 @@ public class S_dashGroundPlayerState : S_basePlayerStates
         Player.SwitchState(Player.GroundState);
 
         Player.AnimatorPlayer.SetTrigger("Dash");
+        Player._groundDashParticles.Play();
+        Player._groundDashTrails.SetActive(true);
     }
 
     public override void OnDisable(S_playerManagerStates Player)
     {
+        Player._groundDashTrails.SetActive(false);
     }
 
     public override void OnEnable(S_playerManagerStates Player)
