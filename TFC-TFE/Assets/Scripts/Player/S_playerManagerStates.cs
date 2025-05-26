@@ -16,7 +16,6 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] public GameObject _hairEffect;
 
     public ParticleSystem _groundDashParticles;
-    public GameObject _groundDashTrails;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
@@ -308,6 +307,7 @@ public class S_playerManagerStates : MonoBehaviour
         yield return new WaitForSeconds(1);
         _visualEffectSphereObject.gameObject.SetActive(false);
     }
+
     #endregion
 
     #region === Gizmos ===
