@@ -69,7 +69,9 @@ public class S_PauseManager : MonoBehaviour
         S_TrainReset.OnResetSpline?.Invoke();
         S_wallBreak.OnReset?.Invoke();
         checkpointManager.RespawnPlayer();
-        if(isPaused)
+        Player._hairEffect.SetActive(false);
+        Player._hairEffect.SetActive(true);
+        if (isPaused)
             TogglePause();
         S_CanvasEnd.OnPlayerRetry?.Invoke();
         Player.SwitchState(Player.InitialyzePlayerState);
