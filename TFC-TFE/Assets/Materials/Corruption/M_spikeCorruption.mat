@@ -58,23 +58,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CorruptionTiling: 0.15
+    - _CorruptionTiling: 0.1
     - _FlowMapSpeed: 0.2
     - _FlowMapSpeedMove: -0.05
     - _FlowMapStrength: 0.2
-    - _GradientPower: 0.57
+    - _GradientPower: 0.87
     - _GradientSubstract: -0.32
+    - _HeightEffect: 2.79
     - _NoiseFlowMapTiling: 0.04
     - _PerlinTilling: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SizeBorder: 0.01
+    - _SizeBorder: 0.15
     - _SpeedCorruption: -0.47
     - _TilingFlowMap: 0.02
     m_Colors:
-    - _BaseColor1: {r: 0.084905684, g: 0.0020024923, b: 0.07784231, a: 0}
-    - _BaseColor2: {r: 0.02739151, g: 0, b: 0.066037714, a: 0}
-    - _ColorBorder: {r: 0.4823529, g: 0, b: 0.5568628, a: 0}
+    - _BaseColor1: {r: 0.03529412, g: 0, b: 0.101960786, a: 0}
+    - _BaseColor2: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorBorder: {r: 2.1422598, g: 0, b: 0.911797, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1513212308198599189
 MonoBehaviour:
