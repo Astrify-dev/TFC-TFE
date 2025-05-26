@@ -16,8 +16,9 @@ public class S_TimerSpeedrun : MonoBehaviour{
     public static Action OnPlayerDeath;
     public static Action OnPlayerStart;
     private float timeMultiplier = 1f;
+    private float elapsedTime;
+    private float lastUpdateTime;
 
-    float StartTimer;
     private void OnEnable(){
         OnPlayerDeath += PlayerDeath;
         OnPlayerStart += ResetTimer;
@@ -32,13 +33,17 @@ public class S_TimerSpeedrun : MonoBehaviour{
 
     private void Start(){
         isRunning = true;
-        StartTimer = Time.time;
+        elapsedTime = 0f;
+        lastUpdateTime = Time.time;
     }
 
     private void Update(){
         if (isRunning){
-            float adjustedTime = (Time.time - StartTimer) * timeMultiplier;
-            timerText.text = FormatTime(adjustedTime);
+            float deltaTime = (Time.time - lastUpdateTime) * timeMultiplier;
+            elapsedTime += deltaTime;
+            lastUpdateTime = Time.time;
+
+            timerText.text = FormatTime(elapsedTime);
         }
     }
 
@@ -64,14 +69,16 @@ public class S_TimerSpeedrun : MonoBehaviour{
         ResetTimer();
     }
 
-    public void StopTimer(){
+    public void StopTimer()
+    {
         isRunning = false;
-        finalTime = Time.time - StartTimer;
+        finalTime = elapsedTime;
 
         PlayerPrefs.SetFloat("FinalTime", finalTime);
 
         float bestTime = PlayerPrefs.GetFloat("BestTime", 6039.999f);
-        if (finalTime < bestTime){
+        if (finalTime < bestTime)
+        {
             PlayerPrefs.SetFloat("BestTime", finalTime);
             Debug.Log($"Nouveau meilleur temps : {FormatTime(finalTime)}");
         }
@@ -82,9 +89,10 @@ public class S_TimerSpeedrun : MonoBehaviour{
         OnTimerSaved?.Invoke();
     }
 
-
-    public void ResetTimer(){
-        StartTimer = Time.time;
+    public void ResetTimer()
+    {
+        elapsedTime = 0f;
+        lastUpdateTime = Time.time;
         timerText.text = "00:00:000";
         isRunning = true;
     }
