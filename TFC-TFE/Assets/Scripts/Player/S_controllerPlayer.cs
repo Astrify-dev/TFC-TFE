@@ -19,6 +19,8 @@ public class S_controllerPlayer : MonoBehaviour
 
     [field: SerializeField] public S_playerManagerStates PlayerManagerStates { get; private set; }
 
+    [field: SerializeField] public S_hairFollow HairFollow { get; private set; }
+    [field: SerializeField] public S_particleDashManager ParticleDashManager { get; private set; }
 
     private void Awake()
     {
@@ -71,6 +73,18 @@ public class S_controllerPlayer : MonoBehaviour
         {
             PlayerManagerStates = GetComponent<S_playerManagerStates>();
         }
+
+        if (HairFollow is null)
+        {
+            Debug.LogError("Not HairFollow Scripts");
+
+        }
+
+        if (ParticleDashManager is null)
+        {
+            Debug.LogError("Not ParticleDashManager Scripts");
+        }
+
 
     }
 }
