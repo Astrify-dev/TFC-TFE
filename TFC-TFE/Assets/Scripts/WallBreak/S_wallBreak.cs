@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using static UnityEngine.Rendering.DebugUI;
 
 public class S_wallBreak : MonoBehaviour, IbreakWall
 {
+    public static Action OnReset;
     [SerializeField] Renderer _render;
     [SerializeField] GameObject _wallCollider;
     [SerializeField] float _speed;
@@ -14,6 +17,16 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
 
     private MaterialPropertyBlock _mpb;
     private IEnumerator _coroutine;
+
+    private void OnEnable()
+    {
+        OnReset += ResetWall;
+    }
+
+    private void OnDisable()
+    {
+        OnReset -= ResetWall;
+    }
 
     private void Start()
     {
@@ -63,7 +76,15 @@ public class S_wallBreak : MonoBehaviour, IbreakWall
 
     }
 
+    private void ResetWall(){
+        _wallCollider.SetActive(true);
+        if(_coroutine is not null)
+            StopCoroutine(_coroutine);
 
+        _mpb.SetFloat("_SliderDirBreak", 0);
+        _render.SetPropertyBlock(_mpb);
+
+    }
 
 
 }

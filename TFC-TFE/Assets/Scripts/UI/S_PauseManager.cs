@@ -67,6 +67,7 @@ public class S_PauseManager : MonoBehaviour
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
         S_TrainReset.OnResetSpline?.Invoke();
+        S_wallBreak.OnReset?.Invoke();
         checkpointManager.RespawnPlayer();
         if(isPaused)
             TogglePause();
