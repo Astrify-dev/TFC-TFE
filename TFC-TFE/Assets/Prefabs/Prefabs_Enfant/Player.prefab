@@ -330,6 +330,9 @@ MonoBehaviour:
   <ArrowEffect>k__BackingField: {fileID: 309063313497254701}
   <AnimatorPlayer>k__BackingField: {fileID: 2688233843152623253}
   <CameraShake>k__BackingField: {fileID: 0}
+  <PlayerManagerStates>k__BackingField: {fileID: 0}
+  <HairFollow>k__BackingField: {fileID: 0}
+  <ParticleDashManager>k__BackingField: {fileID: 0}
 --- !u!114 &4328154141687442599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +358,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visualObject: {fileID: 3471628032930888087}
+  _visualEffectSphereObject: {fileID: 0}
+  _hairEffect: {fileID: 0}
+  _groundDashParticles: {fileID: 8324843421967139861, guid: f5f7f0c9e56dc04449d17d10e12230c7,
+    type: 3}
+  _groundDashTrails: {fileID: 129228892036128497, guid: 39c82ec9107a8c14dba15a6657db3c8f,
+    type: 3}
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: 2dbe5a8af3d376244b03ce25c5936171,
     type: 2}
   <Rigidbody>k__BackingField: {fileID: 9046022859339319530}

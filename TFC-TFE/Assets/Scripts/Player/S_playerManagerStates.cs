@@ -13,7 +13,7 @@ public class S_playerManagerStates : MonoBehaviour
     [Header("Références")]
     [SerializeField] GameObject _visualObject;
     [SerializeField] VisualEffect _visualEffectSphereObject;
-    [SerializeField] GameObject _hairEffect;
+    [SerializeField] public GameObject _hairEffect;
 
     public ParticleSystem _groundDashParticles;
     public GameObject _groundDashTrails;
