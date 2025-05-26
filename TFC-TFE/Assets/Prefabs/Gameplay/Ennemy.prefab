@@ -119,8 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7353f03d201707941a18edb2b5ca7bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameOverOnDeath: 0
+  isGameOverOnDeath: 1
   checkpointManager: {fileID: 0}
+  _SFX_Corruption: {fileID: 0}
+  _corruption: 0
 --- !u!1 &5488247776945737543
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +242,7 @@ MonoBehaviour:
   moveSpeed: 4
   followSpeed: 7
   ennemyAttack: {fileID: 8668393077686560577}
+  SFX_ennemy: {fileID: 11400000, guid: 388440ca20d366340b74e8e0d52e35bf, type: 2}
 --- !u!1 &5669647488548563202
 GameObject:
   m_ObjectHideFlags: 0

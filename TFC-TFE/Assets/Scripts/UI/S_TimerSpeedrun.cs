@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,23 +6,28 @@ using TMPro;
 using UnityEngine;
 
 public class S_TimerSpeedrun : MonoBehaviour{
+    public static Action<float> OnTimeMultiplierChanged;
     public static Action OnTimerSaved;
     [SerializeField] private TextMeshProUGUI timerText;
+    private static float slowMotionMultiplier = 0.25f;
     private bool isRunning;
     private float finalTime;
     public float FinalTime => finalTime;
     public static Action OnPlayerDeath;
     public static Action OnPlayerStart;
+    private float timeMultiplier = 1f;
 
     float StartTimer;
     private void OnEnable(){
         OnPlayerDeath += PlayerDeath;
         OnPlayerStart += ResetTimer;
+        OnTimeMultiplierChanged += UpdateTimeMultiplier;
     }
 
     private void OnDisable(){
         OnPlayerDeath -= PlayerDeath;
         OnPlayerStart -= ResetTimer;
+        OnTimeMultiplierChanged -= UpdateTimeMultiplier; 
     }
 
     private void Start(){
@@ -31,7 +37,8 @@ public class S_TimerSpeedrun : MonoBehaviour{
 
     private void Update(){
         if (isRunning){
-            timerText.text = FormatTime(Time.time - StartTimer);
+            float adjustedTime = (Time.time - StartTimer) * timeMultiplier;
+            timerText.text = FormatTime(adjustedTime);
         }
     }
 
@@ -41,6 +48,15 @@ public class S_TimerSpeedrun : MonoBehaviour{
         int milliseconds = Mathf.FloorToInt((time * 1000f) % 1000f);
 
         return $"{minutes:D2}:{seconds:D2}:{milliseconds:D3}";
+    }
+
+    private void UpdateTimeMultiplier(float newMultiplier){
+        timeMultiplier = newMultiplier;
+    }
+
+    public static float GetSlowMotionMultiplier()
+    {
+        return slowMotionMultiplier;
     }
 
     public void PlayerDeath(){

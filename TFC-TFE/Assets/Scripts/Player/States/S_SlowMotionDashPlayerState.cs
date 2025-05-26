@@ -15,7 +15,9 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
     {
 
         _player = Player;
-
+        float slowMotionMultiplier = S_TimerSpeedrun.GetSlowMotionMultiplier();
+        S_TimerSpeedrun.OnTimeMultiplierChanged?.Invoke(slowMotionMultiplier);
+        S_cameraFollow.OnSlowMotionStateChanged?.Invoke(true);
         S_controllerPlayer.Instance.ArrowEffect.ArrowReset();
 
         float speed = Player.MovementSettings.SlowMotionAnimSpeed;
@@ -78,6 +80,9 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
         _player.SlowMotion.StopSlowMotionAnimEnable();
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
+        S_cameraFollow.OnSlowMotionStateChanged?.Invoke(false);
+
+        S_TimerSpeedrun.OnTimeMultiplierChanged?.Invoke(1f);
     }
     private void Inputs_OnDashReleased()
     {

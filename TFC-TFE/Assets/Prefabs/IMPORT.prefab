@@ -4321,11 +4321,6 @@ PrefabInstance:
       propertyPath: <ParticleDashManager>k__BackingField
       value: 
       objectReference: {fileID: 4500480927484072464}
-    - target: {fileID: 878551305923794998, guid: 3c6c976597fe39f45b73b5b203e12df8,
-        type: 3}
-      propertyPath: <PlayerManagerStates>k__BackingField
-      value: 
-      objectReference: {fileID: 8430438661571246551}
     - target: {fileID: 1088055269657763583, guid: 3c6c976597fe39f45b73b5b203e12df8,
         type: 3}
       propertyPath: m_Layer
@@ -4451,6 +4446,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2391563982778952829, guid: 3c6c976597fe39f45b73b5b203e12df8,
+        type: 3}
+      propertyPath: SFX_Death
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b75a6dd7c94f3d43ab2a8efae3f05e6,
+        type: 2}
     - target: {fileID: 2391563982778952829, guid: 3c6c976597fe39f45b73b5b203e12df8,
         type: 3}
       propertyPath: _hairEffect

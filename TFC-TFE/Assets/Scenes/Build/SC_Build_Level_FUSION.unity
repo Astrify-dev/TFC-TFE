@@ -43901,6 +43901,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3000594296336300475, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _zoomSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000594296336300475, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _slowMotionOrthoSize
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3025101319449117231, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_IsActive
@@ -44557,11 +44567,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6484999074596457884, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      propertyPath: <PlayerManagerStates>k__BackingField
-      value: 
-      objectReference: {fileID: 997343560}
     - target: {fileID: 6515721951656226615, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer

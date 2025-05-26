@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RandomMovement : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class RandomMovement : MonoBehaviour
     [Tooltip("Référence au script d'attaque.")]
     public S_ennemyAttack ennemyAttack;
 
+    [SerializeField] SoundSystem SFX_ennemy;
+
     private Vector3 targetPosition;
     private bool isPlayerInAttackZone = false;
     private Transform playerTransform;
@@ -35,6 +38,10 @@ public class RandomMovement : MonoBehaviour
         ennemyAttack.OnPlayerExit += StopFollowingPlayer;
 
         SetRandomTargetPosition();
+        if (SFX_ennemy is not null){
+            Vector3 PositionSound = new Vector3 (0f, transform.position.y , transform.position.z);
+            SFX_ennemy.Play(transform.position);
+        }
     }
 
     void Update()
