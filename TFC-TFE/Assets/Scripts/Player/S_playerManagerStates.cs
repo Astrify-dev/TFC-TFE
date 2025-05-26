@@ -14,6 +14,9 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] GameObject _visualObject;
     [SerializeField] VisualEffect _visualEffectSphereObject;
     [SerializeField] GameObject _hairEffect;
+
+    public ParticleSystem _groundDashParticles;
+    public GameObject _groundDashTrails;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
     [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
     [field: SerializeField] public TextMeshProUGUI SpeedShow { get; private set; }
