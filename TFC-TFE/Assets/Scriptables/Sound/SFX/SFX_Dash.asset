@@ -15,7 +15,7 @@ MonoBehaviour:
   _sounds:
   - {fileID: 8300000, guid: f7d6556bb77df374f9d3d976af1b3b86, type: 3}
   <FadeDuration>k__BackingField: 0
-  _volume: {x: 0.1, y: 1}
+  _volume: {x: 0.1, y: 0.5}
   _randomVolumeCurve:
     serializedVersion: 2
     m_Curve:
@@ -40,13 +40,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _pitch: {x: 1, y: 1}
+  _pitch: {x: 0.9, y: 1.1}
   _randomPitchCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: -0.010967255
+      value: 0.9946289
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 1.0032959
       inSlope: 0
       outSlope: 0
       tangentMode: 0
