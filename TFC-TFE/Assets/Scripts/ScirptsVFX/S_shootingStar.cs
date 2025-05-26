@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class S_shootingStar : MonoBehaviour
 {
-    private Vector3 direction = new Vector3(-1, -1, 0).normalized;
+    private Vector3 direction = new Vector3(0, -1, -1).normalized;
     private float speed;
     private float delay = 3f;
     private Camera mainCamera;

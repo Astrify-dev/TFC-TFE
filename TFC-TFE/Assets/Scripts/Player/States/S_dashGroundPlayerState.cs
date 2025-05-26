@@ -21,12 +21,10 @@ public class S_dashGroundPlayerState : S_basePlayerStates
 
         Player.AnimatorPlayer.SetTrigger("Dash");
         Player._groundDashParticles.Play();
-        Player._groundDashTrails.SetActive(true);
     }
 
     public override void OnDisable(S_playerManagerStates Player)
     {
-        Player._groundDashTrails.SetActive(false);
     }
 
     public override void OnEnable(S_playerManagerStates Player)
@@ -36,4 +34,5 @@ public class S_dashGroundPlayerState : S_basePlayerStates
     public override void UpdateState(S_playerManagerStates Player)
     {
     }
+    
 }
