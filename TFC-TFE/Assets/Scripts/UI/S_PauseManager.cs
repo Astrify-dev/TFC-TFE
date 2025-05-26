@@ -61,15 +61,19 @@ public class S_PauseManager : MonoBehaviour
     }
 
     public void OnRetryPressed() { 
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
         Debug.Log("Recommencer le niveau !");
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
+        S_TrainReset.OnResetSpline?.Invoke();
         checkpointManager.RespawnPlayer();
         if(isPaused)
             TogglePause();
         S_CanvasEnd.OnPlayerRetry?.Invoke();
         Player.SwitchState(Player.InitialyzePlayerState);
         S_TimerSpeedrun.OnPlayerStart?.Invoke();
+        
     }
 
     public void OnBackButtonPressed(){

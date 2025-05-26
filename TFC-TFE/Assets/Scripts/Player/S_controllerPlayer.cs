@@ -31,8 +31,8 @@ public class S_controllerPlayer : MonoBehaviour
 
         if (Instance is not null && Instance != this)
         {
-            Destroy(gameObject);
-            return;
+            //Destroy(gameObject);
+            //return;
         }
 
         Instance = this;
