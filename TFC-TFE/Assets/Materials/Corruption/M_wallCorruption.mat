@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _CrackNoise:
+        m_Texture: {fileID: 2800000, guid: 2fe23c8d5b9de07459c3e5ba245a1b7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _FlowMap:
         m_Texture: {fileID: 2800000, guid: 27f56eff71160034f9c2f450a0ffb8c8, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -63,6 +67,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DistancePlayer: 0.34
     - _FlowMapSpeed: 0.76
     - _FlowMapSpeedMove: 0.05
     - _HoleMultiply: 4
@@ -71,12 +76,14 @@ Material:
     - _HoleSpeed: 0.2
     - _HoleSpeedMove: 0.2
     - _HoleSpeedSwitch: 0.2
+    - _MultiplyCrack: 2.96
     - _MultiplyNoiseBorder: 0.05
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SizeBorder: 0.06
+    - _SizeBorder: 0.05
     - _SliderDirBreak: 0
     - _StrengthFlowMap: 0.25
+    - _TilingCrack: 0.13
     - _TilingFlowMap: 0.05
     - _TilingNoiseBorder: 0.38
     - _TilingNoiseFlowMap: 0.07
@@ -85,4 +92,6 @@ Material:
     - _BaseColor1: {r: 0.54901963, g: 0, b: 0.5201855, a: 0}
     - _BaseColor2: {r: 0.14186467, g: 0, b: 0.2905661, a: 0}
     - _BorderColor: {r: 1.0252341, g: 0, b: 3.7271597, a: 0}
+    - _CrackColor: {r: 0, g: 12.484045, b: 12.893356, a: 0}
+    - _CrackColorPLayerDistance: {r: 0, g: 5.413394, b: 5.590882, a: 0}
   m_BuildTextureStacks: []
