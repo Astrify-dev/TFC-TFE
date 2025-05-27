@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class S_MainMenu : MonoBehaviour
 {
@@ -18,6 +19,21 @@ public class S_MainMenu : MonoBehaviour
     [SerializeField] private GameObject backButtonCredits;
 
     [SerializeField] private float buttonDelay = 0.5f;
+    [SerializeField] private SoundSystem SFX_Switch;
+    [SerializeField] private float scaleMultiplier = 1.2f;
+    [SerializeField] private float clickScaleMultiplier = 0.8f;
+    [SerializeField] private float animationSpeed = 5f;
+
+    private Vector3 originalScale;
+    private RectTransform rectTransform;
+    private LayoutElement layoutElement;
+
+    private void Start(){
+        rectTransform = GetComponent<RectTransform>();
+        layoutElement = GetComponent<LayoutElement>();
+        originalScale = transform.localScale;
+    }
+
     public void OnPlayButtonPressed(){
         StartCoroutine(DelayedAction(() =>{
             if (!string.IsNullOrEmpty(playSceneName)){
@@ -79,4 +95,23 @@ public class S_MainMenu : MonoBehaviour
         yield return new WaitForSeconds(buttonDelay);
         action?.Invoke(); 
     }
+
+    public void ScaleUp(GameObject button)
+    {
+        RectTransform buttonTransform = button.GetComponent<RectTransform>();
+        if (buttonTransform is not null){
+            buttonTransform.localScale = originalScale * scaleMultiplier;
+        }
+    }
+
+    public void ScaleDown(GameObject button)
+    {
+        RectTransform buttonTransform = button.GetComponent<RectTransform>();
+        if (buttonTransform != null)
+        {
+            buttonTransform.localScale = originalScale;
+        }
+    }
+
+
 }
