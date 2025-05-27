@@ -79,6 +79,9 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
 
                 Player.HandleFlip(reflected.z);
 
+                S_controllerPlayer.Instance.VibrationGamePad.StartVibration(6f, 0.5f, 0.05f);
+                S_controllerPlayer.Instance.CameraShake.Shake(6f, 0.5f);
+
                 Player.AddAirDash(Player.MovementSettings.WallDashMaxAirDashCount);
                 Player.DashDirection = reflected;
                 Player.SwitchState(Player.AirDashState);

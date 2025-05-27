@@ -8,6 +8,9 @@ public class S_deadPlayerState : S_basePlayerStates
         Player.Rigidbody.isKinematic = true;
         Player.Inputs.OnDisable();
 
+        S_controllerPlayer.Instance.VibrationGamePad.StartVibration(3f, 1f, 1f);
+        S_controllerPlayer.Instance.CameraShake.Shake(3f, 2f);
+
         Player.AnimatorPlayer.SetTrigger("IsDead");
     }
 

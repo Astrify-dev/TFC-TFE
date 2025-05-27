@@ -94,6 +94,8 @@ public class S_airDashPlayerState : S_basePlayerStates
             if(hit.transform.parent.TryGetComponent<IbreakWall>(out IbreakWall BreakingWall))
             {
                 BreakingWall.BreakWall(_player.DashDirection.x);
+                S_controllerPlayer.Instance.CameraShake.Shake(3f, 2f);
+                S_controllerPlayer.Instance.VibrationGamePad.StartVibration(3f, 2f, 0.2f);
                 Player.SwitchState(Player.AirDashState);
                 return;
             }

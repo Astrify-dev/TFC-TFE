@@ -26311,6 +26311,57 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 788177944}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &736525606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7657724635838311035, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &736525609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736525606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8940687049bdb840b07909409eea936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &740742752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40771,6 +40822,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4063363237330791960, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _cameraMask
+      value: 
+      objectReference: {fileID: 1144956263}
     - target: {fileID: 4115344448479477771, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -41690,6 +41746,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8763980552892239763, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: <VibrationGamePad>k__BackingField
+      value: 
+      objectReference: {fileID: 736525609}
     - target: {fileID: 8936585294487075928, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -41811,7 +41872,11 @@ PrefabInstance:
     - {fileID: 1537918541243725373, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     - {fileID: 7817471193244416105, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7657724635838311035, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 736525609}
   m_SourcePrefab: {fileID: 100100000, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
 --- !u!20 &1089681641 stripped
 Camera:
@@ -44165,6 +44230,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 810718359952361548, guid: acdf573090d91114db1a4e3355ea9c69,
     type: 3}
   m_PrefabInstance: {fileID: 1143888077}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1144956263 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5151380821512223064, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1145361104
 PrefabInstance:

@@ -31,7 +31,8 @@ public class S_cameraFollow : MonoBehaviour{
     [SerializeField] private AnimationCurve _moveInputStrength;
 
     [Header("Camera Zoom")]
-    [SerializeField] private Camera _camera; 
+    [SerializeField] private Camera _camera;
+    [SerializeField] private Camera _cameraMask;
     [SerializeField] private float _normalOrthoSize = 5f; 
     [SerializeField] private float _slowMotionOrthoSize = 8f; 
     [SerializeField] private float _zoomSpeed = 2f;
@@ -69,11 +70,14 @@ public class S_cameraFollow : MonoBehaviour{
     private void Start(){
         _targetOrthoSize = _normalOrthoSize;
         _camera.orthographicSize = _normalOrthoSize;
+        _cameraMask.orthographicSize = _normalOrthoSize;
     }
 
     private void FixedUpdate()
     {
-        _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, _targetOrthoSize, _zoomSpeed * Time.deltaTime);
+        float SizeCamera = Mathf.Lerp(_camera.orthographicSize, _targetOrthoSize, _zoomSpeed * Time.deltaTime);
+        _camera.orthographicSize = SizeCamera;
+        _cameraMask.orthographicSize = SizeCamera;
 
         float distance = Vector3.Distance(_player.transform.position, transform.position);
         distance *= _distanceSpeed;
