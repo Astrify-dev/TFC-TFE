@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2130806486480115228}
   - component: {fileID: 6281079124375302813}
+  - component: {fileID: -60177379312278609}
   m_Layer: 0
   m_Name: SimpleFrame_02
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-60177379312278609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7840931437760924142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad83befe9fd7de1418c13235f381a935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatAxis: {x: 0, y: 0.5, z: 0}
+  floatDistance: 0.3
+  floatSpeed: 2
