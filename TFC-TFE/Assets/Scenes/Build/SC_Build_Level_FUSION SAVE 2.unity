@@ -30086,7 +30086,7 @@ PrefabInstance:
         type: 3}
       propertyPath: checkpointManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2127221961}
     - target: {fileID: 1437583336598556988, guid: f95972ed36deb0f4a93ba77615df7f22,
         type: 3}
       propertyPath: m_Size.y
@@ -32799,7 +32799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
   _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &919992011
@@ -36139,8 +36139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _splineAnimate: {fileID: 1900862504}
-  _SFX_TchouTchou: {fileID: 0}
-  _train: {fileID: 0}
+  _SFX_TchouTchou: {fileID: 11400000, guid: 0a920af75384aef44bb40d9c640311eb, type: 2}
+  _train: {fileID: 1900862503}
 --- !u!1 &1000459470
 GameObject:
   m_ObjectHideFlags: 0
@@ -47763,8 +47763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
-  _SFX_Corruption: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &1266972559
 BoxCollider:
@@ -50890,7 +50890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
   _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &1327324913
@@ -57778,7 +57778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
   _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &1501577247
@@ -62520,8 +62520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
-  _SFX_Corruption: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
+  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &1637406180
 BoxCollider:
@@ -76402,7 +76402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOverOnDeath: 1
-  checkpointManager: {fileID: 0}
+  checkpointManager: {fileID: 2127221961}
   _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
   _corruption: 1
 --- !u!65 &2013120261
@@ -80448,6 +80448,18 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2127221961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5526912777598868532, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7cdba72e86d9849a860aa0294f3004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2127240547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4890017998824927257, guid: a741d6859ef27ad46b98507b576af6d5,
