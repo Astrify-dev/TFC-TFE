@@ -24,6 +24,8 @@ public class S_controllerPlayer : MonoBehaviour
     [field: SerializeField] public S_switchColorHair ColorSwitchHair { get; private set; }
     [field: SerializeField] public S_particleDashManager ParticleDashManager { get; private set; }
 
+    [field: SerializeField] public S_vibrationGamePad VibrationGamePad { get; private set; }
+
     private void Awake()
     {
         if (inputPlayer is null)
@@ -91,6 +93,11 @@ public class S_controllerPlayer : MonoBehaviour
         {
             Debug.LogError("Not ColorSwitchHair Scripts");
 
+        }
+
+        if(VibrationGamePad is null)
+        {
+            VibrationGamePad = GetComponent<S_vibrationGamePad>();
         }
 
     }
