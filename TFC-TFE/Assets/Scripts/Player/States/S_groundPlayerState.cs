@@ -14,8 +14,6 @@ public class S_groundPlayerState : S_basePlayerStates
         _player = Player;
         Player.SetAirDash(Player.MovementSettings.GroundAirDashCount);
         _velocity = Player.Rigidbody.velocity;
-
-        Player.AnimatorPlayer.SetBool("IsInTheAir", false);
     }
 
     public override void OnEnable(S_playerManagerStates Player)

@@ -123,7 +123,7 @@ public class S_playerManagerStates : MonoBehaviour
 
         //Animator
         AnimatorPlayer.SetFloat("VelocityX", Mathf.Abs(Rigidbody.velocity.z/MovementSettings.maxMoveSpeed));
-        AnimatorPlayer.SetFloat("VelocityY", Mathf.Clamp(Rigidbody.velocity.y/2, -1, 1));
+        AnimatorPlayer.SetFloat("VelocityY", Mathf.Clamp(Rigidbody.velocity.y/5, -1, 1));
 
     }
     private void Inputs_OnMoveEvent(Vector2 Dir)
@@ -144,10 +144,18 @@ public class S_playerManagerStates : MonoBehaviour
 
     public bool CheckGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, MovementSettings.jumpResetLayers))
-            return true;
+        bool Ground = false;
 
-        return Physics.SphereCast(transform.position, 0.25f, Vector3.down, out _, _groundCheckDistance + 0.2f, MovementSettings.jumpResetLayers);
+        if (Physics.Raycast(transform.position, Vector3.down, _groundCheckDistance, MovementSettings.jumpResetLayers))
+            Ground = true;
+        else if(Physics.SphereCast(transform.position, 0.25f, Vector3.down, out _, _groundCheckDistance + 0.2f, MovementSettings.jumpResetLayers))
+            Ground = true;
+
+        AnimatorPlayer.SetBool("IsInTheAir", !Ground);
+
+        return Ground;
+
+        
     }
 
     public bool CheckWall(float distanceCheck)

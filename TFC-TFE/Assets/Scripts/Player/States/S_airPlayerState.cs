@@ -81,8 +81,6 @@ public class S_airPlayerState : S_basePlayerStates
         _player = Player;
         _fallSpeed = 0;
 
-        Player.AnimatorPlayer.SetBool("IsInTheAir", true);
-
         Player.SwitchVisual(false);
 
     }
