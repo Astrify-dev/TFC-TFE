@@ -33,7 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _GradientPower
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -106,6 +106,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Disable: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -117,19 +118,19 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PlayerDistance: 0
-    - _PlayerHeightStrength: 0
-    - _PlayerStrength: 0
+    - _PlayerDistance: 1.5
+    - _PlayerHeightStrength: 0.4
+    - _PlayerStrength: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 1.25
+    - _Speed: 0.7
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Strength: 1.25
+    - _Strength: 0.5
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
