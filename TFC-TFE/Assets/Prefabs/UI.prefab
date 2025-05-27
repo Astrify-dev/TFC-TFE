@@ -429,6 +429,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasEnd
       objectReference: {fileID: 0}
+    - target: {fileID: 5777629461935211261, guid: ed9511180b55c3c43adadf53b2915b0b,
+        type: 3}
+      propertyPath: _timerGame
+      value: 
+      objectReference: {fileID: 5640539112338848301}
     - target: {fileID: 7895854586173635031, guid: ed9511180b55c3c43adadf53b2915b0b,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -578,6 +583,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c4e7cff9ea5f847a6277796105c2aa, type: 3}
+--- !u!1 &5640539112338848301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 317300499727967986, guid: 78c4e7cff9ea5f847a6277796105c2aa,
+    type: 3}
+  m_PrefabInstance: {fileID: 5341409274959600863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6232469292532217803 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2044162142769785620, guid: 78c4e7cff9ea5f847a6277796105c2aa,
