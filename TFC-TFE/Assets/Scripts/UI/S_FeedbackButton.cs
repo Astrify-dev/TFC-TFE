@@ -23,11 +23,14 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     private void Update(){
         if (isClicked){
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale * clickScaleMultiplier, Time.deltaTime * animationSpeed);
+            print("CLICKED");
+            //transform.localScale = Vector3.Lerp(transform.localScale, originalScale * clickScaleMultiplier, Time.deltaTime * animationSpeed);
         }else if(isSelected){
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale * scaleMultiplier, Time.deltaTime * animationSpeed);
+            print("SELECTED");
+            //transform.localScale = Vector3.Lerp(transform.localScale, originalScale * scaleMultiplier, Time.deltaTime * animationSpeed);
         }else{
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * animationSpeed);
+            print("NOT SELECTED OR CLICKED");
+            //transform.localScale = Vector3.Lerp(transform.localScale, originalScale, Time.deltaTime * animationSpeed);
         }
     }
 
@@ -38,7 +41,9 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         isSelected = true;
         if(SFX_Switch is not null){
             SFX_Switch.Play();
-        }
+        }       
+        print("OnSelect called + "+ isSelected);
+
     }
 
     public void OnDeselect(BaseEventData eventData){
@@ -47,10 +52,18 @@ public class S_FeedbackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
         isSelected = false;
     }
-    public void OnDisable(){
-        transform.localScale = originalScale;
+    private void OnDisable()
+    {
         isSelected = false;
         isClicked = false;
+    }
+
+    private void OnEnable()
+    {
+        if (!isSelected && !isClicked)
+        {
+            transform.localScale = originalScale;
+        }
     }
 
 }
