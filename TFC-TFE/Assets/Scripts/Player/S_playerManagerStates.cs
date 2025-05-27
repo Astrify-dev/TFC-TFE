@@ -61,6 +61,8 @@ public class S_playerManagerStates : MonoBehaviour
     private IEnumerator _disableSphereEffect;
     private Coroutine _currentTransition;
 
+    private bool _airColorEnable;
+
     #endregion
 
     #region === États de la State Machine ===
@@ -206,13 +208,32 @@ public class S_playerManagerStates : MonoBehaviour
     {
         AirDashCount += Count;
         AirDashCount = Mathf.Clamp(AirDashCount, 0, MovementSettings.MaxAirDashCount);
-       
+        SwitchColorAirDash();
     }
 
     public void SetAirDash(int Value)
     {
         AirDashCount = Value;
         AirDashCount = Mathf.Clamp(AirDashCount, 0, MovementSettings.MaxAirDashCount);
+        SwitchColorAirDash();
+    }
+
+    private void SwitchColorAirDash()
+    {
+        if(!_airColorEnable && AirDashCount > 0){
+            _airColorEnable = true;
+            S_controllerPlayer.Instance.ColorSwitchHair.ColorSwitch(true);
+            S_controllerPlayer.Instance.HairFollow.SetupPos();
+            return;
+        }
+
+        if(_airColorEnable && AirDashCount <= 0)
+        {
+            _airColorEnable = false;
+            S_controllerPlayer.Instance.ColorSwitchHair.ColorSwitch(false);
+            S_controllerPlayer.Instance.HairFollow.SetUpSmallPos();
+            return;
+        }
     }
 
     public void SwitchVisual(bool Enable)

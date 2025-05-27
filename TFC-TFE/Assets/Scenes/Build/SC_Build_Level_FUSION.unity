@@ -14252,6 +14252,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 346834370}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &348659859 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1891822946102877545, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &349819057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516336348215240064, guid: 96eb33048863d4049bfc878ab070398f,
@@ -23752,6 +23758,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3793536508731893521, guid: d10e5dde9e484f64e8e950facd3b108c,
     type: 3}
   m_PrefabInstance: {fileID: 1733344923}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &605348531 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2206037171790806853, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &605348539 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 8260329299037230847, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &606814515
 PrefabInstance:
@@ -43372,6 +43390,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 643801207653966206, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 725633133877745487, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -43563,6 +43586,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2206037171790806853, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2220738034192119342, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -43681,6 +43709,11 @@ PrefabInstance:
       propertyPath: _zoomSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3000594296336300475, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _cameraMask
+      value: 
+      objectReference: {fileID: 348659859}
     - target: {fileID: 3000594296336300475, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: _slowMotionOrthoSize
@@ -44342,6 +44375,96 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _effectHair
+      value: 
+      objectReference: {fileID: 605348539}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _speedShort
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorEnable.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorEnable.b
+      value: 0.90588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorEnable.g
+      value: 0.7019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorEnable.r
+      value: 0.38039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorDisable.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorDisable.b
+      value: 0.03137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorDisable.g
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorDisable.r
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _speedSwitchColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.data[0].inSlope
+      value: -0.0067221895
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.data[0].outSlope
+      value: -0.0067221895
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471402462866323216, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _colorSwitchCurve.m_Curve.Array.data[0].outWeight
+      value: 0.14020619
+      objectReference: {fileID: 0}
+    - target: {fileID: 6484999074596457884, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: <ColorSwitchHair>k__BackingField
+      value: 
+      objectReference: {fileID: 1952770740}
     - target: {fileID: 6515721951656226615, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -44625,12 +44748,12 @@ PrefabInstance:
     - target: {fileID: 7986906062390744450, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 103.7
+      value: 12.2
       objectReference: {fileID: 0}
     - target: {fileID: 7986906062390744450, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.5
+      value: -65.1
       objectReference: {fileID: 0}
     - target: {fileID: 8017027431117447253, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -44678,6 +44801,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8260329299037230847, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8368179712934335040, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -44698,6 +44826,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -107.78
       objectReference: {fileID: 0}
+    - target: {fileID: 8430438661571246551, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: _hairEffect
+      value: 
+      objectReference: {fileID: 605348531}
     - target: {fileID: 8536110331776652576, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -44866,6 +44999,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 997343565}
+    - targetCorrespondingSourceObject: {fileID: 7800547307128377465, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1952770740}
   m_SourcePrefab: {fileID: 100100000, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
 --- !u!1001 &1090429747
 PrefabInstance:
@@ -80398,6 +80535,52 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1951326734}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1952770737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7800547307128377465, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952770740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952770737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f078f43dc67bf59408766abf848551e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorSwitchCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _speedSwitchColor: 2
+  _colorEnable: {r: 0.38039216, g: 0.7019608, b: 0.90588236, a: 1}
+  _colorDisable: {r: 0.4117647, g: 0.007843138, b: 0.003921569, a: 1}
+  _effectHair: {fileID: 605348539}
 --- !u!4 &1953306288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516336348215240064, guid: 96eb33048863d4049bfc878ab070398f,

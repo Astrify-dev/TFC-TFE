@@ -18,7 +18,7 @@ MonoBehaviour:
   - name: Noise
     collapsed: 1
   - name: Color
-    collapsed: 1
+    collapsed: 0
   - name: Size
     collapsed: 1
   - name: Spline
@@ -30,13 +30,13 @@ MonoBehaviour:
   - name: BigParticle
     collapsed: 1
   - name: WorldParticle
-    collapsed: 0
+    collapsed: 1
   uiBounds:
     serializedVersion: 2
-    x: -5752
+    x: -5751
     y: -402
     width: 19734
-    height: 5003
+    height: 5004
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13520,7 +13520,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
