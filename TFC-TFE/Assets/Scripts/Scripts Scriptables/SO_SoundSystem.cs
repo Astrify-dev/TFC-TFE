@@ -21,7 +21,7 @@ public class SoundSystem : ScriptableObject{
 
     public AudioClip getRandomSong => _sounds[Random.Range(0, _sounds.Count)];
     public float getRandomVolume => Mathf.Lerp(_volume.x, _volume.y, _randomVolumeCurve.Evaluate(UnityEngine.Random.value));
-    public float getRandomPitch => Mathf.Lerp(_pitch.x, _pitch.y, _randomPitchCurve.Evaluate(UnityEngine.Random.value));
+    public float getRandomPitch => Random.Range(_pitch.x, _pitch.y);
 
     public AudioSource Play() => S_SoundPool.instance.PlaySound(this);
 

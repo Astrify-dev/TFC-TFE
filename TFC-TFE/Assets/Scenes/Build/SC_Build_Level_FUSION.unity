@@ -4183,54 +4183,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96eb33048863d4049bfc878ab070398f, type: 3}
---- !u!1 &124797658
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 124797659}
-  - component: {fileID: 124797660}
-  m_Layer: 3
-  m_Name: GhostManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &124797659
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124797658}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1433533471}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &124797660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124797658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6497249b1488df479e01fd0a4885b22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recorder: {fileID: 997343565}
-  ghostPlayer: {fileID: 2086675203}
-  ghostObject: {fileID: 2086675193}
-  gameTimer: {fileID: 2119690154}
 --- !u!1001 &126414755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43438,6 +43390,26 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 908223365816945106, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: recorder
+      value: 
+      objectReference: {fileID: 997343565}
+    - target: {fileID: 908223365816945106, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: gameTimer
+      value: 
+      objectReference: {fileID: 2119690154}
+    - target: {fileID: 908223365816945106, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: ghostObject
+      value: 
+      objectReference: {fileID: 2086675193}
+    - target: {fileID: 908223365816945106, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: ghostPlayer
+      value: 
+      objectReference: {fileID: 2086675203}
     - target: {fileID: 926422340298565481, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -43904,6 +43876,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4189362269608015197, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: ghostPlayer
+      value: 
+      objectReference: {fileID: 2086675203}
+    - target: {fileID: 4189362269608015197, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: ghostRecorder
+      value: 
+      objectReference: {fileID: 997343565}
     - target: {fileID: 4276862489685177668, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -44852,15 +44834,7 @@ PrefabInstance:
     - {fileID: 2158546854182686386, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     - {fileID: 8944428767218611483, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     - {fileID: 1537918541243725373, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3754570893217655505, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 124797659}
-    - targetCorrespondingSourceObject: {fileID: 3754570893217655505, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2119690153}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5342679102836680820, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -59806,12 +59780,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2749250187981878695, guid: 5eade6385be6e8a4daf9ca93096cafa3,
     type: 3}
   m_PrefabInstance: {fileID: 1433292718}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1433533471 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3754570893217655505, guid: 68652eea3fd53a04097c58f15809bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1433651134
 GameObject:
@@ -86308,53 +86276,18 @@ Transform:
   - {fileID: 1563371839}
   m_Father: {fileID: 1697255229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2119690152
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2119690153}
-  - component: {fileID: 2119690154}
-  m_Layer: 3
-  m_Name: TimerGameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2119690153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119690152}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1433533471}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2119690154
+--- !u!114 &2119690154 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4189362269608015197, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2119690152}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cacd567079a37574983029b9676feb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostRecorder: {fileID: 997343565}
-  ghostPlayer: {fileID: 2086675203}
-  isRunning: 0
 --- !u!1001 &2125526511
 PrefabInstance:
   m_ObjectHideFlags: 0
