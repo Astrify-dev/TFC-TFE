@@ -46,9 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingStarPrefab: {fileID: 3455237498200277675, guid: d7c2d4b259174404f8a71fac5f606491,
     type: 3}
-  repeatRate: 0.25
-  time: 1
-  rangeXNegative: -12
-  rangeXPositive: 25
+  repeatRate: 1
   speedMin: 1
-  speedMax: 2
+  speedMax: 6
+  squareSize: {x: 150, y: 100}
+  centerPosition: {x: 0, y: 100, z: 100}
