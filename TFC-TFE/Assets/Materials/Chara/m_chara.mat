@@ -60,13 +60,23 @@ Material:
     m_Ints: []
     m_Floats:
     - _ADDITIONALLIGHT: 0
+    - _ADDITIONALLIGHTENABLE: 0
+    - _Axis_or_Random: 0
+    - _FLOATINGENABLE: 0
     - _Float: 0
+    - _ParallaxStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ROTATIONENABLE: 0
     - _Saturate: 1
     - _Smoothness: 0
+    - _SpeedFloating: 0.5
+    - _SpeedRotation: 0.5
+    - _StrengthFloating: 0.2
     m_Colors:
     - _AddColor: {r: 0.5622641, g: 0.5622641, b: 0.5622641, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _CustomThreshold: {r: -0.6, g: 0, b: 0, a: 0}
+    - _PivotPoint: {r: 0, g: 0, b: 0, a: 0}
+    - _RotationAxis: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
