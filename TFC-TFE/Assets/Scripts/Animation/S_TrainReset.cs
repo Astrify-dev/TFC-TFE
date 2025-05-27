@@ -6,9 +6,12 @@ public class S_TrainReset : MonoBehaviour
 {
     public static Action OnResetSpline;
     [SerializeField] private SplineAnimate _splineAnimate;
+    [SerializeField] private SoundSystem _SFX_TchouTchou;
+    [SerializeField] private GameObject _train;
     private void OnEnable()
     {
         OnResetSpline += ResetTrain;
+        _SFX_TchouTchou.Play(_train.transform.position);
     }
 
     private void OnDisable()
