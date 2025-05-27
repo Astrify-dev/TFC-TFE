@@ -33,8 +33,6 @@ public class S_vibrationGamePad : MonoBehaviour
 
             Value = _progressCurve.Evaluate(Timer);
 
-            Debug.Log(Value);
-
             Gamepad.current.SetMotorSpeeds(Value * Speed, Value * power);
 
             yield return null;
