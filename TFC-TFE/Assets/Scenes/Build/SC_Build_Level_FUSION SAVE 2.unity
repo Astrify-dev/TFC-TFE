@@ -39327,6 +39327,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 129072844127128918, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 129865259357464678, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -40467,6 +40472,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7042211284883848241, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7051286340840478234, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -48372,6 +48382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: P_ShootingStarsSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523635635436604800, guid: 29f9bd70dcca1464db156506fa43a71d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
