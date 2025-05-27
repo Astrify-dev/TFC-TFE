@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.XR.Haptics;
 public class S_GhostRecorder : MonoBehaviour{
     public S_playerManagerStates S_playerManagerStates;
     public Animator animator;
-    public float recordInterval = 0.05f;
+    public float recordInterval = 0.01f;
     private float recordTimer = 0f;
 
     public List<S_GhostFrame> RecordedFrames { get; private set; } = new List<S_GhostFrame>();
