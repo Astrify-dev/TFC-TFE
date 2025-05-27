@@ -74500,28 +74500,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 315737626}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1939192671 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3216646849983165114, guid: 8606fc5301756bc49943f95f79f452e2,
-    type: 3}
-  m_PrefabInstance: {fileID: 7626586884699046816}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1939192674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1939192671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7353f03d201707941a18edb2b5ca7bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameOverOnDeath: 1
-  checkpointManager: {fileID: 2127221961}
-  _SFX_Corruption: {fileID: 11400000, guid: a2bd928dc33448944b5a49c170fada5d, type: 2}
-  _corruption: 1
 --- !u!1001 &1943574143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82112,10 +82090,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1246811511694282887, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 2127221961}
     - target: {fileID: 5079218128129337402, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
       propertyPath: m_Name
       value: DeathFollow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079218128129337402, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6231611209748367052, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
@@ -82167,14 +82155,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _gizmosCount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _updateCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _disableGiemos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534450678548425734, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3216646849983165114, guid: 8606fc5301756bc49943f95f79f452e2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1939192674}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8606fc5301756bc49943f95f79f452e2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
