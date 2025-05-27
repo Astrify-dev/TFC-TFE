@@ -25,7 +25,9 @@ public class S_vibrationGamePad : MonoBehaviour
         float Timer = 0;
         float Value = 0;
 
-        while (Timer < 0)
+        Debug.Log("VibrationOn");
+
+        while (Timer < 1)
         {
             Timer += Time.unscaledDeltaTime * Duration;
 
