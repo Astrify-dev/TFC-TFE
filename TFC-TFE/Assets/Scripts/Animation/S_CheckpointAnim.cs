@@ -12,9 +12,7 @@ public class S_CheckpointAnim : MonoBehaviour
     {
         float rotationSpeed = speed * Time.deltaTime;
 
-        if (checkpointAnimator.GetBool("IsActivated"))
-        {
             transform.Rotate(0f, 0f, rotationSpeed);
-        }
+       
     }
 }
