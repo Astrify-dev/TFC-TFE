@@ -347,6 +347,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Lol",
+            "id": "684df49f-1512-41a0-8cc1-26180f2703bf",
+            "actions": [
+                {
+                    "name": "Drunk",
+                    "type": "Button",
+                    "id": "2d14e23e-f107-4eff-8b30-9123d3470e0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e97c7025-1fbc-4f69-a3d0-b93f7c4d0100",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drunk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
