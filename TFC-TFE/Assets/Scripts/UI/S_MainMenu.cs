@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class S_MainMenu : MonoBehaviour
 {
@@ -22,9 +24,15 @@ public class S_MainMenu : MonoBehaviour
     [SerializeField] private SoundSystem SFX_Switch;
     [SerializeField] private float scaleMultiplier = 1.2f;
     [SerializeField] private S_HiddenButtonMain S_HiddenButtonMain;
+
+    [Header("FullScreenPath")]
+    [SerializeField] private Material _fullScreenPathDistortion;
+
     private Vector3 originalScale;
     private RectTransform rectTransform;
     private LayoutElement layoutElement;
+
+    [SerializeField] Volume Volume;
 
     private void Start(){
         rectTransform = GetComponent<RectTransform>();
@@ -32,9 +40,19 @@ public class S_MainMenu : MonoBehaviour
         originalScale = transform.localScale;
     }
 
+    private void OnEnable()
+    {
+        _fullScreenPathDistortion.SetInt("_Enable", 0);
+    }
+
+    private void OnDisable()
+    {
+        
+    }
     public void OnPlayButtonPressed(){
         StartCoroutine(DelayedAction(() =>{
             if (!string.IsNullOrEmpty(playSceneName)){
+                _fullScreenPathDistortion.SetInt("_Enable", 1);
                 SceneManager.LoadScene(playSceneName);
             }
         }));
