@@ -20,6 +20,13 @@ public class S_vibrationGamePad : MonoBehaviour
         StartCoroutine(_vibrationOn);
     }
 
+    public void StopVibration()
+    {
+        if (_vibrationOn is not null)
+            StopCoroutine(_vibrationOn);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+    }
+
     IEnumerator VibrationGamePad(float Duration, float Speed, float power)
     {
         float Timer = 0;
