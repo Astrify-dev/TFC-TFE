@@ -37,6 +37,11 @@ public class S_groundPlayerState : S_basePlayerStates
             return;
         }
 
+        RaycastHit hit;
+        Physics.Raycast(Player.transform.position, Vector3.down, out hit, 1f, Player.MovementSettings.jumpResetLayers);
+
+        Debug.Log(hit.normal);
+
         float moveInput = Player.DirectionInput.x;
         float targetSpeed = moveInput * Player.MovementSettings.maxMoveSpeed;
 
@@ -48,9 +53,13 @@ public class S_groundPlayerState : S_basePlayerStates
         float AccelerationDeltaTime = Player.MovementSettings.accelerationRate * Time.deltaTime;
 
         _velocity.z = Mathf.MoveTowards(_velocity.z, targetSpeed, AccelerationDeltaTime);
-        
 
-        Player.Rigidbody.velocity = _velocity;
+
+
+        Vector2 RemapDir = Vector3.Cross(Vector3.up,hit.normal).normalized;
+        Vector3 forward = Vector3.ProjectOnPlane(Player.transform.forward, hit.normal).normalized;
+
+        Player.Rigidbody.velocity = _velocity.z * forward;
         Player.HandleFlip(moveInput);
     }
 

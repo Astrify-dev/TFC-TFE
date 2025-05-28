@@ -131,7 +131,7 @@ public class S_hairFollow : MonoBehaviour
 
     public void FlipHair(bool Right)
     {
-        Debug.Log("HairRight:" + Right);
+        //Debug.Log("HairRight:" + Right);
 
         _positionPlayer.z = -Mathf.Abs(_positionPlayer.z);
         _posTarget1.z = -Mathf.Abs(_posTarget1.z);
