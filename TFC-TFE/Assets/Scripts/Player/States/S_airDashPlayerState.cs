@@ -103,6 +103,7 @@ public class S_airDashPlayerState : S_basePlayerStates
                 BreakingWall.BreakWall(_player.DashDirection.x);
                 S_controllerPlayer.Instance.CameraShake.Shake(3f, 2f);
                 S_controllerPlayer.Instance.VibrationGamePad.StartVibration(3f, 2f, 0.2f);
+                Debug.Log("EnableVibration");
                 Player.SwitchState(Player.AirDashState);
                 return;
             }

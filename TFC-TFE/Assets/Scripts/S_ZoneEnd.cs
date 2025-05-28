@@ -12,6 +12,7 @@ public class S_ZoneEnd : MonoBehaviour{
             if (timerSpeedrun is not null){
                 timerSpeedrun.StopTimer();
             }
+            S_controllerPlayer.Instance.VibrationGamePad.StopVibration();
             deathSpline.endWin = true;
             FindObjectOfType<S_GhostManager>()?.OnRunEnd();
             S_playerManagerStates playerManagerStates = other.GetComponent<S_playerManagerStates>();

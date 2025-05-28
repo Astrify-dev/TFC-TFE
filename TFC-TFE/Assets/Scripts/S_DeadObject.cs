@@ -29,7 +29,9 @@ public class S_DeadObject : MonoBehaviour{
                 }else{
                     checkpointManager.RespawnPlayer();
                 }
-
+                S_controllerPlayer.Instance.VibrationGamePad.StartVibration(3f, 1f, 1f);
+                Debug.Log("EnableVibration");
+                S_controllerPlayer.Instance.CameraShake.Shake(3f, 2f);
                 S_deathAlongueSpline.RestDeadZone?.Invoke();
                 S_TimerSpeedrun.OnPlayerDeath?.Invoke();
                 StartCoroutine(InvokeCanvasEndEventWithDelay(1f));
