@@ -379,51 +379,6 @@ Transform:
   - {fileID: 579259528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3481307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089681643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleUp
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681643}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 10
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleDown
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681643}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &4424123
 GameObject:
   m_ObjectHideFlags: 0
@@ -18548,6 +18503,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1316019665}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &406339160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5561361148550815420, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &406339162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5109745335915396325, guid: 68652eea3fd53a04097c58f15809bdc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089681640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406339160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60edbc9b413d6a4f8f96bb2917b7fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &408194104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39118,51 +39091,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 914121723}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &916196631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089681644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleUp
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681644}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 10
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleDown
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681644}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!4 &916391907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4784496811259277490, guid: 41f1bcd55fabc5545a3fb839d8f47779,
@@ -48719,6 +48647,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5561361148550815420, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5568581188110874433, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -49204,6 +49137,11 @@ PrefabInstance:
     - target: {fileID: 7075858413909852869, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7096508374071794746, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7100550427624590432, guid: 68652eea3fd53a04097c58f15809bdc6,
@@ -49835,12 +49773,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ghostObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 406339160}
     - target: {fileID: 9191213902833344680, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: ghostPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 406339162}
     - target: {fileID: 9192823477577227008, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -49872,16 +49810,15 @@ PrefabInstance:
       value: -107.78
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2246195228087634474, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 2779518855760900437, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 1894977065022838578, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 1788069662866809872, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 7527906174127483094, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 5963242138674153589, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 1168739477324557358, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 2227507866267083251, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 2201661513449329764, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
-    - {fileID: 5975111451680450662, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects:
     - {fileID: 2158546854182686386, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     - {fileID: 8944428767218611483, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
@@ -49891,22 +49828,6 @@ PrefabInstance:
     - {fileID: 6518285377617557980, guid: 68652eea3fd53a04097c58f15809bdc6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 554870316255263657, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1089681651}
-    - targetCorrespondingSourceObject: {fileID: 5540800572450642996, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1536690640}
-    - targetCorrespondingSourceObject: {fileID: 9057272009051529397, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 916196631}
-    - targetCorrespondingSourceObject: {fileID: 7727736908289318018, guid: 68652eea3fd53a04097c58f15809bdc6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3481307}
     - targetCorrespondingSourceObject: {fileID: 5304653680488759295, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       insertIndex: -1
@@ -49940,30 +49861,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1089681643 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7727736908289318018, guid: 68652eea3fd53a04097c58f15809bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089681640}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1089681644 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9057272009051529397, guid: 68652eea3fd53a04097c58f15809bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089681640}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1089681645 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5540800572450642996, guid: 68652eea3fd53a04097c58f15809bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089681640}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1089681646 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 554870316255263657, guid: 68652eea3fd53a04097c58f15809bdc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089681640}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1089681647 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5623654208933870943, guid: 68652eea3fd53a04097c58f15809bdc6,
@@ -49988,51 +49885,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1089681640}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1089681651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089681646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleUp
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681646}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 10
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleDown
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681646}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1089681652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71362,51 +71214,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536660242}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1536690640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089681645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 9
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleUp
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681645}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 10
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1835918121}
-          m_TargetAssemblyTypeName: S_PauseManager, Assembly-CSharp
-          m_MethodName: ScaleDown
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1089681645}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &1536713097
 PrefabInstance:
   m_ObjectHideFlags: 0
