@@ -7,13 +7,11 @@ public class S_shootingStarSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject shootingStarPrefab;
     [SerializeField] private float repeatRate = 1.5f;
-    [SerializeField] private float time = 1f;
-    [SerializeField] private float rangeXNegative = -5f;
-    [SerializeField] private float rangeXPositive = 5f;
     [SerializeField] private float speedMin = 3f;
     [SerializeField] private float speedMax = 6f;
-    private float addY = 5f;
-    [SerializeField] private Camera mainCamera;
+
+    [SerializeField] Vector2 squareSize = new Vector2(5f, 5f);
+    [SerializeField] Vector3 centerPosition = Vector3.zero;
 
     void Start()
     {
@@ -22,13 +20,16 @@ public class S_shootingStarSpawn : MonoBehaviour
 
     void SpawnShootingStar()
     {
-        Vector3 topOfScreen = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height + addY, 10f));
 
-        float randomX = Random.Range(rangeXNegative, rangeXPositive);
-        Vector3 spawnPos = new Vector3(-15f, topOfScreen.y + 1f, topOfScreen.x + randomX);
+        float randomY = Random.Range(centerPosition.y - squareSize.x / 2f, centerPosition.y + squareSize.x / 2f);
+        float randomZ = Random.Range(centerPosition.z - squareSize.y / 2f, centerPosition.z + squareSize.y / 2f);
+
+        Vector3 spawnPos = new Vector3(-15, randomY, randomZ);
 
         GameObject star = Instantiate(shootingStarPrefab, spawnPos, Quaternion.identity);
+
         float speed = Random.Range(speedMin, speedMax);
-        star.AddComponent<S_shootingStar>().Initialize(speed);
-    }
+
+        star.GetComponent<S_shootingStar>().Initialize(speed);
+    } 
 }

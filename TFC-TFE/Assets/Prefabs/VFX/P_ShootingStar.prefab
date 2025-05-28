@@ -24672,6 +24672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8881135872507748401}
+  - component: {fileID: 6102731468863657358}
   m_Layer: 0
   m_Name: P_ShootingStar
   m_TagString: Untagged
@@ -24696,6 +24697,19 @@ Transform:
   - {fileID: 9187066240856508751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6102731468863657358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455237498200277675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea8f8ef7d4d5974bac62d0fd7ad97c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endVFX: {fileID: 5957246825772316269, guid: 065c2c0767a302c42842cdc85a140c00, type: 3}
 --- !u!1 &4870911881550355750
 GameObject:
   m_ObjectHideFlags: 0

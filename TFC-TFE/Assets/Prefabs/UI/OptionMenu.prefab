@@ -482,7 +482,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0.9955938, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9686275, g: 0.8000001, b: 0.64705884, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1059,7 +1059,6 @@ GameObject:
   - component: {fileID: 3886905580160266647}
   - component: {fileID: 7485413854049651462}
   - component: {fileID: 1920502337679693689}
-  - component: {fileID: 3034888885610265322}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1084,7 +1083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182, y: -209}
+  m_AnchoredPosition: {x: 1030, y: -209}
   m_SizeDelta: {x: 306.259, y: 144.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3886905580160266647
@@ -1181,22 +1180,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3034888885610265322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955908273200859297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac633f528a9a524fa973714549a2831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SFX_Switch: {fileID: 11400000, guid: 330b71b3426019c4e84131c59ce1e711, type: 2}
-  scaleMultiplier: 1.2
-  clickScaleMultiplier: 0.8
-  animationSpeed: 3
 --- !u!1 &2527938146915592428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4777122781366682145}
+  - component: {fileID: 8044968068438908998}
   m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
@@ -1233,6 +1217,51 @@ RectTransform:
   m_AnchoredPosition: {x: -140.65, y: 0}
   m_SizeDelta: {x: -353.021, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8044968068438908998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527938146915592428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleUp
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2527938146915592428}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleDown
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2527938146915592428}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2772257403049484983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1399,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0.9955938, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9686275, g: 0.8000001, b: 0.64705884, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1459,7 +1488,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0.9955938, b: 0, a: 1}
+    m_SelectedColor: {r: 0.9686275, g: 0.8000001, b: 0.64705884, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1573,6 +1602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3297549254770923545}
+  - component: {fileID: 3035671827152400003}
   m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
@@ -1600,6 +1630,51 @@ RectTransform:
   m_AnchoredPosition: {x: -140.65, y: 0}
   m_SizeDelta: {x: -353.021, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3035671827152400003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4216122485409724375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleUp
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4216122485409724375}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleDown
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4216122485409724375}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4435548495050422773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,6 +1893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7740958012124614824}
+  - component: {fileID: 2368609686836342555}
   m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
@@ -1845,6 +1921,51 @@ RectTransform:
   m_AnchoredPosition: {x: -140.65, y: 0}
   m_SizeDelta: {x: -353.021, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2368609686836342555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6058821216742021875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleUp
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6058821216742021875}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 10
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: S_MainMenu, Assembly-CSharp
+          m_MethodName: ScaleDown
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 6058821216742021875}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6358046776220518788
 GameObject:
   m_ObjectHideFlags: 0
