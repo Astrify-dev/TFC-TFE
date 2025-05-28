@@ -11,6 +11,10 @@ public class S_HiddenButtonMain : MonoBehaviour{
         StartCoroutine(ActivateUIHidenWithDelay());
     }
 
+    public void HideUIHiden(){
+        StartCoroutine(ActivateUIHidenWithDelay());
+    }
+
     private IEnumerator ActivateUIHidenWithDelay(){
         yield return new WaitForSeconds(2.15f);
         _UIHiden.SetActive(true);

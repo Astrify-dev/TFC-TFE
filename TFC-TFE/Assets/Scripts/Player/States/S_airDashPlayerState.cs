@@ -83,11 +83,18 @@ public class S_airDashPlayerState : S_basePlayerStates
 
 
         float DistanceRay = ( Mathf.Abs(_dirAirDash.y * Player.MovementSettings.ReboundCorrectionValueCapsule) + 1) * Player.WallCheckDistance;
-
-        if (Physics.Raycast(Player.transform.position, _dirAirDash, DistanceRay, Player.MovementSettings.bounceLayers))
-            Player.SwitchState(Player.WallReboundState);
-
         RaycastHit hit;
+
+        if (Physics.Raycast(Player.transform.position, _dirAirDash,out hit, DistanceRay, Player.MovementSettings.bounceLayers))
+        {
+            if (hit.transform.gameObject.layer == Player._invisibleWall) { 
+                Player.SwitchState(Player.AirState);
+                return;
+            }
+                
+            Player.SwitchState(Player.WallReboundState);
+        }
+
 
         if (Physics.Raycast(Player.transform.position, _dirAirDash,out hit, DistanceRay, Player.MovementSettings.breakWall))
         {

@@ -14,6 +14,7 @@ public class S_playerManagerStates : MonoBehaviour
     [SerializeField] GameObject _visualObject;
     [SerializeField] VisualEffect _visualEffectSphereObject;
     [SerializeField] public VisualEffect _hairEffect;
+    [field: SerializeField] public LayerMask _invisibleWall { get; private set; }
 
     public ParticleSystem _groundDashParticles;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }

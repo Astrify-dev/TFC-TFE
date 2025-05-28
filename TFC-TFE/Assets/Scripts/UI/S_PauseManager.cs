@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class S_PauseManager : MonoBehaviour
-{
+public class S_PauseManager : MonoBehaviour{
     [SerializeField] private GameObject pauseMenu;
 
     [Header("UI Panels")]
@@ -19,14 +19,23 @@ public class S_PauseManager : MonoBehaviour
     [SerializeField] private S_CanvasEnd s_CanvasEnd;
     [SerializeField] private S_playerManagerStates Player;
 
+    [SerializeField] private float scaleMultiplier = 1.2f;
+
     [SerializeField] private SoundSystem SFX_Confirm;
     private bool isPaused = false;
+
+    private Vector3 originalScale;
+    private RectTransform rectTransform;
+    private LayoutElement layoutElement;
 
     private void Start(){
         S_inputPlayer inputPlayer = FindObjectOfType<S_inputPlayer>();
         if (inputPlayer is not null){
             inputPlayer.OnPauseToggleEvent += TogglePause;
         }
+        rectTransform = GetComponent<RectTransform>();
+        layoutElement = GetComponent<LayoutElement>();
+        originalScale = transform.localScale;
     }
 
     private void TogglePause(){
@@ -120,4 +129,21 @@ public class S_PauseManager : MonoBehaviour
         yield return new WaitForSeconds(1f); 
     }
 
+    public void ScaleUp(GameObject button)
+    {
+        RectTransform buttonTransform = button.GetComponent<RectTransform>();
+        if (buttonTransform is not null)
+        {
+            buttonTransform.localScale = originalScale * scaleMultiplier;
+        }
+    }
+
+    public void ScaleDown(GameObject button)
+    {
+        RectTransform buttonTransform = button.GetComponent<RectTransform>();
+        if (buttonTransform != null)
+        {
+            buttonTransform.localScale = originalScale;
+        }
+    }
 }

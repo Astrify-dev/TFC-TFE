@@ -11848,7 +11848,7 @@ GameObject:
   - component: {fileID: 238897814}
   - component: {fileID: 238897813}
   - component: {fileID: 238897812}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MurInvisible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12592,7 +12592,7 @@ GameObject:
   - component: {fileID: 254558737}
   - component: {fileID: 254558736}
   - component: {fileID: 254558735}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MurInvisible (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22858,6 +22858,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1246811511694282887, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: checkpointManager
+      value: 
+      objectReference: {fileID: 2127221961}
     - target: {fileID: 5079218128129337402, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
       propertyPath: m_Name
@@ -22866,7 +22871,7 @@ PrefabInstance:
     - target: {fileID: 5079218128129337402, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6231611209748367052, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
@@ -48787,6 +48792,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 6097415289055591384, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: <_invisibleWall>k__BackingField.m_Bits
+      value: 131072
+      objectReference: {fileID: 0}
     - target: {fileID: 6134119515355534620, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: _player
@@ -49121,12 +49131,12 @@ PrefabInstance:
     - target: {fileID: 7100550427624590432, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 146.3
+      value: 49.54
       objectReference: {fileID: 0}
     - target: {fileID: 7100550427624590432, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 77.3
+      value: 49.16
       objectReference: {fileID: 0}
     - target: {fileID: 7110612707634202531, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -50358,7 +50368,7 @@ GameObject:
   - component: {fileID: 1106343307}
   - component: {fileID: 1106343306}
   - component: {fileID: 1106343305}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MurInvisible (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64556,7 +64566,7 @@ GameObject:
   - component: {fileID: 1412444201}
   - component: {fileID: 1412444200}
   - component: {fileID: 1412444199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84273,7 +84283,7 @@ GameObject:
   - component: {fileID: 1858915911}
   - component: {fileID: 1858915910}
   - component: {fileID: 1858915909}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: MurInvisible (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

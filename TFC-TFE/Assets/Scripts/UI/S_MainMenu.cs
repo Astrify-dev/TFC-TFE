@@ -21,9 +21,7 @@ public class S_MainMenu : MonoBehaviour
     [SerializeField] private float buttonDelay = 0.5f;
     [SerializeField] private SoundSystem SFX_Switch;
     [SerializeField] private float scaleMultiplier = 1.2f;
-    [SerializeField] private float clickScaleMultiplier = 0.8f;
-    [SerializeField] private float animationSpeed = 5f;
-
+    [SerializeField] private S_HiddenButtonMain S_HiddenButtonMain;
     private Vector3 originalScale;
     private RectTransform rectTransform;
     private LayoutElement layoutElement;
@@ -89,6 +87,7 @@ public class S_MainMenu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(firstMainMenuButton);
         }));
+        S_HiddenButtonMain.HideUIHiden();
     }
 
     private IEnumerator DelayedAction(System.Action action){
