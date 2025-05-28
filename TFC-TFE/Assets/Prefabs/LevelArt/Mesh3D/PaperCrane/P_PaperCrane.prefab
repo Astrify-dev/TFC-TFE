@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8584693132161438746}
+  - component: {fileID: 2414853797364769574}
   m_Layer: 0
   m_Name: P_PaperCrane
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 2010760280384486157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2414853797364769574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855228761727017121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad83befe9fd7de1418c13235f381a935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatAxis: {x: 0, y: 1, z: 0}
+  floatDistance: 1
+  floatSpeed: 1
 --- !u!1001 &2048327143270997222
 PrefabInstance:
   m_ObjectHideFlags: 0
