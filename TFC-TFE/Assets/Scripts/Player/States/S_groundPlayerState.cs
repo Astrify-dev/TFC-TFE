@@ -40,8 +40,6 @@ public class S_groundPlayerState : S_basePlayerStates
         RaycastHit hit;
         Physics.Raycast(Player.transform.position, Vector3.down, out hit, 1f, Player.MovementSettings.jumpResetLayers);
 
-        Debug.Log(hit.normal);
-
         float moveInput = Player.DirectionInput.x;
         float targetSpeed = moveInput * Player.MovementSettings.maxMoveSpeed;
 

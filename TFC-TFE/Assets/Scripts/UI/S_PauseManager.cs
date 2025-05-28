@@ -82,6 +82,7 @@ public class S_PauseManager : MonoBehaviour{
         {
             ghostManager.OnRunStart();
         }
+        S_controllerPlayer.Instance.VibrationGamePad.StopVibration();
         S_deathAlongueSpline.RestDeadZone?.Invoke();
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
