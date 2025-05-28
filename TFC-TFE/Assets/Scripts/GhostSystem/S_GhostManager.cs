@@ -34,4 +34,16 @@ public class S_GhostManager : MonoBehaviour
         gameTimer.StopTimer();
         lastRun = new List<S_GhostFrame>(recorder.RecordedFrames);
     }
+
+    public void SetGhostPause(bool isPaused){
+        if (recorder != null)
+            recorder.enabled = !isPaused; 
+
+        if (gameTimer != null)
+            gameTimer.isRunning = !isPaused; 
+
+        if (ghostPlayer != null)
+            ghostPlayer.SetPause(isPaused); 
+    }
+
 }
