@@ -11,7 +11,8 @@ public class S_vibrationGamePad : MonoBehaviour
 
     public void StartVibration(float Duration, float Speed, float power)
     {
-        
+
+        if (Gamepad.current is null) return;
         Gamepad.current.SetMotorSpeeds(0f, 0f);
 
         if (_vibrationOn is not null)
