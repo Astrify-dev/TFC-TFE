@@ -42,14 +42,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Debug: 0
     - _DistortionStrength: 0.05
     - _PowerBlink: 20
-    - _PowerPatch: 8.5
+    - _PowerPatch: 6.17
     - _SpeedBlink: -0.01
     - _StrengthParallaxeLayer0: 1
-    - _StrengthParallaxeLayer1: 0.5
-    - _StrengthParallaxeLayer2: 0
-    - _StrengthParallaxeLayer3: 0.1
+    - _StrengthParallaxeLayer1: 0.6
+    - _StrengthParallaxeLayer2: 0.2
+    - _StrengthParallaxeLayer3: 2
     - _TilingNoisePatch: 0.02
     - _tilingNoiseDistortion: 0.05
     m_Colors: []
