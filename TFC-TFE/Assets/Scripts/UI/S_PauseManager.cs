@@ -42,10 +42,6 @@ public class S_PauseManager : MonoBehaviour{
         isPaused = !isPaused;
         pauseMenu.SetActive(isPaused);
         s_InputPlayer.PauseGame(isPaused);
-        S_GhostManager ghostManager = FindObjectOfType<S_GhostManager>();
-        if (ghostManager != null){
-            ghostManager.SetGhostPause(isPaused);
-        }
     }
 
     private void OnDestroy(){

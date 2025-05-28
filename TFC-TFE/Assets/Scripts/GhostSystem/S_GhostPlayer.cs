@@ -9,7 +9,6 @@ public class S_GhostPlayer : MonoBehaviour{
     public GameObject ballVFXObject;
     private List<S_GhostFrame> replayFrames;
     private int currentIndex = 0;
-    private float pausedTime;
 
     public void StartReplay(List<S_GhostFrame> frames)
     {
@@ -17,32 +16,12 @@ public class S_GhostPlayer : MonoBehaviour{
         currentIndex = 0;
     }
 
-    private bool isPaused = false;
-    private Vector3 pausedPosition;
-    private Quaternion pausedRotation;
-
-    public void SetPause(bool pause){
-        isPaused = pause;
-
-        if (isPaused){
-            pausedPosition = transform.position;
-            pausedRotation = transform.rotation;
-            pausedTime = replayFrames[currentIndex].time;
-        }
-    }
-
     public void UpdateGhost(float currentTime)
     {
-        if (isPaused)
-            return;
 
         if (replayFrames == null || replayFrames.Count < 2)
             return;
 
-        if (pausedTime > 0f){
-            currentTime = pausedTime;
-            pausedTime = 0f;
-        }
 
         while (currentIndex < replayFrames.Count - 2 &&
                replayFrames[currentIndex + 1].time < currentTime)

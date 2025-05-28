@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class GameTimer : MonoBehaviour
 {
@@ -9,11 +9,9 @@ public class GameTimer : MonoBehaviour
 
     public bool isRunning = false;
 
-    void Update()
-    {
+    void Update(){
         if (!isRunning) return;
 
-        // Utilise le vrai temps, pas Time.deltaTime (qui est affecté par timeScale)
         float deltaTime = Time.unscaledDeltaTime;
         currentTime += deltaTime;
 
@@ -21,8 +19,7 @@ public class GameTimer : MonoBehaviour
         ghostPlayer?.UpdateGhost(currentTime);
     }
 
-    public void StartTimer()
-    {
+    public void StartTimer(){
         currentTime = 0f;
         isRunning = true;
     }

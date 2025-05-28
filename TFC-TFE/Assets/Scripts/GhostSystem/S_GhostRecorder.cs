@@ -11,13 +11,17 @@ public class S_GhostRecorder : MonoBehaviour{
 
     public List<S_GhostFrame> RecordedFrames { get; private set; } = new List<S_GhostFrame>();
 
-    public void RecordFrame(float currentTime){
+    public void RecordFrame(float currentTime)
+    {
         recordTimer += Time.unscaledDeltaTime;
 
-        if (recordTimer >= recordInterval){
+        if (recordTimer >= recordInterval)
+        {
             var animParams = new Dictionary<string, object>();
-            foreach (var param in animator.parameters){
-                switch (param.type){
+            foreach (var param in animator.parameters)
+            {
+                switch (param.type)
+                {
                     case AnimatorControllerParameterType.Float:
                         animParams[param.name] = animator.GetFloat(param.name);
                         break;
@@ -33,7 +37,7 @@ public class S_GhostRecorder : MonoBehaviour{
             }
             bool isBall = S_playerManagerStates.IsDashing;
             bool facingR = S_playerManagerStates.FacingRight;
-            RecordedFrames.Add(new S_GhostFrame(transform.position, currentTime, animParams, isBall,facingR));
+            RecordedFrames.Add(new S_GhostFrame(transform.position, currentTime, animParams, isBall, facingR));
             recordTimer = 0f;
         }
     }
