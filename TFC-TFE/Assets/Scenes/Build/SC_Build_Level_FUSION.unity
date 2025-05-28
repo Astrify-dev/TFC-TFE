@@ -48295,6 +48295,11 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 4482538303803100696, guid: 68652eea3fd53a04097c58f15809bdc6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -73.73
+      objectReference: {fileID: 0}
     - target: {fileID: 4510216276169153947, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Layer
@@ -48650,7 +48655,7 @@ PrefabInstance:
     - target: {fileID: 5561361148550815420, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5568581188110874433, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -49142,7 +49147,7 @@ PrefabInstance:
     - target: {fileID: 7096508374071794746, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7100550427624590432, guid: 68652eea3fd53a04097c58f15809bdc6,
         type: 3}
@@ -60064,8 +60069,8 @@ Transform:
   m_GameObject: {fileID: 1307194987}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0049067196, y: -0, z: -0, w: 0.99998796}
-  m_LocalPosition: {x: 1.0956, y: 76.8295, z: 14.8}
-  m_LocalScale: {x: 1, y: 0.92686325, z: 9.833571}
+  m_LocalPosition: {x: 1.0956, y: 76.7341, z: 14.4602}
+  m_LocalScale: {x: 1, y: 0.75087947, z: 9.833057}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 822090165}
@@ -88545,8 +88550,8 @@ Transform:
   m_GameObject: {fileID: 1928912755}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0049067196, y: -0, z: -0, w: 0.99998796}
-  m_LocalPosition: {x: 1.0956, y: 77.2761, z: 37.1}
-  m_LocalScale: {x: 1, y: 0.8252207, z: 10.270514}
+  m_LocalPosition: {x: 1.0956, y: 77.2552, z: 36.7232}
+  m_LocalScale: {x: 1, y: 0.7883333, z: 11.023342}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 822090165}
