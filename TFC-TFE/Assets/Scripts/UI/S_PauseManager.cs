@@ -77,6 +77,7 @@ public class S_PauseManager : MonoBehaviour
         {
             ghostManager.OnRunStart();
         }
+        S_deathAlongueSpline.RestDeadZone?.Invoke();
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
         S_TrainReset.OnResetSpline?.Invoke();
