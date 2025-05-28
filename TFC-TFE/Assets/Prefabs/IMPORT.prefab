@@ -98,7 +98,6 @@ GameObject:
   m_Component:
   - component: {fileID: 783909496274827894}
   - component: {fileID: 5151380821512223064}
-  - component: {fileID: 7066527760347465776}
   - component: {fileID: 8840287477304135851}
   m_Layer: 0
   m_Name: CameraMask
@@ -173,14 +172,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &7066527760347465776
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2359396598380805251}
-  m_Enabled: 1
 --- !u!114 &8840287477304135851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +412,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852719566518606788, guid: 5c4e5022516e4e24bb7922243356dc59,
         type: 3}
+      propertyPath: _cameraMask
+      value: 
+      objectReference: {fileID: 5151380821512223064}
+    - target: {fileID: 2852719566518606788, guid: 5c4e5022516e4e24bb7922243356dc59,
+        type: 3}
       propertyPath: _slowMotionOrthoSize
       value: 15
       objectReference: {fileID: 0}
@@ -492,12 +488,12 @@ PrefabInstance:
     - target: {fileID: 6982151134653921277, guid: 5c4e5022516e4e24bb7922243356dc59,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 103.7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6982151134653921277, guid: 5c4e5022516e4e24bb7922243356dc59,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.5
+      value: -66.7
       objectReference: {fileID: 0}
     - target: {fileID: 6982151134653921277, guid: 5c4e5022516e4e24bb7922243356dc59,
         type: 3}
@@ -1950,6 +1946,11 @@ PrefabInstance:
       objectReference: {fileID: 7877319632999029799}
     - target: {fileID: 878551305923794998, guid: 3c6c976597fe39f45b73b5b203e12df8,
         type: 3}
+      propertyPath: <VibrationGamePad>k__BackingField
+      value: 
+      objectReference: {fileID: 9083871422977731029}
+    - target: {fileID: 878551305923794998, guid: 3c6c976597fe39f45b73b5b203e12df8,
+        type: 3}
       propertyPath: <ParticleDashManager>k__BackingField
       value: 
       objectReference: {fileID: 2299759600108910634}
@@ -2088,7 +2089,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _hairEffect
       value: 
-      objectReference: {fileID: 4272766626932207527}
+      objectReference: {fileID: 2713527982779656481}
     - target: {fileID: 2391563982778952829, guid: 3c6c976597fe39f45b73b5b203e12df8,
         type: 3}
       propertyPath: _visualEffectSphereObject
@@ -2747,6 +2748,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8670795679448632508}
+    - targetCorrespondingSourceObject: {fileID: 2300046216173436382, guid: 3c6c976597fe39f45b73b5b203e12df8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9083871422977731029}
   m_SourcePrefab: {fileID: 100100000, guid: 3c6c976597fe39f45b73b5b203e12df8, type: 3}
 --- !u!4 &1827743821277297375 stripped
 Transform:
@@ -2811,3 +2816,48 @@ MonoBehaviour:
   S_playerManagerStates: {fileID: 6097415289055591384}
   animator: {fileID: 5827748408170004784}
   recordInterval: 0.05
+--- !u!114 &9083871422977731029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657724635838311035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8940687049bdb840b07909409eea936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

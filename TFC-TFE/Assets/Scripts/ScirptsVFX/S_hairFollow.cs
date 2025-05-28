@@ -58,13 +58,11 @@ public class S_hairFollow : MonoBehaviour
         _smallPosTarget2 = _pos2 / 100;
         _smallPosTarget3 = _pos3 / 100;
         SetupPos();
+
     }
     private void OnEnable()
     {
-        transform.position = _player.transform.position + _positionPlayer;
-        _target3.transform.position = transform.position;
-        _target2.transform.position = transform.position;
-        _target1.transform.position = transform.position;
+        ResetHair();
     }
 
     private void Update()
@@ -133,6 +131,8 @@ public class S_hairFollow : MonoBehaviour
 
     public void FlipHair(bool Right)
     {
+        Debug.Log("HairRight:" + Right);
+
         _positionPlayer.z = -Mathf.Abs(_positionPlayer.z);
         _posTarget1.z = -Mathf.Abs(_posTarget1.z);
         _posTarget2.z = Mathf.Abs(_posTarget2.z);
@@ -149,7 +149,15 @@ public class S_hairFollow : MonoBehaviour
         
     }
 
-    
+    public void ResetHair()
+    {
+        transform.position = _player.transform.position + _positionPlayer;
+        _target3.transform.position = transform.position;
+        _target2.transform.position = transform.position;
+        _target1.transform.position = transform.position;
+
+        FlipHair(S_controllerPlayer.Instance.PlayerManagerStates.FacingRight);
+    }
 
     private void OnDrawGizmos()
     {

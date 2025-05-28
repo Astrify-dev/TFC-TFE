@@ -77,13 +77,14 @@ public class S_PauseManager : MonoBehaviour
         {
             ghostManager.OnRunStart();
         }
+        S_deathAlongueSpline.RestDeadZone?.Invoke();
         S_TimerSpeedrun.OnPlayerDeath?.Invoke();
         S_CanvasEnd.OnPlayerDeath?.Invoke();
         S_TrainReset.OnResetSpline?.Invoke();
         S_wallBreak.OnReset?.Invoke();
         checkpointManager.RespawnPlayer();
-        Player._hairEffect.SetActive(false);
-        Player._hairEffect.SetActive(true);
+        Player._hairEffect.gameObject.SetActive(false);
+        Player._hairEffect.gameObject.SetActive(true);
         if (isPaused)
             TogglePause();
         S_CanvasEnd.OnPlayerRetry?.Invoke();
