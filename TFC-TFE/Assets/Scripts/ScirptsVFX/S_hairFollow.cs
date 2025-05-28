@@ -30,10 +30,6 @@ public class S_hairFollow : MonoBehaviour
     [Space]
     [SerializeField] bool _drawGizmos;
 
-    private Vector3 _pos1;
-    private Vector3 _pos2;
-    private Vector3 _pos3;
-
     private Vector3 _posTarget1;
     private Vector3 _posTarget2;
     private Vector3 _posTarget3;
@@ -50,13 +46,10 @@ public class S_hairFollow : MonoBehaviour
 
     private void Awake()
     {
-        _pos1 = _target1.transform.position - _target2.transform.position;
-        _pos2 = _target2.transform.position - _target3.transform.position;
-        _pos3 = _target3.transform.position - transform.position;
+        _posTarget1 = _target1.transform.position - _target2.transform.position;
+        _posTarget2 = _target2.transform.position - _target3.transform.position;
+        _posTarget3 = _target3.transform.position - transform.position;
 
-        _smallPosTarget1 = _pos1 / 100;
-        _smallPosTarget2 = _pos2 / 100;
-        _smallPosTarget3 = _pos3 / 100;
         SetupPos();
 
     }
@@ -72,36 +65,28 @@ public class S_hairFollow : MonoBehaviour
 
     public void SetupPos()
     {
-        _posTarget1 = _pos1;
-        _posTarget2 = _pos2;
-        _posTarget3 = _pos3;
-
         _short = false;
     }
 
     public void SetUpSmallPos()
     {
-        _posTarget1 = _smallPosTarget1;
-        _posTarget2 = _smallPosTarget2;
-        _posTarget3 = _smallPosTarget3;
-
         _short = true;
     }
 
     private void FixedUpdate()
     {
         float speedShort = _short ? _speedShort : 1;
+        float distanceShort = _short ? 0.01f : 1;
 
-
-        Vector3 posTargetRand = Turbulance(_posTarget3);
+        Vector3 posTargetRand = Turbulance(_posTarget3 * distanceShort);
 
         _vectorTarget3 = DirectionTarget(transform.position + posTargetRand, _target3.transform, _speed3 * speedShort, _vectorTarget3);
 
-        posTargetRand = Turbulance(_posTarget2);
+        posTargetRand = Turbulance(_posTarget2 * distanceShort);
 
         _vectorTarget2 = DirectionTarget(_target3.transform.position + posTargetRand, _target2.transform, _speed2 * speedShort, _vectorTarget2);
 
-        posTargetRand = Turbulance(_posTarget1);
+        posTargetRand = Turbulance(_posTarget1 * distanceShort);
 
         _vectorTarget1 = DirectionTarget(_target2.transform.position + posTargetRand, _target1.transform, _speed1 * speedShort, _vectorTarget1);
 
@@ -131,7 +116,7 @@ public class S_hairFollow : MonoBehaviour
 
     public void FlipHair(bool Right)
     {
-        //Debug.Log("HairRight:" + Right);
+        Debug.Log("HairRight:" + Right);
 
         _positionPlayer.z = -Mathf.Abs(_positionPlayer.z);
         _posTarget1.z = -Mathf.Abs(_posTarget1.z);
