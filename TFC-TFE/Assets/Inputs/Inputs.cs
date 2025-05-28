@@ -369,6 +369,34 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Lol"",
+            ""id"": ""684df49f-1512-41a0-8cc1-26180f2703bf"",
+            ""actions"": [
+                {
+                    ""name"": ""Drunk"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d14e23e-f107-4eff-8b30-9123d3470e0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e97c7025-1fbc-4f69-a3d0-b93f7c4d0100"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drunk"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -382,6 +410,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_CameraMove = m_Camera.FindAction("CameraMove", throwIfNotFound: true);
+        // Lol
+        m_Lol = asset.FindActionMap("Lol", throwIfNotFound: true);
+        m_Lol_Drunk = m_Lol.FindAction("Drunk", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -555,6 +586,52 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Lol
+    private readonly InputActionMap m_Lol;
+    private List<ILolActions> m_LolActionsCallbackInterfaces = new List<ILolActions>();
+    private readonly InputAction m_Lol_Drunk;
+    public struct LolActions
+    {
+        private @Inputs m_Wrapper;
+        public LolActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Drunk => m_Wrapper.m_Lol_Drunk;
+        public InputActionMap Get() { return m_Wrapper.m_Lol; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LolActions set) { return set.Get(); }
+        public void AddCallbacks(ILolActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LolActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LolActionsCallbackInterfaces.Add(instance);
+            @Drunk.started += instance.OnDrunk;
+            @Drunk.performed += instance.OnDrunk;
+            @Drunk.canceled += instance.OnDrunk;
+        }
+
+        private void UnregisterCallbacks(ILolActions instance)
+        {
+            @Drunk.started -= instance.OnDrunk;
+            @Drunk.performed -= instance.OnDrunk;
+            @Drunk.canceled -= instance.OnDrunk;
+        }
+
+        public void RemoveCallbacks(ILolActions instance)
+        {
+            if (m_Wrapper.m_LolActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILolActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LolActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LolActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LolActions @Lol => new LolActions(this);
     public interface IPlayerActions
     {
         void OnDirection(InputAction.CallbackContext context);
@@ -565,5 +642,9 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     public interface ICameraActions
     {
         void OnCameraMove(InputAction.CallbackContext context);
+    }
+    public interface ILolActions
+    {
+        void OnDrunk(InputAction.CallbackContext context);
     }
 }
