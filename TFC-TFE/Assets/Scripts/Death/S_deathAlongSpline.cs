@@ -15,13 +15,20 @@ public class S_deathAlongueSpline : MonoBehaviour
 
     [SerializeField] Material _materialCorruption;
 
+    [Header("UpdateDeadZone")]
+    [SerializeField] int _updateCount;
+
+
     [Header("GizmosHelps")]
     [SerializeField] bool _disableGiemos;
     [SerializeField] private int _gizmosCount = 100;
     [SerializeField] private float _gizmosSize = 1;
 
-    public static Action RestDeadZone; 
+    public static Action RestDeadZone;
 
+    public static event Action<float> UpdateCollider;
+
+    private int _countUpdateCollider;
     private float _splineDistance;
     private float _currentDistancePercentage;
 
@@ -55,12 +62,14 @@ public class S_deathAlongueSpline : MonoBehaviour
         float currentSpeed = _speedCurve.Evaluate(_currentDistancePercentage) * _maxSpeed;
         _currentDistancePercentage += (currentSpeed * Time.deltaTime) / _splineDistance;
 
-        Debug.Log(_splineDistance);
-
         if (_currentDistancePercentage > 1)
             EndGame();
 
-
+        if (_currentDistancePercentage * _updateCount > _countUpdateCollider)
+        {
+            _countUpdateCollider += 1;
+            UpdateCollider?.Invoke(_currentDistancePercentage);
+        }
 
         Vector3 NewPosition = _splineFollow.EvaluatePosition(_currentDistancePercentage);
 
@@ -102,8 +111,17 @@ public class S_deathAlongueSpline : MonoBehaviour
 
         }
 
-        
-            
+        for (int i = 0; i < _updateCount; i++)
+        {
+            float Value = (float)i / _updateCount;
+            Vector3 GizmosPos = _splineFollow.EvaluatePosition(Value);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(GizmosPos,new Vector3(_gizmosSize/5, _gizmosSize*4, _gizmosSize/2));
+
+        }
+
+
     }
 
 }

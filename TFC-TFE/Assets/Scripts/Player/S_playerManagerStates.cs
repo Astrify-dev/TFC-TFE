@@ -13,7 +13,7 @@ public class S_playerManagerStates : MonoBehaviour
     [Header("Références")]
     [SerializeField] GameObject _visualObject;
     [SerializeField] VisualEffect _visualEffectSphereObject;
-    [SerializeField] public GameObject _hairEffect;
+    [SerializeField] public VisualEffect _hairEffect;
 
     public ParticleSystem _groundDashParticles;
     [field: SerializeField] public PlayerMovementSettings MovementSettings { get; private set; }
@@ -179,17 +179,15 @@ public class S_playerManagerStates : MonoBehaviour
 
     public void HandleFlip(float moveInput)
     {
-        S_hairFollow HairFollow = S_controllerPlayer.Instance.HairFollow;
+        
 
         if (moveInput > 0 && !FacingRight)
         {
             SetFlip(0);
-            HairFollow.FlipHair(true);
         }
         else if (moveInput < 0 && FacingRight)
         {
             SetFlip(180);
-            HairFollow.FlipHair(false);
         }
 
         
@@ -197,7 +195,12 @@ public class S_playerManagerStates : MonoBehaviour
 
     public void SetFlip(int value)
     {
+        S_hairFollow HairFollow = S_controllerPlayer.Instance.HairFollow;
+
         FacingRight = !FacingRight;
+
+        HairFollow.FlipHair(FacingRight);
+
         Vector3 rot = _visualObject.transform.eulerAngles;
         rot.y = value;
         _visualObject.transform.eulerAngles = rot;
@@ -247,7 +250,7 @@ public class S_playerManagerStates : MonoBehaviour
         if (Enable)
         { 
             ObjectCorp.SetActive(false);
-            _hairEffect.SetActive(false);
+            _hairEffect.enabled = false;
             _visualEffectSphereObject.gameObject.SetActive(true); 
             IsDashing = true;
             _visualEffectSphereObject.Play();
@@ -257,7 +260,8 @@ public class S_playerManagerStates : MonoBehaviour
         else
         {
             _visualEffectSphereObject.Stop();
-            _hairEffect.SetActive(true);
+            _hairEffect.enabled = true;
+            S_controllerPlayer.Instance.HairFollow.ResetHair();
             ObjectCorp.SetActive(true);
             _disableSphereEffect = DisableSpherEffect();
             StartCoroutine(_disableSphereEffect);
