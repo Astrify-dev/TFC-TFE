@@ -32,6 +32,7 @@ public class S_deathAlongueSpline : MonoBehaviour
     private float _splineDistance;
     private float _currentDistancePercentage;
 
+    public bool endWin = false;
     private void Awake()
     {
         Vector3 NewPosition = _splineFollow.EvaluatePosition(0);
@@ -59,7 +60,9 @@ public class S_deathAlongueSpline : MonoBehaviour
 
     private void Update()
     {
+        if (endWin) return;
         float currentSpeed = _speedCurve.Evaluate(_currentDistancePercentage) * _maxSpeed;
+
         _currentDistancePercentage += (currentSpeed * Time.deltaTime) / _splineDistance;
 
         if (_currentDistancePercentage > 1)
@@ -91,6 +94,7 @@ public class S_deathAlongueSpline : MonoBehaviour
 
     private void resetDeadZone()
     {
+        endWin = false;
         _currentDistancePercentage = 0;
         Vector3 NewPosition = _splineFollow.EvaluatePosition(0);
         Debug.Log(NewPosition);
@@ -123,5 +127,6 @@ public class S_deathAlongueSpline : MonoBehaviour
 
 
     }
+
 
 }
