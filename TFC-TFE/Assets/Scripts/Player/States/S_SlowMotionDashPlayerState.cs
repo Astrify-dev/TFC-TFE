@@ -90,6 +90,7 @@ public class S_slowMotionDashPlayerState : S_basePlayerStates
         _player.DashDirection = _dirAirDash;
         _player.AddAirDash(-1);
         S_controllerPlayer.Instance.VibrationGamePad.StartVibration(6f, 0.5f, 0.05f);
+        Debug.Log("EnableVibration");
         S_controllerPlayer.Instance.CameraShake.Shake(6f, 0.2f);
         _player.SwitchState(_player.AirDashState);
     }
