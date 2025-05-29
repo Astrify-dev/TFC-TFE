@@ -63,10 +63,7 @@ public class S_PauseManager : MonoBehaviour{
     public void OnQuitButtonPressed()
     {
         PlayConfirmSoundWithDelay();
-        Application.Quit();
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+        SceneManager.LoadScene(0);
     }
     public void OnContinueButtonPressed(){
         PlayConfirmSoundWithDelay();

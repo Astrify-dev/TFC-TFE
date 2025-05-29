@@ -16,6 +16,13 @@ public class S_slowMotionEffect : MonoBehaviour
         _material.SetFloat("_EnableSlowMotion",0);
     }
 
+    public void ResetSlowMotion()
+    {
+        if (_couroutineEffectEnable is not null)
+            StopCoroutine(_couroutineEffectEnable);
+        _material.SetFloat("_EnableSlowMotion", 0);
+    }
+
     public void StartSlowMotion(bool Enable,float Speed)
     {
         if (_couroutineEffectEnable is not null)

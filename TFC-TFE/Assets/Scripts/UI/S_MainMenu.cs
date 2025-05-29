@@ -38,6 +38,7 @@ public class S_MainMenu : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
         layoutElement = GetComponent<LayoutElement>();
         originalScale = transform.localScale;
+        Time.timeScale = 1;
     }
 
     private void OnEnable()

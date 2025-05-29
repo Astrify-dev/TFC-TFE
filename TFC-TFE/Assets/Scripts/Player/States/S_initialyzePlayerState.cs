@@ -5,6 +5,8 @@ public class S_initialyzePlayerState : S_basePlayerStates
     public override void EnterState(S_playerManagerStates Player)
     {
         // État de démarrage → bascule immédiatement vers le sol
+        S_controllerPlayer.Instance.SlowMotionEffect.ResetSlowMotion();
+        Player.HandleFlip(1);
         Player.SwitchState(Player.GroundState);
     }
 
