@@ -1478,12 +1478,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ghostObject
       value: 
-      objectReference: {fileID: 5561361148550815420}
+      objectReference: {fileID: 0}
     - target: {fileID: 2201069070998164695, guid: 8a8c442d54139314f93c6769abb27ff5,
         type: 3}
       propertyPath: ghostPlayer
       value: 
-      objectReference: {fileID: 5109745335915396325}
+      objectReference: {fileID: 0}
     - target: {fileID: 2741432871083915220, guid: 8a8c442d54139314f93c6769abb27ff5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1538,7 +1538,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ghostPlayer
       value: 
-      objectReference: {fileID: 5109745335915396325}
+      objectReference: {fileID: 0}
     - target: {fileID: 2896648230288992344, guid: 8a8c442d54139314f93c6769abb27ff5,
         type: 3}
       propertyPath: ghostRecorder
@@ -3989,4 +3989,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f9109c98beeb414594e1f04f06a2371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fullScreenPath: {fileID: 2100000, guid: b278fb28c5fc27e4992685754d0de9be, type: 2}
+  _fullScreenPath: {fileID: 2100000, guid: af72f37241892da4e874b15b9d1bcf86, type: 2}

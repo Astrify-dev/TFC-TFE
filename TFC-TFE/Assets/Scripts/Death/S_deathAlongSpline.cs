@@ -15,6 +15,11 @@ public class S_deathAlongueSpline : MonoBehaviour
 
     [SerializeField] Material _materialCorruption;
 
+    [Header("SpeedDistancePlayer")]
+    [SerializeField] float _distancePlayer;
+    [SerializeField] float _speedUpgrade;
+    [SerializeField] float _speedAcceleration;
+
     [Header("UpdateDeadZone")]
     [SerializeField] int _updateCount;
 
@@ -24,6 +29,8 @@ public class S_deathAlongueSpline : MonoBehaviour
     [SerializeField] private int _gizmosCount = 100;
     [SerializeField] private float _gizmosSize = 1;
 
+    GameObject _player; 
+
     public static Action RestDeadZone;
 
     public static event Action<float> UpdateCollider;
@@ -31,6 +38,7 @@ public class S_deathAlongueSpline : MonoBehaviour
     private int _countUpdateCollider;
     private float _splineDistance;
     private float _currentDistancePercentage;
+    private float _speedAdd;
 
     public bool endWin = false;
     private void Awake()
@@ -45,6 +53,8 @@ public class S_deathAlongueSpline : MonoBehaviour
         _materialCorruption.SetInt("_EnableEffect", 1);
         _splineDistance = _splineFollow.CalculateLength();
         resetDeadZone();
+
+        _player = S_controllerPlayer.Instance.transform.gameObject;
     }
 
     private void OnEnable()
@@ -63,6 +73,10 @@ public class S_deathAlongueSpline : MonoBehaviour
         if (endWin) return;
         float currentSpeed = _speedCurve.Evaluate(_currentDistancePercentage) * _maxSpeed;
 
+        DistancePlayerTest();
+
+        currentSpeed += _speedAdd;
+
         _currentDistancePercentage += (currentSpeed * Time.deltaTime) / _splineDistance;
 
         if (_currentDistancePercentage > 1)
@@ -79,6 +93,20 @@ public class S_deathAlongueSpline : MonoBehaviour
         _materialCorruption.SetVector("_Coord", NewPosition);
 
         _deathObject.transform.position = NewPosition;
+    }
+
+    private void DistancePlayerTest()
+    {
+        Vector2 ObjectCoord = new Vector2(_deathObject.transform.position.z, _deathObject.transform.position.y);
+        Vector2 PlayerCoord = new Vector2(_player.transform.position.z, _player.transform.position.y);
+
+        float SpeedAddTarget = 0;
+
+        if (Vector2.Distance(ObjectCoord, PlayerCoord) > _distancePlayer)
+            SpeedAddTarget = _speedUpgrade;
+
+        _speedAdd = Mathf.MoveTowards(_speedAdd, SpeedAddTarget, _speedAcceleration);
+
     }
 
     private void EndGame()

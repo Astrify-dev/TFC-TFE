@@ -81,7 +81,7 @@ public class S_airPlayerState : S_basePlayerStates
         _player = Player;
         _fallSpeed = 0;
 
-        Player.SwitchVisual(false);
+        
 
     }
     public override void OnEnable(S_playerManagerStates Player)

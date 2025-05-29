@@ -67,8 +67,9 @@ public class S_airDashPlayerState : S_basePlayerStates
         Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
         Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
         Player.Rigidbody.velocity = Player.Rigidbody.velocity/ Player.MovementSettings.BrakeAirDashPower;
+        Player.SwitchVisual(false);
 
-        
+
     }
     public override void UpdateState(S_playerManagerStates Player)
     {
