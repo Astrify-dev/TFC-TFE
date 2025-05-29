@@ -1836,6 +1836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a59ca46fc763f54d96677bd4904df96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSpline: {fileID: 1285690522}
 --- !u!1001 &51554060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48256,6 +48257,18 @@ Transform:
   - {fileID: 1775757450}
   m_Father: {fileID: 1903668314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1285690522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7626586884699046816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74143332dc0666145842b3d3bdecd301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1285925769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82172,7 +82185,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
         type: 3}
+      propertyPath: _speedUpgrade
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
       propertyPath: _disableGiemos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _distancePlayer
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465052555014346366, guid: 8606fc5301756bc49943f95f79f452e2,
+        type: 3}
+      propertyPath: _speedAcceleration
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6534450678548425734, guid: 8606fc5301756bc49943f95f79f452e2,
