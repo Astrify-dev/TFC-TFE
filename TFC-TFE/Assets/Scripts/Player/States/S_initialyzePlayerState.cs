@@ -6,6 +6,7 @@ public class S_initialyzePlayerState : S_basePlayerStates
     {
         // État de démarrage → bascule immédiatement vers le sol
         S_controllerPlayer.Instance.SlowMotionEffect.ResetSlowMotion();
+        Player.SwitchVisual(false);
         Player.HandleFlip(1);
         Player.SwitchState(Player.GroundState);
     }

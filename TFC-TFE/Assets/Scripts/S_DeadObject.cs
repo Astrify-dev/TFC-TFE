@@ -22,6 +22,7 @@ public class S_DeadObject : MonoBehaviour{
     private void OnCollisionEnter(Collision collision){
         if (collision.collider.CompareTag("Player")){
             Debug.Log("Game Over !");
+            S_controllerPlayer.Instance.SlowMotionEffect.ResetSlowMotion();
             S_playerManagerStates playerManagerStates = collision.collider.GetComponent<S_playerManagerStates>();
             if (playerManagerStates is not null){
                 if (isGameOverOnDeath){

@@ -67,7 +67,7 @@ public class S_airDashPlayerState : S_basePlayerStates
         Player.Inputs.OnJumpEvent -= Inputs_OnJumpEvent;
         Player.Inputs.OnDashEvent -= Inputs_OnDashEvent;
         Player.Rigidbody.velocity = Player.Rigidbody.velocity/ Player.MovementSettings.BrakeAirDashPower;
-        Player.SwitchVisual(false);
+        
 
 
     }
@@ -78,6 +78,7 @@ public class S_airDashPlayerState : S_basePlayerStates
         if (Time.time > _durationAirDash)
         {
             _player.SetfalsePressRebounds();
+            Player.SwitchVisual(false);
             Player.SwitchState(Player.AirState);
             
         }
@@ -88,7 +89,8 @@ public class S_airDashPlayerState : S_basePlayerStates
 
         if (Physics.Raycast(Player.transform.position, _dirAirDash,out hit, DistanceRay, Player.MovementSettings.bounceLayers))
         {
-            if (hit.transform.gameObject.layer == Player._invisibleWall) { 
+            if (hit.transform.gameObject.layer == Player._invisibleWall) {
+                Player.SwitchVisual(false);
                 Player.SwitchState(Player.AirState);
                 return;
             }

@@ -62,7 +62,11 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
     public override void UpdateState(S_playerManagerStates Player)
     {
         if(_durationWidowsPress < Time.time)
+        {
+            Player.SwitchVisual(false);
             Player.SwitchState(Player.AirState);
+        }
+            
 
         if (Player.PressRebounds)
         {
@@ -90,6 +94,7 @@ public class S_wallDashReboundPlayerState : S_basePlayerStates
 
                 
             }
+            Player.SwitchVisual(false);
             Player.SwitchState(Player.AirState);
 
         }

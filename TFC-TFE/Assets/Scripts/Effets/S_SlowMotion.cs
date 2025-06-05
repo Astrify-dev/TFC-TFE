@@ -21,6 +21,11 @@ public class S_SlowMotion : MonoBehaviour{
             StopCoroutine(_slowMotionCoroutine);
             _slowMotionCoroutine = null;
         }
+        if(_slowMotionAnimEnableCoroutine != null)
+        {
+            StopCoroutine(_slowMotionAnimEnableCoroutine);
+            _slowMotionAnimEnableCoroutine = null;
+        }
         ResetTimeScale();
     }
     private IEnumerator HandleSlowMotion(float intensity, float duration, System.Action onSlowMotionEnd)
@@ -64,6 +69,7 @@ public class S_SlowMotion : MonoBehaviour{
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
             Timer += Time.unscaledDeltaTime * Speed;
+            Debug.Log("TimeScale: "+ Time.timeScale);
             yield return null;
         }
 
@@ -73,6 +79,7 @@ public class S_SlowMotion : MonoBehaviour{
 
     private void ResetTimeScale()
     {
+        Debug.Log("ResetTimeScale");
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f;
     }
