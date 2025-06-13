@@ -13,6 +13,24 @@ public class S_AudioSettings : MonoBehaviour{
         masterSlider.onValueChanged.AddListener(SetMasterVolume);
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+
+        SetValue();
+
+
+
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.Save();
+    }
+
+    private void SetValue()
+    {
+        masterSlider.value = PlayerPrefs.GetFloat("VMaster");
+        musicSlider.value = PlayerPrefs.GetFloat("VMusic");
+        sfxSlider.value = PlayerPrefs.GetFloat("VSFX");
     }
 
     public void SetMasterVolume(float value){
@@ -20,6 +38,7 @@ public class S_AudioSettings : MonoBehaviour{
         float clamped = Mathf.Max(steppedValue, 0.0001f);
         float dB = Mathf.Log10(clamped) * 20f;
         audioMixer.SetFloat("Master", dB);
+        PlayerPrefs.SetFloat("VMaster", value);
     }
 
     public void SetMusicVolume(float value){
@@ -27,6 +46,7 @@ public class S_AudioSettings : MonoBehaviour{
         float clamped = Mathf.Max(steppedValue, 0.0001f);
         float dB = Mathf.Log10(clamped) * 20f;
         audioMixer.SetFloat("Music", dB);
+        PlayerPrefs.SetFloat("VMusic", value);
     }
 
     public void SetSFXVolume(float value){
@@ -34,5 +54,6 @@ public class S_AudioSettings : MonoBehaviour{
         float clamped = Mathf.Max(steppedValue, 0.0001f);
         float dB = Mathf.Log10(clamped) * 20f;
         audioMixer.SetFloat("SFX", dB);
+        PlayerPrefs.SetFloat("VSFX", value);
     }
 }

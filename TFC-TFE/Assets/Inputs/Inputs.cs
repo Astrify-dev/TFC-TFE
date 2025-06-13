@@ -375,9 +375,36 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
             ""id"": ""684df49f-1512-41a0-8cc1-26180f2703bf"",
             ""actions"": [
                 {
-                    ""name"": ""Drunk"",
+                    ""name"": ""DrunkDown"",
                     ""type"": ""Button"",
                     ""id"": ""2d14e23e-f107-4eff-8b30-9123d3470e0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrunkUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebf7397c-756d-4483-9f28-53504ba4aac5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrunkLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f1e33f8-b623-4fc2-91ae-e2c117aff64a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DrunkRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""8881b0fc-2935-4d8c-b3a5-5cac39182888"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -392,7 +419,79 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drunk"",
+                    ""action"": ""DrunkDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05bb4853-513e-4d6c-9474-5611f6f9a4f1"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrunkUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""502c5eb6-a8fc-44b2-9833-09dbb2ee4023"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrunkLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e0c18bf-9c06-4f34-8346-9ac52dc11966"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DrunkRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""c49929dd-b203-437b-9209-c7b4cef0d918"",
+            ""actions"": [
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""6021e01b-dfbb-4b04-913c-b00955c02ae6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""17bb7976-5299-4193-92f4-4120a0252df3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e6c5fdb-6135-4d6a-9dc7-d667a0588834"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -412,7 +511,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         m_Camera_CameraMove = m_Camera.FindAction("CameraMove", throwIfNotFound: true);
         // Lol
         m_Lol = asset.FindActionMap("Lol", throwIfNotFound: true);
-        m_Lol_Drunk = m_Lol.FindAction("Drunk", throwIfNotFound: true);
+        m_Lol_DrunkDown = m_Lol.FindAction("DrunkDown", throwIfNotFound: true);
+        m_Lol_DrunkUp = m_Lol.FindAction("DrunkUp", throwIfNotFound: true);
+        m_Lol_DrunkLeft = m_Lol.FindAction("DrunkLeft", throwIfNotFound: true);
+        m_Lol_DrunkRight = m_Lol.FindAction("DrunkRight", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Switch = m_UI.FindAction("Switch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -590,12 +695,18 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     // Lol
     private readonly InputActionMap m_Lol;
     private List<ILolActions> m_LolActionsCallbackInterfaces = new List<ILolActions>();
-    private readonly InputAction m_Lol_Drunk;
+    private readonly InputAction m_Lol_DrunkDown;
+    private readonly InputAction m_Lol_DrunkUp;
+    private readonly InputAction m_Lol_DrunkLeft;
+    private readonly InputAction m_Lol_DrunkRight;
     public struct LolActions
     {
         private @Inputs m_Wrapper;
         public LolActions(@Inputs wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Drunk => m_Wrapper.m_Lol_Drunk;
+        public InputAction @DrunkDown => m_Wrapper.m_Lol_DrunkDown;
+        public InputAction @DrunkUp => m_Wrapper.m_Lol_DrunkUp;
+        public InputAction @DrunkLeft => m_Wrapper.m_Lol_DrunkLeft;
+        public InputAction @DrunkRight => m_Wrapper.m_Lol_DrunkRight;
         public InputActionMap Get() { return m_Wrapper.m_Lol; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -605,16 +716,34 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_LolActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_LolActionsCallbackInterfaces.Add(instance);
-            @Drunk.started += instance.OnDrunk;
-            @Drunk.performed += instance.OnDrunk;
-            @Drunk.canceled += instance.OnDrunk;
+            @DrunkDown.started += instance.OnDrunkDown;
+            @DrunkDown.performed += instance.OnDrunkDown;
+            @DrunkDown.canceled += instance.OnDrunkDown;
+            @DrunkUp.started += instance.OnDrunkUp;
+            @DrunkUp.performed += instance.OnDrunkUp;
+            @DrunkUp.canceled += instance.OnDrunkUp;
+            @DrunkLeft.started += instance.OnDrunkLeft;
+            @DrunkLeft.performed += instance.OnDrunkLeft;
+            @DrunkLeft.canceled += instance.OnDrunkLeft;
+            @DrunkRight.started += instance.OnDrunkRight;
+            @DrunkRight.performed += instance.OnDrunkRight;
+            @DrunkRight.canceled += instance.OnDrunkRight;
         }
 
         private void UnregisterCallbacks(ILolActions instance)
         {
-            @Drunk.started -= instance.OnDrunk;
-            @Drunk.performed -= instance.OnDrunk;
-            @Drunk.canceled -= instance.OnDrunk;
+            @DrunkDown.started -= instance.OnDrunkDown;
+            @DrunkDown.performed -= instance.OnDrunkDown;
+            @DrunkDown.canceled -= instance.OnDrunkDown;
+            @DrunkUp.started -= instance.OnDrunkUp;
+            @DrunkUp.performed -= instance.OnDrunkUp;
+            @DrunkUp.canceled -= instance.OnDrunkUp;
+            @DrunkLeft.started -= instance.OnDrunkLeft;
+            @DrunkLeft.performed -= instance.OnDrunkLeft;
+            @DrunkLeft.canceled -= instance.OnDrunkLeft;
+            @DrunkRight.started -= instance.OnDrunkRight;
+            @DrunkRight.performed -= instance.OnDrunkRight;
+            @DrunkRight.canceled -= instance.OnDrunkRight;
         }
 
         public void RemoveCallbacks(ILolActions instance)
@@ -632,6 +761,52 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
         }
     }
     public LolActions @Lol => new LolActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Switch;
+    public struct UIActions
+    {
+        private @Inputs m_Wrapper;
+        public UIActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Switch => m_Wrapper.m_UI_Switch;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Switch.started += instance.OnSwitch;
+            @Switch.performed += instance.OnSwitch;
+            @Switch.canceled += instance.OnSwitch;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Switch.started -= instance.OnSwitch;
+            @Switch.performed -= instance.OnSwitch;
+            @Switch.canceled -= instance.OnSwitch;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnDirection(InputAction.CallbackContext context);
@@ -645,6 +820,13 @@ public partial class @Inputs: IInputActionCollection2, IDisposable
     }
     public interface ILolActions
     {
-        void OnDrunk(InputAction.CallbackContext context);
+        void OnDrunkDown(InputAction.CallbackContext context);
+        void OnDrunkUp(InputAction.CallbackContext context);
+        void OnDrunkLeft(InputAction.CallbackContext context);
+        void OnDrunkRight(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnSwitch(InputAction.CallbackContext context);
     }
 }

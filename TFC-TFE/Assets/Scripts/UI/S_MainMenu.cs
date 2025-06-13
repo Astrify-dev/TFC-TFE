@@ -44,6 +44,7 @@ public class S_MainMenu : MonoBehaviour
     private void OnEnable()
     {
         _fullScreenPathDistortion.SetInt("_Enable", 0);
+        _fullScreenPathDistortion.SetInt("_Drunk", 0);
     }
 
     private void OnDisable()

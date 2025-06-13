@@ -353,9 +353,36 @@
             "id": "684df49f-1512-41a0-8cc1-26180f2703bf",
             "actions": [
                 {
-                    "name": "Drunk",
+                    "name": "DrunkDown",
                     "type": "Button",
                     "id": "2d14e23e-f107-4eff-8b30-9123d3470e0e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrunkUp",
+                    "type": "Button",
+                    "id": "ebf7397c-756d-4483-9f28-53504ba4aac5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrunkLeft",
+                    "type": "Button",
+                    "id": "4f1e33f8-b623-4fc2-91ae-e2c117aff64a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrunkRight",
+                    "type": "Button",
+                    "id": "8881b0fc-2935-4d8c-b3a5-5cac39182888",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -370,7 +397,79 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drunk",
+                    "action": "DrunkDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05bb4853-513e-4d6c-9474-5611f6f9a4f1",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrunkUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "502c5eb6-a8fc-44b2-9833-09dbb2ee4023",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrunkLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e0c18bf-9c06-4f34-8346-9ac52dc11966",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrunkRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "c49929dd-b203-437b-9209-c7b4cef0d918",
+            "actions": [
+                {
+                    "name": "Switch",
+                    "type": "Button",
+                    "id": "6021e01b-dfbb-4b04-913c-b00955c02ae6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "17bb7976-5299-4193-92f4-4120a0252df3",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e6c5fdb-6135-4d6a-9dc7-d667a0588834",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
